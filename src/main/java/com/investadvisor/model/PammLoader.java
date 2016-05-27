@@ -66,8 +66,7 @@ public abstract class PammLoader {
         deviation = Math.sqrt(changeSquaresSum / changes.size());
 
         //if values can't be calculates, let's use 2%
-        //todo we should calculate active days only
-        pamm.setLossDaysPercentage(lossDaysNumber == 0 ? 2 : lossDaysNumber / changes.size());
+        pamm.setLossDaysPercentage(lossDaysNumber == 0 ? 2 : lossDaysNumber * 100 / changes.size());
         pamm.setMaxDailyLoss(maxDailyLoss == 0. ? -2 : maxDailyLoss);
         pamm.setAverageDailyLoss(sumDailyLoss == 0 ? 2 : sumDailyLoss / lossDaysNumber);
         pamm.setDeviation(deviation);

@@ -89,6 +89,9 @@ public class PammRisk {
             case UNI_TRADE:
                 brokerCoefficient = 1.;
                 break;
+            case INSOLT:
+                brokerCoefficient = 1.;
+                break;
             default:
                 throw new RuntimeException("No broker coefficient specified");
         }

@@ -63,6 +63,13 @@ public class PammProfit {
                 commissionEnterFixed = 0.;
                 commissionWithdrawFixed = 0.;
                 break;
+            case INSOLT:
+                commissionEnterPercentage = 2.04;
+                commissionWithdrawPercentage = 2.;
+
+                commissionEnterFixed = 0.;
+                commissionWithdrawFixed = 0.;
+                break;
             default:
                 throw new Exception("Commission is not defined for " + pamm.getPammBroker());
         }

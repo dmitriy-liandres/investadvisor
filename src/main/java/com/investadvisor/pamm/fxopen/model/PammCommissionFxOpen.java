@@ -38,7 +38,7 @@ public class PammCommissionFxOpen extends PammCommission {
     public Double calculateProfitAfterMangerCommission(Pamm pamm, ProvidedParams providedParams) {
         Double avgChange = pamm.getAvgChange() - annualMasterCommission / 365;
         //pay attention, this value is not in percentage, it is in percentage/100;
-        Double estimatedIncrease = Math.pow(1 + avgChange, providedParams.getPeriodInDays()) - 1;
+        Double estimatedIncrease = Math.pow(1 + avgChange/100, providedParams.getPeriodInDays()) - 1;
         Double finalIncreased = (1 + estimatedIncrease) * (1 - assignmentCommissions / 100);
 
         if (finalIncreased - 1 < minimumPerformanceConstant / 100) {

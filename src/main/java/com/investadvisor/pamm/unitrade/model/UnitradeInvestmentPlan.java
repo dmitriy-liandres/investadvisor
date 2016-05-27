@@ -4,14 +4,14 @@ package com.investadvisor.pamm.unitrade.model;
  * Author Dmitriy Liandres
  * Date 27.05.2016
  */
-public class InvestmentPlan {
+public class UnitradeInvestmentPlan {
     private String name;
     private Integer days;
     private Integer monthsNumber;
     private Double percentagePerMonth;
     private Double minimalInvestment;
 
-    public InvestmentPlan(String name, Integer days, Double percentagePerMonth, Integer monthsNumber, Double minimalInvestment) {
+    public UnitradeInvestmentPlan(String name, Integer days, Double percentagePerMonth, Integer monthsNumber, Double minimalInvestment) {
         this.name = name;
         this.days = days;
         this.monthsNumber = monthsNumber;

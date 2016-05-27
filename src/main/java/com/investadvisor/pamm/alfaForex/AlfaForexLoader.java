@@ -41,7 +41,7 @@ public class AlfaForexLoader extends PammLoader {
     //fetch's csrf token
     Pattern CSRF_TOKEN_PATTERN = Pattern.compile("<meta name=\"csrf-token\" content=\"(.*?)\">");
 
-    //fetchs managers info
+    //fetches managers info
     Pattern MANAGER_PATTERN = Pattern.compile("<tr(.*?)</tr>", Pattern.DOTALL);
     //fetch id
     Pattern ID_PATTERN = Pattern.compile("view/(.*?)\"");

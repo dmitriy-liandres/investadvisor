@@ -7,5 +7,5 @@ package com.investadvisor.model;
  */
 public enum PammBroker {
     ALPARI, ALFA_FOREX, FXOPEN,
-    UNI_TRADE
+    UNI_TRADE, INSOLT
 }

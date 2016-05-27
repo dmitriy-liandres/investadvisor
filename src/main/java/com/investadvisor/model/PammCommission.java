@@ -51,7 +51,7 @@ public class PammCommission {
         Double avgChange = pamm.getAvgChange();
 
         //pay attention, this value is not in percentage, it is in percentage/100;
-        Double estimatedIncrease = Math.pow(1 + avgChange, providedParams.getPeriodInDays()) - 1;
+        Double estimatedIncrease = Math.pow(1 + avgChange/100, providedParams.getPeriodInDays()) - 1;
         return 1 + estimatedIncrease * (1 - commissionFromProfit / 100);
     }
 
