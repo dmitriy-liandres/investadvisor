@@ -1,5 +1,7 @@
 package com.investadvisor.pamm.fxopen.model;
 
+import com.investadvisor.ProvidedParams;
+import com.investadvisor.model.Pamm;
 import com.investadvisor.model.PammCommission;
 
 /**
@@ -33,23 +35,21 @@ public class PammCommissionFxOpen extends PammCommission {
     }
 
     @Override
-    public Double calculateFinalResultAfterMangerCommission(Double estimatedIncrease) {
+    public Double calculateProfitAfterMangerCommission(Pamm pamm, ProvidedParams providedParams) {
+        Double avgChange = pamm.getAvgChange() - annualMasterCommission / 365;
+        //pay attention, this value is not in percentage, it is in percentage/100;
+        Double estimatedIncrease = Math.pow(1 + avgChange, providedParams.getPeriodInDays()) - 1;
+        Double finalIncreased = (1 + estimatedIncrease) * (1 - assignmentCommissions / 100);
 
-        Double finalIncrease = (1 + estimatedIncrease) * (1 - assignmentCommissions / 100);
-
-        if (finalIncrease - 1 < minimumPerformanceConstant / 100) {
-            return finalIncrease;
+        if (finalIncreased - 1 < minimumPerformanceConstant / 100) {
+            return finalIncreased;
         } else {
-            Double managerCommission = (finalIncrease - minimumPerformanceConstant / 100 - 1) * getCommissionFromProfit() / 100;
-            return (finalIncrease - managerCommission);
+            Double managerCommission = (finalIncreased - minimumPerformanceConstant / 100 - 1) * getCommissionFromProfit() / 100;
+            return (finalIncreased - managerCommission);
         }
 
     }
 
-    @Override
-    public Double adjustAvgChangeBasedOnCommission(Double avgChange) {
-        return avgChange - annualMasterCommission / 365;
-    }
 
     public Double getAnnualMasterCommission() {
         return annualMasterCommission;

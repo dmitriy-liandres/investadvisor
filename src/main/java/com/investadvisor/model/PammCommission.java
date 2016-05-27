@@ -1,5 +1,7 @@
 package com.investadvisor.model;
 
+import com.investadvisor.ProvidedParams;
+
 /**
  * Author Dmitriy Liandres
  * Date 26.05.2016
@@ -41,23 +43,18 @@ public class PammCommission {
     }
 
     /**
-     * Calculates final result (1+ increase) based on estimated increase and manager commissions
+     * Calculates final result (1+ increase) based on provided params
      *
      * @return commission
      */
-    public Double calculateFinalResultAfterMangerCommission(Double estimatedIncrease) {
+    public Double calculateProfitAfterMangerCommission(Pamm pamm, ProvidedParams providedParams) {
+        Double avgChange = pamm.getAvgChange();
+
+        //pay attention, this value is not in percentage, it is in percentage/100;
+        Double estimatedIncrease = Math.pow(1 + avgChange, providedParams.getPeriodInDays()) - 1;
         return 1 + estimatedIncrease * (1 - commissionFromProfit / 100);
     }
 
-    /**
-     * Some prokers takes daily fees, so we have to adjust avgChange
-     *
-     * @param avgChange average change
-     * @return resulted average change
-     */
-    public Double adjustAvgChangeBasedOnCommission(Double avgChange) {
-        return avgChange;
-    }
 
     @Override
     public String toString() {

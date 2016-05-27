@@ -1,5 +1,7 @@
 package com.investadvisor.model;
 
+import com.investadvisor.Currency;
+import com.investadvisor.ProvidedParams;
 import com.investadvisor.pamm.fxopen.model.PammCommissionFxOpen;
 import org.junit.Test;
 
@@ -15,11 +17,19 @@ public class PammCommissionTest {
     public void testGeneralCase() {
         Double minBalance = 100.;
         Double managerCommission = 20.;
-        Double finalIncrease = 0.3;
-        PammCommission pammCommission = new PammCommission(minBalance, 0, managerCommission);
-        Double calculatedFinalResultAfterMangerCommission = pammCommission.calculateFinalResultAfterMangerCommission(finalIncrease);
-        Double expectedCalculatedFinalResultAfterMangerCommission = 1 + finalIncrease * (1 - managerCommission / 100);
-        assertEquals(expectedCalculatedFinalResultAfterMangerCommission, calculatedFinalResultAfterMangerCommission);
+        Integer minPeriodInDays = 0;
+        Pamm pamm = new Pamm();
+        pamm.setAvgChange(0.1);
+
+        ProvidedParams providedParams = generateProvidedParams();
+        PammCommission pammCommission = new PammCommission(minBalance, minPeriodInDays, managerCommission);
+        Double calculateProfitAfterMangerCommission = pammCommission.calculateProfitAfterMangerCommission(pamm, providedParams);
+
+        Double avgChange = pamm.getAvgChange();
+        Double estimatedIncrease = Math.pow(1 + avgChange, providedParams.getPeriodInDays()) - 1;
+        Double expectedCalculateProfitAfterMangerCommission = 1 + estimatedIncrease * (1 - managerCommission / 100);
+
+        assertEquals(expectedCalculateProfitAfterMangerCommission, calculateProfitAfterMangerCommission);
     }
 
     /**
@@ -32,16 +42,19 @@ public class PammCommissionTest {
         Double annualMasterCommission = 10.;
         Double minimumPerformanceConstant = 10.;
         Double assignmentCommissions = 10.;
-        Double finalIncrease = 0.05;
-        Double avgChange = 0.1;
-        PammCommissionFxOpen pammCommissionFxOpen = new PammCommissionFxOpen(minBalance, 0, managerCommission, annualMasterCommission, minimumPerformanceConstant, assignmentCommissions);
-        Double adjustedAvgChange = pammCommissionFxOpen.adjustAvgChangeBasedOnCommission(avgChange);
-        Double expectedAdjustedAvgChange = avgChange - annualMasterCommission / 365;
-        assertEquals(expectedAdjustedAvgChange, adjustedAvgChange);
+        Double avgChange = annualMasterCommission / 365 + 0.0001;
+        Integer minPeriodInDays = 0;
 
-        Double calculatedFinalResultAfterMangerCommission = pammCommissionFxOpen.calculateFinalResultAfterMangerCommission(finalIncrease);
-        Double expectedCalculatedFinalResultAfterMangerCommission = (1 - assignmentCommissions / 100) * (1 + finalIncrease);
-        assertEquals(expectedCalculatedFinalResultAfterMangerCommission, calculatedFinalResultAfterMangerCommission);
+        Pamm pamm = new Pamm();
+        pamm.setAvgChange(avgChange);
+        ProvidedParams providedParams = generateProvidedParams();
+        PammCommissionFxOpen pammCommissionFxOpen = new PammCommissionFxOpen(minBalance, minPeriodInDays, managerCommission, annualMasterCommission, minimumPerformanceConstant, assignmentCommissions);
+
+        Double calculateProfitAfterMangerCommission = pammCommissionFxOpen.calculateProfitAfterMangerCommission(pamm, providedParams);
+        avgChange -= annualMasterCommission / 365;
+        Double estimatedIncrease = Math.pow(1 + avgChange, providedParams.getPeriodInDays()) - 1;
+        Double finalIncreased = (1 + estimatedIncrease) * (1 - assignmentCommissions / 100);
+        assertEquals(finalIncreased, calculateProfitAfterMangerCommission);
     }
 
     /**
@@ -52,18 +65,22 @@ public class PammCommissionTest {
         Double minBalance = 100.;
         Double managerCommission = 20.;
         Double annualMasterCommission = 10.;
-        Double minimumPerformanceConstant = 20.;
+        Double minimumPerformanceConstant = 10.;
         Double assignmentCommissions = 10.;
-        Double finalIncrease = 0.3;
-        Double avgChange = 0.1;
-        PammCommissionFxOpen pammCommissionFxOpen = new PammCommissionFxOpen(minBalance, 0, managerCommission, annualMasterCommission, minimumPerformanceConstant, assignmentCommissions);
-        Double adjustedAvgChange = pammCommissionFxOpen.adjustAvgChangeBasedOnCommission(avgChange);
-        Double expectedAdjustedAvgChange = avgChange - annualMasterCommission / 365;
-        assertEquals(expectedAdjustedAvgChange, adjustedAvgChange);
+        Double avgChange = annualMasterCommission / 365 + 0.0005;
+        Integer minPeriodInDays = 0;
 
-        Double calculatedFinalResultAfterMangerCommission = pammCommissionFxOpen.calculateFinalResultAfterMangerCommission(finalIncrease);
-        Double expectedCalculatedFinalResultAfterMangerCommission = (1 - assignmentCommissions / 100) * (1 + finalIncrease);
-        assertEquals(expectedCalculatedFinalResultAfterMangerCommission, calculatedFinalResultAfterMangerCommission);
+        Pamm pamm = new Pamm();
+        pamm.setAvgChange(avgChange);
+        ProvidedParams providedParams = generateProvidedParams();
+        PammCommissionFxOpen pammCommissionFxOpen = new PammCommissionFxOpen(minBalance, minPeriodInDays, managerCommission, annualMasterCommission, minimumPerformanceConstant, assignmentCommissions);
+
+        Double calculateProfitAfterMangerCommission = pammCommissionFxOpen.calculateProfitAfterMangerCommission(pamm, providedParams);
+        avgChange -= annualMasterCommission / 365;
+        Double estimatedIncrease = Math.pow(1 + avgChange, providedParams.getPeriodInDays()) - 1;
+        Double finalIncreased = (1 + estimatedIncrease) * (1 - assignmentCommissions / 100);
+        assertEquals(finalIncreased, calculateProfitAfterMangerCommission);
+
     }
 
     /**
@@ -76,17 +93,28 @@ public class PammCommissionTest {
         Double annualMasterCommission = 10.;
         Double minimumPerformanceConstant = 10.;
         Double assignmentCommissions = 10.;
-        Double finalIncrease = 0.4;
-        Double avgChange = 0.1;
-        PammCommissionFxOpen pammCommissionFxOpen = new PammCommissionFxOpen(minBalance, 0, managerCommission, annualMasterCommission, minimumPerformanceConstant, assignmentCommissions);
-        Double adjustedAvgChange = pammCommissionFxOpen.adjustAvgChangeBasedOnCommission(avgChange);
-        Double expectedAdjustedAvgChange = avgChange - annualMasterCommission / 365;
-        assertEquals(expectedAdjustedAvgChange, adjustedAvgChange);
+        Double avgChange = annualMasterCommission / 365 + 0.001;
+        Integer minPeriodInDays = 0;
 
-        Double calculatedFinalResultAfterMangerCommission = pammCommissionFxOpen.calculateFinalResultAfterMangerCommission(finalIncrease);
-        Double expectedCalculatedFinalResult = (1 - assignmentCommissions / 100) * (1 + finalIncrease);
-        Double managerCommissionExpected = (expectedCalculatedFinalResult - 1 - minimumPerformanceConstant / 100) * managerCommission / 100;
-        Double expectedCalculatedFinalResultAfterMangerCommission = expectedCalculatedFinalResult - managerCommissionExpected;
-        assertEquals(expectedCalculatedFinalResultAfterMangerCommission, calculatedFinalResultAfterMangerCommission);
+        Pamm pamm = new Pamm();
+        pamm.setAvgChange(avgChange);
+        ProvidedParams providedParams = generateProvidedParams();
+        PammCommissionFxOpen pammCommissionFxOpen = new PammCommissionFxOpen(minBalance, minPeriodInDays, managerCommission, annualMasterCommission, minimumPerformanceConstant, assignmentCommissions);
+
+        Double calculateProfitAfterMangerCommission = pammCommissionFxOpen.calculateProfitAfterMangerCommission(pamm, providedParams);
+        avgChange -= annualMasterCommission / 365;
+        Double estimatedIncrease = Math.pow(1 + avgChange, providedParams.getPeriodInDays()) - 1;
+        Double finalIncreased = (1 + estimatedIncrease) * (1 - assignmentCommissions / 100);
+        finalIncreased -= (finalIncreased - minimumPerformanceConstant / 100 - 1) * managerCommission / 100;
+        assertEquals(finalIncreased, calculateProfitAfterMangerCommission);
+
+    }
+
+    private ProvidedParams generateProvidedParams() {
+        Double summ = 1000.;
+        Double periodInDays = 365.;
+        Currency currency = Currency.USD;
+        Integer maxAllowedRisk = 100;
+        return new ProvidedParams(summ, periodInDays, currency, maxAllowedRisk);
     }
 }

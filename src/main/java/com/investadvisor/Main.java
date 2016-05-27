@@ -7,6 +7,7 @@ import com.investadvisor.model.PammRiskProfit;
 import com.investadvisor.pamm.alfaForex.AlfaForexLoader;
 import com.investadvisor.pamm.alpari.AlpariLoader;
 import com.investadvisor.pamm.fxopen.FxOpenLoader;
+import com.investadvisor.pamm.unitrade.UniTradeLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,8 +32,9 @@ public class Main {
 
         List<Pamm> pamms = new ArrayList<>();
         List<FutureTask<List<Pamm>>> pammLoadersFutureTasks = new ArrayList<>();
-    //    pammLoadersFutureTasks.add(createAndStartFutureTask(() -> AlpariLoader.getInstance().load()));
-     //   pammLoadersFutureTasks.add(createAndStartFutureTask(() -> AlfaForexLoader.getInstance().load()));
+        pammLoadersFutureTasks.add(createAndStartFutureTask(() -> UniTradeLoader.getInstance().load()));
+        pammLoadersFutureTasks.add(createAndStartFutureTask(() -> AlpariLoader.getInstance().load()));
+        pammLoadersFutureTasks.add(createAndStartFutureTask(() -> AlfaForexLoader.getInstance().load()));
         pammLoadersFutureTasks.add(createAndStartFutureTask(() -> FxOpenLoader.getInstance().load()));
 
         pammLoadersFutureTasks.forEach(pammLoadersFutureTask -> {

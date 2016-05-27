@@ -86,6 +86,11 @@ public class PammRisk {
             case FXOPEN:
                 brokerCoefficient = 1.;
                 break;
+            case UNI_TRADE:
+                brokerCoefficient = 1.;
+                break;
+            default:
+                throw new RuntimeException("No broker coefficient specified");
         }
 
         Double managerMoneyInUsd = YahooExchangeRates.convertToUSD(pamm.getManagerMoney(), pamm.getCurrency(), Currency.USD);

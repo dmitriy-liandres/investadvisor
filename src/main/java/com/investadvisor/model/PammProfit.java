@@ -55,6 +55,14 @@ public class PammProfit {
                 commissionWithdrawFixed = 0.;
                 //https://www.alfa-forex.ru/ru/terms/traders/deposit-withdrawal.html#output_means-tab
                 break;
+
+            case UNI_TRADE:
+                commissionEnterPercentage = 3.627;
+                commissionWithdrawPercentage = 0.; //todo check test
+
+                commissionEnterFixed = 0.;
+                commissionWithdrawFixed = 0.;
+                break;
             default:
                 throw new Exception("Commission is not defined for " + pamm.getPammBroker());
         }
@@ -71,12 +79,7 @@ public class PammProfit {
                 continue;
             }
 
-            Double avgChange = pammCommission.adjustAvgChangeBasedOnCommission(pamm.getAvgChange());
-
-            //pay attention, this valus is not in percentage, it is in percentage/100;
-            Double estimatedIncrease = Math.pow(1 + avgChange / 100, providedParams.getPeriodInDays()) - 1;
-
-            Double calculatedFinalResultAfterMangerCommission = pammCommission.calculateFinalResultAfterMangerCommission(estimatedIncrease);
+            Double calculatedFinalResultAfterMangerCommission = pammCommission.calculateProfitAfterMangerCommission(pamm, providedParams);
 
             Double profitMoneyForSpecifiedCommission = investedMoney * calculatedFinalResultAfterMangerCommission;
 
