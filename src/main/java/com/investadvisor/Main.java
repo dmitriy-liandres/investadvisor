@@ -1,7 +1,12 @@
 package com.investadvisor;
 
-import com.investadvisor.alfaForex.AlfaForexLoader;
-import com.investadvisor.fxopen.FxOpenLoader;
+import com.investadvisor.model.Pamm;
+import com.investadvisor.model.PammProfit;
+import com.investadvisor.model.PammRisk;
+import com.investadvisor.model.PammRiskProfit;
+import com.investadvisor.pamm.alfaForex.AlfaForexLoader;
+import com.investadvisor.pamm.alpari.AlpariLoader;
+import com.investadvisor.pamm.fxopen.FxOpenLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,14 +25,15 @@ import java.util.stream.Collectors;
 public class Main {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
+
     public static void main(String[] args) throws Exception {
 
 
         List<Pamm> pamms = new ArrayList<>();
         List<FutureTask<List<Pamm>>> pammLoadersFutureTasks = new ArrayList<>();
-        // pammLoadersFutureTasks.add(createAndStartFutureTask(() -> AlpariLoader.getInstance().load()));
-        //pammLoadersFutureTasks.add(createAndStartFutureTask(() -> AlfaForexLoader.getInstance().load()));
-          pammLoadersFutureTasks.add(createAndStartFutureTask(() -> FxOpenLoader.getInstance().load()));
+    //    pammLoadersFutureTasks.add(createAndStartFutureTask(() -> AlpariLoader.getInstance().load()));
+     //   pammLoadersFutureTasks.add(createAndStartFutureTask(() -> AlfaForexLoader.getInstance().load()));
+        pammLoadersFutureTasks.add(createAndStartFutureTask(() -> FxOpenLoader.getInstance().load()));
 
         pammLoadersFutureTasks.forEach(pammLoadersFutureTask -> {
             try {
@@ -39,35 +45,40 @@ public class Main {
         Scanner scanIn = new Scanner(System.in);
         //calculate risk
         while (true) {
+            try {
+                System.out.println("enter summ");
+                Double summ = Double.valueOf(scanIn.nextLine());
+                System.out.println("enter days");
+                Double periodInDays = Double.valueOf(scanIn.nextLine());
+                System.out.println("enter currency");
+                Currency currency = Currency.valueOf(scanIn.nextLine());
+                System.out.println("max allowed risk");
+                Integer maxAllowedRisk = Integer.valueOf(scanIn.nextLine());
+                ProvidedParams providedParams = new ProvidedParams(summ, periodInDays, currency, maxAllowedRisk);
 
-            System.out.println("enter summ");
-            Double summ = Double.valueOf(scanIn.nextLine());
-            System.out.println("enter days");
-            Double periodInDays = Double.valueOf(scanIn.nextLine());
-            System.out.println("enter currency");
-            Currency currency = Currency.valueOf(scanIn.nextLine());
-            System.out.println("max allowed risk");
-            Integer maxAllowedRisk = Integer.valueOf(scanIn.nextLine());
-            ProvidedParams providedParams = new ProvidedParams(summ, periodInDays, currency, maxAllowedRisk);
+                //broker coefficient
+                List<PammRiskProfit> pammRisksProfit = new ArrayList<>();
+                for (Pamm pamm : pamms) {
+                    if (pamm.getCurrency() != currency) {
+                        continue;
+                    }
 
-            //broker coefficient
-            List<PammRiskProfit> pammRisksProfit = new ArrayList<>();
-            for (Pamm pamm : pamms) {
-                if (pamm.getCurrency() != currency) {
-                    continue;
+                    PammRisk pammRisk = new PammRisk();
+                    pammRisk.calculateRisk(pamm, providedParams);
+                    PammProfit pammProfit = new PammProfit();
+                    Boolean isSuitsUser = pammProfit.calculateProfit(pamm, providedParams);
+                    if (isSuitsUser) {
+                        logger.info("pamm = {}, pammRisk = {}, pammProfit = {] ", pamm, pammRisk, pammProfit);
+                        pammRisksProfit.add(new PammRiskProfit(pamm, pammRisk, pammProfit));
+                    }
                 }
-
-                PammRisk pammRisk = new PammRisk();
-                pammRisk.calculateRisk(pamm, providedParams);
-                PammProfit pammProfit = new PammProfit();
-                pammProfit.calculateProfit(pamm, providedParams);
-                logger.info("pamm = {}, pammRisk = {}, pammProfit = {] ", pamm, pammRisk, pammProfit);
-                pammRisksProfit.add(new PammRiskProfit(pamm, pammRisk, pammProfit));
+                //filter by max allowed risk
+                pammRisksProfit = pammRisksProfit.stream().filter(pammRisks -> pammRisks.getPammRisk().getTotalRisk() <= providedParams.getMaxAllowedRisk()).collect(Collectors.toList());
+                pammRisksProfit.sort((o1, o2) -> o1.getPammRisk().getTotalRisk().compareTo(o2.getPammRisk().getTotalRisk()));
+                System.out.println(pammRisksProfit);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            //filter by max allowed risk
-            pammRisksProfit = pammRisksProfit.stream().filter(pammRisks->pammRisks.getPammRisk().getTotalRisk()<=providedParams.getMaxAllowedRisk()).collect(Collectors.toList());
-            pammRisksProfit.sort((o1, o2) -> o1.getPammRisk().getTotalRisk().compareTo(o2.getPammRisk().getTotalRisk()));
-            System.out.println(pammRisksProfit);
         }
     }
 
