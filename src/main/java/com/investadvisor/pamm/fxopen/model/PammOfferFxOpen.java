@@ -1,14 +1,15 @@
 package com.investadvisor.pamm.fxopen.model;
 
 import com.investadvisor.ProvidedParams;
-import com.investadvisor.model.Pamm;
-import com.investadvisor.model.PammCommission;
+import com.investadvisor.model.InvestmentTarget;
+import com.investadvisor.model.pamm.Pamm;
+import com.investadvisor.model.pamm.InvestmentTargetOffer;
 
 /**
  * Author Dmitriy Liandres
  * Date 26.05.2016
  */
-public class PammCommissionFxOpen extends PammCommission {
+public class PammOfferFxOpen extends InvestmentTargetOffer {
     /**
      * This commission is divided between all working days
      */
@@ -22,12 +23,12 @@ public class PammCommissionFxOpen extends PammCommission {
      */
     private Double assignmentCommissions;
 
-    public PammCommissionFxOpen(Double minInvestment,
-                                Integer minPeriodInDays,
-                                Double commissionFromProfit,
-                                Double annualMasterCommission,
-                                Double minimumPerformanceConstant,
-                                Double assignmentCommissions) {
+    public PammOfferFxOpen(Double minInvestment,
+                           Integer minPeriodInDays,
+                           Double commissionFromProfit,
+                           Double annualMasterCommission,
+                           Double minimumPerformanceConstant,
+                           Double assignmentCommissions) {
         super(minInvestment, minPeriodInDays, commissionFromProfit);
         this.annualMasterCommission = annualMasterCommission;
         this.minimumPerformanceConstant = minimumPerformanceConstant;
@@ -35,7 +36,7 @@ public class PammCommissionFxOpen extends PammCommission {
     }
 
     @Override
-    public Double calculateProfitAfterMangerCommission(Pamm pamm, ProvidedParams providedParams) {
+    public Double calculateProfitAfterMangerCommission(InvestmentTarget pamm, ProvidedParams providedParams) {
         Double avgChange = pamm.getAvgChange() - annualMasterCommission / 365;
         //pay attention, this value is not in percentage, it is in percentage/100;
         Double estimatedIncrease = Math.pow(1 + avgChange/100, providedParams.getPeriodInDays()) - 1;

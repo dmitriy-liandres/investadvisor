@@ -8,6 +8,7 @@ public class PammFxOpenManagerMoney {
 
     private String date;
     private Double dailyGain;
+    private Double totalGain;
 
     public String getDate() {
         return date;
@@ -25,11 +26,20 @@ public class PammFxOpenManagerMoney {
         this.dailyGain = dailyGain;
     }
 
+    public Double getTotalGain() {
+        return totalGain;
+    }
+
+    public void setTotalGain(Double totalGain) {
+        this.totalGain = totalGain;
+    }
+
     @Override
     public String toString() {
         return "PammFxOpenManagerMoney{" +
                 "date='" + date + '\'' +
                 ", dailyGain=" + dailyGain +
+                ", totalGain=" + totalGain +
                 '}';
     }
 }

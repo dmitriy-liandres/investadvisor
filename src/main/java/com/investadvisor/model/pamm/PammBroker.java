@@ -1,4 +1,4 @@
-package com.investadvisor.model;
+package com.investadvisor.model.pamm;
 
 /**
  * All PAMM brokers

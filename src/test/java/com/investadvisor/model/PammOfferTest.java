@@ -2,8 +2,12 @@ package com.investadvisor.model;
 
 import com.investadvisor.Currency;
 import com.investadvisor.ProvidedParams;
-import com.investadvisor.pamm.fxopen.model.PammCommissionFxOpen;
+import com.investadvisor.model.pamm.Pamm;
+import com.investadvisor.model.pamm.InvestmentTargetOffer;
+import com.investadvisor.pamm.fxopen.model.PammOfferFxOpen;
 import org.junit.Test;
+
+import java.io.IOException;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -11,19 +15,19 @@ import static junit.framework.Assert.assertEquals;
  * Author Dmitriy Liandres
  * Date 27.05.2016
  */
-public class PammCommissionTest {
+public class PammOfferTest {
 
     @Test
     public void testGeneralCase() {
         Double minBalance = 100.;
         Double managerCommission = 20.;
         Integer minPeriodInDays = 0;
-        Pamm pamm = new Pamm();
+        Pamm pamm = generatePamm();
         pamm.setAvgChange(0.1);
 
         ProvidedParams providedParams = generateProvidedParams();
-        PammCommission pammCommission = new PammCommission(minBalance, minPeriodInDays, managerCommission);
-        Double calculateProfitAfterMangerCommission = pammCommission.calculateProfitAfterMangerCommission(pamm, providedParams);
+        InvestmentTargetOffer investmentTargetOffer = new InvestmentTargetOffer(minBalance, minPeriodInDays, managerCommission);
+        Double calculateProfitAfterMangerCommission = investmentTargetOffer.calculateProfitAfterMangerCommission(pamm, providedParams);
 
         Double avgChange = pamm.getAvgChange();
         Double estimatedIncrease = Math.pow(1 + avgChange, providedParams.getPeriodInDays()) - 1;
@@ -45,12 +49,12 @@ public class PammCommissionTest {
         Double avgChange = annualMasterCommission / 365 + 0.0001;
         Integer minPeriodInDays = 0;
 
-        Pamm pamm = new Pamm();
+        Pamm pamm = generatePamm();
         pamm.setAvgChange(avgChange);
         ProvidedParams providedParams = generateProvidedParams();
-        PammCommissionFxOpen pammCommissionFxOpen = new PammCommissionFxOpen(minBalance, minPeriodInDays, managerCommission, annualMasterCommission, minimumPerformanceConstant, assignmentCommissions);
+        PammOfferFxOpen pammOfferFxOpen = new PammOfferFxOpen(minBalance, minPeriodInDays, managerCommission, annualMasterCommission, minimumPerformanceConstant, assignmentCommissions);
 
-        Double calculateProfitAfterMangerCommission = pammCommissionFxOpen.calculateProfitAfterMangerCommission(pamm, providedParams);
+        Double calculateProfitAfterMangerCommission = pammOfferFxOpen.calculateProfitAfterMangerCommission(pamm, providedParams);
         avgChange -= annualMasterCommission / 365;
         Double estimatedIncrease = Math.pow(1 + avgChange, providedParams.getPeriodInDays()) - 1;
         Double finalIncreased = (1 + estimatedIncrease) * (1 - assignmentCommissions / 100);
@@ -70,12 +74,12 @@ public class PammCommissionTest {
         Double avgChange = annualMasterCommission / 365 + 0.0005;
         Integer minPeriodInDays = 0;
 
-        Pamm pamm = new Pamm();
+        Pamm pamm = generatePamm();
         pamm.setAvgChange(avgChange);
         ProvidedParams providedParams = generateProvidedParams();
-        PammCommissionFxOpen pammCommissionFxOpen = new PammCommissionFxOpen(minBalance, minPeriodInDays, managerCommission, annualMasterCommission, minimumPerformanceConstant, assignmentCommissions);
+        PammOfferFxOpen pammOfferFxOpen = new PammOfferFxOpen(minBalance, minPeriodInDays, managerCommission, annualMasterCommission, minimumPerformanceConstant, assignmentCommissions);
 
-        Double calculateProfitAfterMangerCommission = pammCommissionFxOpen.calculateProfitAfterMangerCommission(pamm, providedParams);
+        Double calculateProfitAfterMangerCommission = pammOfferFxOpen.calculateProfitAfterMangerCommission(pamm, providedParams);
         avgChange -= annualMasterCommission / 365;
         Double estimatedIncrease = Math.pow(1 + avgChange, providedParams.getPeriodInDays()) - 1;
         Double finalIncreased = (1 + estimatedIncrease) * (1 - assignmentCommissions / 100);
@@ -96,12 +100,12 @@ public class PammCommissionTest {
         Double avgChange = annualMasterCommission / 365 + 0.001;
         Integer minPeriodInDays = 0;
 
-        Pamm pamm = new Pamm();
+        Pamm pamm = generatePamm();
         pamm.setAvgChange(avgChange);
         ProvidedParams providedParams = generateProvidedParams();
-        PammCommissionFxOpen pammCommissionFxOpen = new PammCommissionFxOpen(minBalance, minPeriodInDays, managerCommission, annualMasterCommission, minimumPerformanceConstant, assignmentCommissions);
+        PammOfferFxOpen pammOfferFxOpen = new PammOfferFxOpen(minBalance, minPeriodInDays, managerCommission, annualMasterCommission, minimumPerformanceConstant, assignmentCommissions);
 
-        Double calculateProfitAfterMangerCommission = pammCommissionFxOpen.calculateProfitAfterMangerCommission(pamm, providedParams);
+        Double calculateProfitAfterMangerCommission = pammOfferFxOpen.calculateProfitAfterMangerCommission(pamm, providedParams);
         avgChange -= annualMasterCommission / 365;
         Double estimatedIncrease = Math.pow(1 + avgChange, providedParams.getPeriodInDays()) - 1;
         Double finalIncreased = (1 + estimatedIncrease) * (1 - assignmentCommissions / 100);
@@ -116,5 +120,34 @@ public class PammCommissionTest {
         Currency currency = Currency.USD;
         Integer maxAllowedRisk = 100;
         return new ProvidedParams(summ, periodInDays, currency, maxAllowedRisk);
+    }
+
+    private Pamm generatePamm() {
+        return new Pamm() {
+            @Override
+            public String generateLink() {
+                return null;
+            }
+
+            @Override
+            public Double getCommissionEnterPercentage() {
+                return null;
+            }
+
+            @Override
+            public Double getCommissionWithdrawPercentage() {
+                return null;
+            }
+
+            @Override
+            public Double getCommissionEnterFixed(Currency currency) throws IOException {
+                return null;
+            }
+
+            @Override
+            public Double getCommissionWithdrawFixed(Currency currency) throws IOException {
+                return null;
+            }
+        };
     }
 }

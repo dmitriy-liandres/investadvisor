@@ -1,9 +1,9 @@
 package com.investadvisor.pamm.fxopen;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.investadvisor.model.Pamm;
-import com.investadvisor.model.PammBroker;
-import com.investadvisor.model.PammLoader;
+import com.investadvisor.model.pamm.Pamm;
+import com.investadvisor.model.pamm.PammBroker;
+import com.investadvisor.model.pamm.PammLoader;
 import com.investadvisor.pamm.fxopen.model.*;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
@@ -55,7 +55,7 @@ public class FxOpenLoader extends PammLoader {
         //let's load managers one by one
         for (FXOpenManagerGeneral manager : allValues) {
             logger.info("Start load FxOpen manager details, pammId = {}", manager.getId());
-            Pamm pamm = new Pamm();
+            Pamm pamm = new FxOpenPamm();
             pamm.setPammBroker(PammBroker.FXOPEN);
             pamm.setAgeInDays(manager.getDays());
             pamm.setManagerMoney(manager.getMasterCapital());
@@ -123,11 +123,11 @@ public class FxOpenLoader extends PammLoader {
                     }
 
 
-                    PammCommissionFxOpen pammCommissionFxOpen = new PammCommissionFxOpen(fxOpenOffersResultData.getInitialDeposit(), minPeriodInDays, fxOpenOffersResultData.getPerformanceFee(), fxOpenOffersResultData.getManagementFee(), fxOpenOffersResultData.getMinimumPerformanceConstraint(), fxOpenOffersResultData.getDepositCommision());
-                    pamm.addCommission(pammCommissionFxOpen);
+                    PammOfferFxOpen pammOfferFxOpen = new PammOfferFxOpen(fxOpenOffersResultData.getInitialDeposit(), minPeriodInDays, fxOpenOffersResultData.getPerformanceFee(), fxOpenOffersResultData.getManagementFee(), fxOpenOffersResultData.getMinimumPerformanceConstraint(), fxOpenOffersResultData.getDepositCommision());
+                    pamm.addOffer(pammOfferFxOpen);
                 }
             }
-            if (CollectionUtils.isEmpty(pamm.getCommissions())) {
+            if (CollectionUtils.isEmpty(pamm.getInvestmentTargetOffers())) {
                 //no active offers
                 continue;
             }
@@ -156,13 +156,16 @@ public class FxOpenLoader extends PammLoader {
                 Map<String, Double> depositLoadPerDate = new HashMap<>();
                 allDepositLoads.forEach(depositLoad -> depositLoadPerDate.put(depositLoad.getDate(), depositLoad.getValue()));
                 List<Double> changes = new ArrayList<>();
-                dailyGains.forEach(dailyGain -> {
+                Double totalIncreaseInPercents = 0.;
+
+                for (PammFxOpenManagerMoney dailyGain : dailyGains) {
                     if (depositLoadPerDate.get(dailyGain.getDate()) > 0.) {
                         changes.add(dailyGain.getDailyGain());
                     }
-                });
+                    totalIncreaseInPercents = dailyGain.getTotalGain();
+                }
                 //all days are returned
-                addChangesToPamm(changes, pamm);
+                addChangesToPamm(changes, totalIncreaseInPercents, pamm);
                 pamms.add(pamm);
 
 

@@ -64,8 +64,10 @@ public class YahooExchangeRates {
         Map<Currency, Map<Currency, Double>> result = new HashMap<>();
         //create list of currency exchange:
         List<String> currencyExchanges = new ArrayList<>();
-        for (Currency currency : Currency.values()) {
-            currencyExchanges.add("\"" + currency.name() + Currency.USD.name() + "\"");
+        for (Currency currencyFrom : Currency.values()) {
+            for (Currency currencyTo : Currency.values()) {
+                currencyExchanges.add("\"" + currencyFrom.name() + currencyTo.name() + "\"");
+            }
         }
         String url = urlString.replace("(?)", StringUtils.join(currencyExchanges, ","));
         //this url returns all pamms for alpari

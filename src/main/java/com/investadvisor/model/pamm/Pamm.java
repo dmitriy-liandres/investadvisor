@@ -1,16 +1,15 @@
-package com.investadvisor.model;
+package com.investadvisor.model.pamm;
 
-import com.investadvisor.Currency;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.investadvisor.model.InvestmentTarget;
+import com.investadvisor.model.InvestmentTargetProfit;
+import com.investadvisor.model.InvestmentTargetRisk;
 
 /**
  * Base Bean for all PAMMS and PAMM based companies
  * Author Dmitriy Liandres
  * Date 24.05.2016
  */
-public class Pamm {
+public abstract class Pamm extends InvestmentTarget {
 
     private PammBroker pammBroker;
     private Integer ageInDays;
@@ -18,45 +17,29 @@ public class Pamm {
     private Double totalMoney;
     private String name;
     private String id;
-    private Currency currency;
-    private List<PammCommission> commissions;
+
+
     private Double lossDaysPercentage;
     private Double maxDailyLoss;
     private Double averageDailyLoss;
     private Double deviation;
-    private Double avgChange;
 
-
-    public List<PammCommission> getCommissions() {
-        return commissions;
+    public Pamm(InvestmentTargetRisk investmentTargetRisk, InvestmentTargetProfit investmentTargetProfit) {
+        super(investmentTargetRisk, investmentTargetProfit);
     }
 
-    public void setCommissions(List<PammCommission> commissions) {
-        this.commissions = commissions;
+    public Pamm() {
+        super(new PammRisk(), new PammProfit());
     }
 
-    public void addCommission(PammCommission commission) {
-        if (commissions == null) {
-            commissions = new ArrayList<>();
-        }
-        commissions.add(commission);
+    public Boolean isHyip() {
+        return false;
+
     }
 
-    public Double getAvgChange() {
-        return avgChange;
-    }
 
-    public void setAvgChange(Double avgChange) {
-        this.avgChange = avgChange;
-    }
 
-    public Currency getCurrency() {
-        return currency;
-    }
 
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
-    }
 
     public String getId() {
         return id;
@@ -142,18 +125,15 @@ public class Pamm {
     public String toString() {
         return "Pamm{" +
                 "pammBroker=" + pammBroker +
-                ", id='" + id + '\'' +
-                ", name='" + name + '\'' +
                 ", ageInDays=" + ageInDays +
                 ", managerMoney=" + managerMoney +
                 ", totalMoney=" + totalMoney +
-                ", commissions=" + commissions +
+                ", name='" + name + '\'' +
+                ", id='" + id + '\'' +
                 ", lossDaysPercentage=" + lossDaysPercentage +
                 ", maxDailyLoss=" + maxDailyLoss +
                 ", averageDailyLoss=" + averageDailyLoss +
                 ", deviation=" + deviation +
-                ", currency=" + currency +
-                ", avgChange=" + avgChange +
-                '}';
+                "} " + super.toString();
     }
 }

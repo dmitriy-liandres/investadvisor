@@ -1,11 +1,13 @@
 package com.investadvisor.pamm.alfaForex;
 
 import com.investadvisor.Currency;
-import com.investadvisor.model.Pamm;
-import com.investadvisor.model.PammBroker;
-import com.investadvisor.model.PammCommission;
-import com.investadvisor.model.PammLoader;
+import com.investadvisor.model.pamm.Pamm;
+import com.investadvisor.model.pamm.PammBroker;
+import com.investadvisor.model.pamm.InvestmentTargetOffer;
+import com.investadvisor.model.pamm.PammLoader;
+import com.investadvisor.pamm.alfaForex.model.AlfaForexPamm;
 import com.investadvisor.pamm.alfaForex.model.PammAlfaForexManagerMoney;
+import com.investadvisor.pamm.alfaForex.model.PammAlfaForexManagerMoneyResultItem;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
@@ -111,7 +113,7 @@ public class AlfaForexLoader extends PammLoader {
                 Double totalMoney = Double.valueOf(getMatchValue(TOTAL_MONEY_PATTERN, managerBlock));
                 Currency currency = Currency.valueOf(getMatchValue(CURRENCY_PATTERN, managerBlock));
 
-                Pamm pamm = new Pamm();
+                Pamm pamm = new AlfaForexPamm();
                 pamm.setPammBroker(PammBroker.ALFA_FOREX);
                 pamm.setId(id);
                 pamm.setName(name);
@@ -161,18 +163,22 @@ public class AlfaForexLoader extends PammLoader {
 
                 List<Double> changes = new ArrayList<>();
                 final Double[] previousValue = {0.};
-                pammAlfaForexManagerMoney.getResult().forEach(resultItem -> {
+
+                Double totalIncreaseInPercents = 0.;
+
+                for (PammAlfaForexManagerMoneyResultItem resultItem : pammAlfaForexManagerMoney.getResult()) {
                     if (depositLoadPerDate.get(resultItem.getDate()) == 0.) {
                         //no deposit load, no need to calculate
-                        return;
+                        continue;
                     }
                     //if resultItem.getValue() == -100, it means, that account was closed, but let's calculate next way
                     Double change = resultItem.getValue() == -100 ? -100 : (resultItem.getValue() - previousValue[0]) * 100 / (previousValue[0] + 100);
                     changes.add(change);
                     previousValue[0] = resultItem.getValue();
-                });
+                    totalIncreaseInPercents = resultItem.getValue();
+                }
 
-                addChangesToPamm(changes, pamm);
+                addChangesToPamm(changes, totalIncreaseInPercents, pamm);
 
                 //load commissions
                 Document doc = Jsoup.connect("https://my.alfa-forex.ru/public/pamm/view/" + id + "#offer").timeout(30000).get();
@@ -181,7 +187,7 @@ public class AlfaForexLoader extends PammLoader {
                 Double minInvestment = Double.valueOf(cells.get(2).text().split("/")[0]);
                 Integer minPeriod = Integer.valueOf(cells.get(3).text());
 
-                pamm.addCommission(new PammCommission(minInvestment, minPeriod, percentage));
+                pamm.addOffer(new InvestmentTargetOffer(minInvestment, minPeriod, percentage));
 
                 pamms.add(pamm);
 

@@ -1,18 +1,19 @@
-package com.investadvisor.model;
+package com.investadvisor.model.pamm;
 
 import com.investadvisor.ProvidedParams;
+import com.investadvisor.model.InvestmentTarget;
 
 /**
  * Author Dmitriy Liandres
  * Date 26.05.2016
  */
-public class PammCommission {
+public class InvestmentTargetOffer {
 
     private Double minInvestment;
     private Integer minPeriodInDays;
     private Double commissionFromProfit;
 
-    public PammCommission(Double minInvestment, Integer minPeriodInDays, Double commissionFromProfit) {
+    public InvestmentTargetOffer(Double minInvestment, Integer minPeriodInDays, Double commissionFromProfit) {
         this.minInvestment = minInvestment;
         this.minPeriodInDays = minPeriodInDays;
         this.commissionFromProfit = commissionFromProfit;
@@ -47,18 +48,18 @@ public class PammCommission {
      *
      * @return commission
      */
-    public Double calculateProfitAfterMangerCommission(Pamm pamm, ProvidedParams providedParams) {
-        Double avgChange = pamm.getAvgChange();
+    public Double calculateProfitAfterMangerCommission(InvestmentTarget investmentTarget, ProvidedParams providedParams) {
+        Double avgChange = investmentTarget.getAvgChange();
 
         //pay attention, this value is not in percentage, it is in percentage/100;
-        Double estimatedIncrease = Math.pow(1 + avgChange/100, providedParams.getPeriodInDays()) - 1;
+        Double estimatedIncrease = Math.pow(1 + avgChange / 100, providedParams.getPeriodInDays()) - 1;
         return 1 + estimatedIncrease * (1 - commissionFromProfit / 100);
     }
 
 
     @Override
     public String toString() {
-        return "PammCommission{" +
+        return "PammOffer{" +
                 "minInvestment=" + minInvestment +
                 ", minPeriodInDays=" + minPeriodInDays +
                 ", commissionFromProfit=" + commissionFromProfit +

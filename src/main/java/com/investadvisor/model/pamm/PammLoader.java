@@ -1,10 +1,7 @@
-package com.investadvisor.model;
+package com.investadvisor.model.pamm;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.MapperFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.investadvisor.model.InvestmentTargetLoader;
 
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -15,34 +12,16 @@ import java.util.regex.Pattern;
  * Author Dmitriy Liandres
  * Date 24.05.2016
  */
-public abstract class PammLoader {
-
-
-    /**
-     * Maps json to object and back
-     */
-    protected static ObjectMapper objectMapper = new ObjectMapper();
-
-    static {
-        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-        objectMapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
-    }
-
-    /**
-     * Loads all pamms for one broker
-     *
-     * @return list of pamms
-     * @throws IOException
-     */
-    protected abstract List<Pamm> load() throws IOException;
+public abstract class PammLoader extends InvestmentTargetLoader<Pamm> {
 
     /**
      * Calculate all required params and set values to Pamm
      *
-     * @param changes list with changes
-     * @param pamm    pamm to which we should set values
+     * @param changes                 list with changes
+     * @param totalIncreaseInPercents total change for all work time. 13 means that at the end manager had start value * 1.13
+     * @param pamm                    pamm to which we should set values
      */
-    protected void addChangesToPamm(List<Double> changes, Pamm pamm) {
+    protected void addChangesToPamm(List<Double> changes, Double totalIncreaseInPercents, Pamm pamm) {
         Double lossDaysNumber = 0.;
         Double maxDailyLoss = 0.;
         Double sumDailyLoss = 0.;
@@ -60,8 +39,8 @@ public abstract class PammLoader {
 
         //calc deviation
 
-        Double avgChangePerAllDays = changes.stream().mapToDouble(value -> value).sum() / pamm.getAgeInDays();
-        Double avgChangePerWorkDays = changes.stream().mapToDouble(value -> value).sum() / changes.size();
+        Double avgChangePerAllDays = (Math.pow(totalIncreaseInPercents / 100 + 1, 1. / pamm.getAgeInDays()) - 1) * 100;
+        Double avgChangePerWorkDays = (Math.pow(totalIncreaseInPercents / 100 + 1, 1. / changes.size()) - 1) - 1;
         Double changeSquaresSum = changes.stream().mapToDouble(value -> (value - avgChangePerWorkDays) * (value - avgChangePerWorkDays)).sum();
         deviation = Math.sqrt(changeSquaresSum / changes.size());
 
@@ -71,19 +50,6 @@ public abstract class PammLoader {
         pamm.setAverageDailyLoss(sumDailyLoss == 0 ? 2 : sumDailyLoss / lossDaysNumber);
         pamm.setDeviation(deviation);
         pamm.setAvgChange(avgChangePerAllDays);
-    }
-
-    /**
-     * Gets match values using provided patterns and text
-     *
-     * @param pattern regexp pattern
-     * @param text    text where we search for pattern
-     * @return the first found group
-     */
-    protected String getMatchValue(Pattern pattern, String text) {
-        Matcher idMatcher = pattern.matcher(text);
-        idMatcher.find();
-        return idMatcher.group(1);
     }
 
     /**

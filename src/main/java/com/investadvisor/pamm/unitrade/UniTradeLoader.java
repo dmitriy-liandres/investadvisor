@@ -1,9 +1,10 @@
 package com.investadvisor.pamm.unitrade;
 
 import com.investadvisor.Currency;
-import com.investadvisor.model.Pamm;
-import com.investadvisor.model.PammBroker;
-import com.investadvisor.model.PammLoader;
+import com.investadvisor.model.pamm.Pamm;
+import com.investadvisor.model.pamm.PammBroker;
+import com.investadvisor.model.pamm.PammLoader;
+import com.investadvisor.pamm.unitrade.model.UniTradePamm;
 import com.investadvisor.pamm.unitrade.model.UnitradeInvestmentPlan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +49,7 @@ public class UniTradeLoader extends PammLoader {
         logger.info("Finish download all offers for Unitrade");
         List<Pamm> pamms = new ArrayList<>();
         for (UnitradeInvestmentPlan unitradeInvestmentPlan : UNITRADE_INVESTMENT_PLANS) {
-            Pamm pamm = new Pamm();
+            Pamm pamm = new UniTradePamm();
             pamm.setPammBroker(PammBroker.UNI_TRADE);
             LocalDate now = LocalDate.now();
 
@@ -62,8 +63,8 @@ public class UniTradeLoader extends PammLoader {
 
             pamm.setName(unitradeInvestmentPlan.getName());
             pamm.setId(String.valueOf(pamms.size() + 1));
-            PammCommissionUniTrade pammCommission = new PammCommissionUniTrade(unitradeInvestmentPlan);
-            pamm.addCommission(pammCommission);
+            PammOfferUniTrade pammOffer = new PammOfferUniTrade(unitradeInvestmentPlan);
+            pamm.addOffer(pammOffer);
             pamm.setLossDaysPercentage(5.); //we can't get more accurate data
             pamm.setMaxDailyLoss(5.); //we can't get more accurate data
             pamm.setAverageDailyLoss(2.5);   //we can't get more accurate data

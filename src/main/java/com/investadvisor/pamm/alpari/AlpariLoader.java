@@ -1,10 +1,11 @@
 package com.investadvisor.pamm.alpari;
 
 import com.investadvisor.Currency;
-import com.investadvisor.model.Pamm;
-import com.investadvisor.model.PammBroker;
-import com.investadvisor.model.PammCommission;
-import com.investadvisor.model.PammLoader;
+import com.investadvisor.model.pamm.InvestmentTargetOffer;
+import com.investadvisor.model.pamm.Pamm;
+import com.investadvisor.model.pamm.PammBroker;
+import com.investadvisor.model.pamm.PammLoader;
+import com.investadvisor.pamm.alpari.model.AlpariPamm;
 import com.investadvisor.pamm.alpari.model.PAMMAlpariGeneral;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
@@ -50,7 +51,7 @@ public class AlpariLoader extends PammLoader {
      * @throws IOException
      */
     public List<Pamm> load() throws IOException {
-        logger.info("Download all Alpari pamm managers");
+        logger.info("Start download all Alpari pamm managers");
         List<Pamm> pamms = new ArrayList<>();
 
         //this url returns all pamms for alpari
@@ -60,7 +61,7 @@ public class AlpariLoader extends PammLoader {
         PAMMAlpariGeneral allValue = objectMapper.readValue(urlAll.openStream(), PAMMAlpariGeneral.class);
 
         allValue.getElements().forEach(onePammElements -> {
-            Pamm pamm = new Pamm();
+            Pamm pamm = new AlpariPamm();
             pamm.setPammBroker(PammBroker.ALPARI);
             pamm.setId(String.valueOf(onePammElements.get(0)));
             pamm.setName(String.valueOf(onePammElements.get(1)));
@@ -95,6 +96,7 @@ public class AlpariLoader extends PammLoader {
             //only work days are returned
             List<Double> changes = new ArrayList<>();
 
+            Double totalIncreaseInPercents = 0.;
             for (CSVRecord record : records) {
                 String date = record.get(0);
                 if (date.equals(nowFormatted)) {
@@ -113,8 +115,9 @@ public class AlpariLoader extends PammLoader {
                 Double change = open == -100 ? -100 : (close - open) * 100 / (open + 100);
 
                 changes.add(change);
+                totalIncreaseInPercents = close;
             }
-            addChangesToPamm(changes, pamm);
+            addChangesToPamm(changes, totalIncreaseInPercents, pamm);
 
             //let's load commissions
             Document doc = Jsoup.connect("http://www.alpari.ru/ru/investor/pamm/" + pamm.getId()).timeout(30000).get();
@@ -126,12 +129,13 @@ public class AlpariLoader extends PammLoader {
             for (int i = 1; i < minBalances.size(); i++) {
                 Double minBalance = Double.valueOf(minBalances.get(i).text().replace(spaceCharStr, "").trim());
                 Double commission = Double.valueOf(commissions.get(i).text().replace("%", "").trim());
-                PammCommission pammCommission = new PammCommission(minBalance, 1, commission);
-                pamm.addCommission(pammCommission);
+                InvestmentTargetOffer investmentTargetOffer = new InvestmentTargetOffer(minBalance, 1, commission);
+                pamm.addOffer(investmentTargetOffer);
             }
 
             logger.info("Finish overwork pamm {}", pamm);
         }
+        logger.info("Finish download all Alpari pamm managers");
         filterUselessPamms(pamms);
         return pamms;
     }

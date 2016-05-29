@@ -1,8 +1,10 @@
-package com.investadvisor.model;
+package com.investadvisor.model.pamm;
 
 import com.investadvisor.Currency;
 import com.investadvisor.ProvidedParams;
 import com.investadvisor.exchangerates.YahooExchangeRates;
+import com.investadvisor.model.InvestmentTarget;
+import com.investadvisor.model.InvestmentTargetRisk;
 
 import java.io.IOException;
 
@@ -11,7 +13,7 @@ import java.io.IOException;
  * Author Dmitriy Liandres
  * Date 25.05.2016
  */
-public class PammRisk {
+public class PammRisk extends InvestmentTargetRisk {
 
     private Double brokerCoefficient;
     private Double pammAgeCoefficient;
@@ -20,61 +22,10 @@ public class PammRisk {
     private Double pammManagerTotalMoneyCoefficient;
     private Double investmentSummCoefficient;
     private Double mainRiskCoefficient;
-    private Double totalRisk;
 
-    public Double getBrokerCoefficient() {
-        return brokerCoefficient;
-    }
 
-    public void setBrokerCoefficient(Double brokerCoefficient) {
-        this.brokerCoefficient = brokerCoefficient;
-    }
-
-    public Double getPammAgeCoefficient() {
-        return pammAgeCoefficient;
-    }
-
-    public void setPammAgeCoefficient(Double pammAgeCoefficient) {
-        this.pammAgeCoefficient = pammAgeCoefficient;
-    }
-
-    public Double getInvestmentAgeCoefficient() {
-        return investmentAgeCoefficient;
-    }
-
-    public void setInvestmentAgeCoefficient(Double investmentAgeCoefficient) {
-        this.investmentAgeCoefficient = investmentAgeCoefficient;
-    }
-
-    public Double getPammManagerMoneyCoefficient() {
-        return pammManagerMoneyCoefficient;
-    }
-
-    public void setPammManagerMoneyCoefficient(Double pammManagerMoneyCoefficient) {
-        this.pammManagerMoneyCoefficient = pammManagerMoneyCoefficient;
-    }
-
-    public Double getPammManagerTotalMoneyCoefficient() {
-        return pammManagerTotalMoneyCoefficient;
-    }
-
-    public void setPammManagerTotalMoneyCoefficient(Double pammManagerTotalMoneyCoefficient) {
-        this.pammManagerTotalMoneyCoefficient = pammManagerTotalMoneyCoefficient;
-    }
-
-    public Double getInvestmentSummCoefficient() {
-        return investmentSummCoefficient;
-    }
-
-    public void setInvestmentSummCoefficient(Double investmentSummCoefficient) {
-        this.investmentSummCoefficient = investmentSummCoefficient;
-    }
-
-    public Double getTotalRisk() {
-        return totalRisk;
-    }
-
-    public void calculateRisk(Pamm pamm, ProvidedParams providedParams) throws IOException {
+    public Double calculateAndSetRisk(InvestmentTarget investmentTarget, ProvidedParams providedParams) throws IOException {
+        Pamm pamm = (Pamm) investmentTarget;
         brokerCoefficient = 0.;
         switch (pamm.getPammBroker()) {
             case ALFA_FOREX:
@@ -107,8 +58,9 @@ public class PammRisk {
         investmentSummCoefficient = providedMoneyInUsd > totalMoneyInUsd ? 3 : providedMoneyInUsd > totalMoneyInUsd / 2 ? 2 : providedMoneyInUsd > pamm.getTotalMoney() / 3 ? 1.5 : 1;
         mainRiskCoefficient = Math.pow(Math.abs(pamm.getLossDaysPercentage() * pamm.getMaxDailyLoss() * pamm.getAverageDailyLoss() * pamm.getDeviation()), 0.25);
 
-        totalRisk = brokerCoefficient * pammAgeCoefficient * investmentAgeCoefficient * pammManagerMoneyCoefficient * pammManagerTotalMoneyCoefficient * investmentSummCoefficient * mainRiskCoefficient;
-
+        //todo maybe we have to add deposit load to this coefficient in future
+        setTotalRisk(brokerCoefficient * pammAgeCoefficient * investmentAgeCoefficient * pammManagerMoneyCoefficient * pammManagerTotalMoneyCoefficient * investmentSummCoefficient * mainRiskCoefficient);
+        return getTotalRisk();
     }
 
 
@@ -122,7 +74,6 @@ public class PammRisk {
                 ", pammManagerTotalMoneyCoefficient=" + pammManagerTotalMoneyCoefficient +
                 ", investmentSummCoefficient=" + investmentSummCoefficient +
                 ", mainRiskCoefficient=" + mainRiskCoefficient +
-                ", totalRisk=" + totalRisk +
-                '}';
+                "} " + super.toString();
     }
 }

@@ -1,24 +1,24 @@
 package com.investadvisor.pamm.unitrade;
 
 import com.investadvisor.ProvidedParams;
-import com.investadvisor.model.Pamm;
-import com.investadvisor.model.PammCommission;
+import com.investadvisor.model.InvestmentTarget;
+import com.investadvisor.model.pamm.InvestmentTargetOffer;
 import com.investadvisor.pamm.unitrade.model.UnitradeInvestmentPlan;
 
 /**
  * Author Dmitriy Liandres
  * Date 27.05.2016
  */
-public class PammCommissionUniTrade extends PammCommission {
+public class PammOfferUniTrade extends InvestmentTargetOffer {
     private UnitradeInvestmentPlan unitradeInvestmentPlan;
 
-    public PammCommissionUniTrade(UnitradeInvestmentPlan unitradeInvestmentPlan) {
+    public PammOfferUniTrade(UnitradeInvestmentPlan unitradeInvestmentPlan) {
         super(unitradeInvestmentPlan.getMinimalInvestment(), unitradeInvestmentPlan.getDays(), 0.);
         this.unitradeInvestmentPlan = unitradeInvestmentPlan;
     }
 
     @Override
-    public Double calculateProfitAfterMangerCommission(Pamm pamm, ProvidedParams providedParams) {
+    public Double calculateProfitAfterMangerCommission(InvestmentTarget pamm, ProvidedParams providedParams) {
         return 1 + unitradeInvestmentPlan.getPercentagePerMonth() * unitradeInvestmentPlan.getMonthsNumber() / 100;
     }
 }

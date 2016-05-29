@@ -2,11 +2,12 @@ package com.investadvisor.pamm.insolt;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.investadvisor.Currency;
-import com.investadvisor.model.Pamm;
-import com.investadvisor.model.PammBroker;
-import com.investadvisor.model.PammLoader;
+import com.investadvisor.model.pamm.Pamm;
+import com.investadvisor.model.pamm.PammBroker;
+import com.investadvisor.model.pamm.PammLoader;
 import com.investadvisor.pamm.insolt.model.InsoltGraphData;
 import com.investadvisor.pamm.insolt.model.InsoltInvestmentPlan;
+import com.investadvisor.pamm.insolt.model.InsoltPamm;
 import org.apache.commons.io.IOUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -94,7 +95,7 @@ public class InsoltLoader extends PammLoader {
 
         //load offers
         for (InsoltInvestmentPlan insoltInvestmentPlan : INSOLT_INVESTMENT_PLANS) {
-            Pamm pamm = new Pamm();
+            Pamm pamm = new InsoltPamm();
             pamm.setPammBroker(PammBroker.INSOLT);
 
 
@@ -126,18 +127,20 @@ public class InsoltLoader extends PammLoader {
             pamm.setCurrency(Currency.USD);
             pamm.setName(insoltInvestmentPlan.getName());
             pamm.setId(String.valueOf(pamms.size() + 1));
-            PammCommissionInsolt pammCommission = new PammCommissionInsolt(insoltInvestmentPlan);
-            pamm.addCommission(pammCommission);
+            PammOfferInsolt pammOffer = new PammOfferInsolt(insoltInvestmentPlan);
+            pamm.addOffer(pammOffer);
 
             List<Double> changes = new ArrayList<>();
             Double previousValue = 0.;
+            Double totalIncreaseInPercents = 0.;
             for (InsoltGraphData insoltGraphDataOneWeek : insoltGraphData) {
                 Double change = (insoltGraphDataOneWeek.getValue() - previousValue) * 100 / (previousValue + 100);
                 changes.add(change);
                 previousValue = insoltGraphDataOneWeek.getValue();
+                totalIncreaseInPercents = insoltGraphDataOneWeek.getValue();
 
             }
-            addChangesToPamm(changes, pamm);
+            addChangesToPamm(changes, totalIncreaseInPercents, pamm);
 
             pamms.add(pamm);
         }
