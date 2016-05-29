@@ -2,9 +2,9 @@ package com.investadvisor.hyip.yabankir;
 
 import com.investadvisor.Currency;
 import com.investadvisor.hyip.yabankir.model.YaBankir;
-import com.investadvisor.hyip.yabankir.model.YaBankirProfit;
 import com.investadvisor.hyip.yabankir.model.YaBankirRisk;
 import com.investadvisor.model.InvestmentTargetLoader;
+import com.investadvisor.model.hyip.HyipProfit;
 import com.investadvisor.model.pamm.InvestmentTargetOffer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +40,7 @@ public class YaBankirLoader extends InvestmentTargetLoader<YaBankir> {
 
         Double avgPercentage = (Math.pow(3.65, 1. / 365) - 1) * 100;
 
-        YaBankir yaBankirUsd = new YaBankir(new YaBankirRisk(), new YaBankirProfit());
+        YaBankir yaBankirUsd = new YaBankir(new YaBankirRisk(), new HyipProfit());
         yaBankirUsd.setAvgChange(avgPercentage);
         yaBankirUsd.setCurrency(Currency.USD);
 
@@ -49,7 +49,7 @@ public class YaBankirLoader extends InvestmentTargetLoader<YaBankir> {
         hyips.add(yaBankirUsd);
 
         //add offer in RUB
-        YaBankir yaBankirRub = new YaBankir(new YaBankirRisk(), new YaBankirProfit());
+        YaBankir yaBankirRub = new YaBankir(new YaBankirRisk(), new HyipProfit());
         yaBankirUsd.setAvgChange(avgPercentage);
         yaBankirRub.setCurrency(Currency.RUB);
 

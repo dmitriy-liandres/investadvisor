@@ -1,5 +1,7 @@
 package com.investadvisor;
 
+import com.investadvisor.hyip.itcTravel.ItcTravelLoader;
+import com.investadvisor.hyip.itcTravel.model.ItcTravel;
 import com.investadvisor.hyip.yabankir.YaBankirLoader;
 import com.investadvisor.model.InvestmentTarget;
 import com.investadvisor.model.InvestmentTargetProfit;
@@ -37,7 +39,8 @@ public class Main {
         //pammLoadersFutureTasks.add(createAndStartFutureTask(() -> AlfaForexLoader.getInstance().load()));
         //pammLoadersFutureTasks.add(createAndStartFutureTask(() -> FxOpenLoader.getInstance().load()));
 
-        investmentTargets.addAll(YaBankirLoader.getInstance().load());
+        //investmentTargets.addAll(YaBankirLoader.getInstance().load());
+        investmentTargets.addAll(ItcTravelLoader.getInstance().load());
         pammLoadersFutureTasks.forEach(pammLoadersFutureTask -> {
             try {
                 investmentTargets.addAll(pammLoadersFutureTask.get());

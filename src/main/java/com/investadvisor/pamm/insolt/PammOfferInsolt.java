@@ -20,6 +20,7 @@ public class PammOfferInsolt extends InvestmentTargetOffer {
     @Override
     public Double calculateProfitAfterMangerCommission(InvestmentTarget pamm, ProvidedParams providedParams) {
         Double avgChangePerWeek = pamm.getAvgChange() * 7;
+        //recapitalization is done evey week
         //pay attention, this value is not in percentage, it is in percentage/100;
         Double estimatedIncrease = Math.pow(1 + avgChangePerWeek / 100, insoltInvestmentPlan.getDays() / 7) - 1;
         return 1 + estimatedIncrease * (1 - getCommissionFromProfit() / 100);

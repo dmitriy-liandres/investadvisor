@@ -1,4 +1,4 @@
-package com.investadvisor.hyip.yabankir.model;
+package com.investadvisor.hyip.itcTravel.model;
 
 import com.investadvisor.ProvidedParams;
 import com.investadvisor.model.InvestmentTarget;
@@ -10,21 +10,15 @@ import java.io.IOException;
  * Author Dmitriy Liandres
  * Date 29.05.2016
  */
-public class YaBankirRisk extends InvestmentTargetRisk {
-    /**
-     * Risk fo all hypes = 100*percentage per month
-     *
-     * @return total risk
-     */
-
+public class ItcTravelRisk extends InvestmentTargetRisk {
     @Override
     public Double calculateAndSetRisk(InvestmentTarget investmentTarget, ProvidedParams providedParams) throws IOException {
-        setTotalRisk(100. * 265/12);
+        setTotalRisk(100. * (9 + 12 * +15 + 18 + 21) / 5 / 30);
         return getTotalRisk();
     }
 
     @Override
     public String toString() {
-        return "YaBankirRisk{} " + super.toString();
+        return "ItcTravelRisk{} " + super.toString();
     }
 }

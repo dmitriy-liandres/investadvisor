@@ -1,4 +1,4 @@
-package com.investadvisor.hyip.yabankir.model;
+package com.investadvisor.model.hyip;
 
 import com.investadvisor.model.InvestmentTargetProfit;
 
@@ -6,6 +6,5 @@ import com.investadvisor.model.InvestmentTargetProfit;
  * Author Dmitriy Liandres
  * Date 29.05.2016
  */
-public class YaBankirProfit extends InvestmentTargetProfit {
-
+public class HyipProfit extends InvestmentTargetProfit {
 }
