@@ -7,7 +7,7 @@ import com.investadvisor.model.pamm.InvestmentTargetOffer;
  * Author Dmitriy Liandres
  * Date 29.05.2016
  */
-public abstract class InvestmentTargetProfit {
+public abstract class InvestmentTargetOfferProfit {
 
 
     private Double profitPercentage;
@@ -58,7 +58,7 @@ public abstract class InvestmentTargetProfit {
                 continue;
             }
 
-            Double calculatedFinalResultAfterMangerCommission = investmentTargetOffer.calculateProfitAfterMangerCommission(investmentTarget, providedParams);
+            Double calculatedFinalResultAfterMangerCommission = calculateProfitAfterMangerCommission(investmentTarget, investmentTargetOffer, providedParams);
 
             Double profitMoneyForSpecifiedCommission = investedMoney * (calculatedFinalResultAfterMangerCommission - 1);
 
@@ -80,6 +80,20 @@ public abstract class InvestmentTargetProfit {
         setProfitPercentage((resultMoney / providedParams.getSumm()) * 100);
 
         return true;
+    }
+
+
+    /**
+     * Calculates final result (1+ increase) based on provided params
+     *
+     * @return commission
+     */
+    public Double calculateProfitAfterMangerCommission(InvestmentTarget investmentTarget, InvestmentTargetOffer investmentTargetOffer, ProvidedParams providedParams) {
+        Double avgChange = investmentTargetOffer.getAvgChange();
+
+        //pay attention, this value is not in percentage, it is in percentage/100;
+        Double estimatedIncrease = Math.pow(1 + avgChange / 100, providedParams.getPeriodInDays()) - 1;
+        return 1 + estimatedIncrease * (1 - investmentTargetOffer.getCommissionFromProfit() / 100);
     }
 
     @Override

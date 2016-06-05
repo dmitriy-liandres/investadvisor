@@ -1,9 +1,8 @@
 package com.investadvisor.pamm.fxopen.model;
 
-import com.investadvisor.ProvidedParams;
-import com.investadvisor.model.InvestmentTarget;
-import com.investadvisor.model.pamm.Pamm;
+import com.investadvisor.Currency;
 import com.investadvisor.model.pamm.InvestmentTargetOffer;
+import com.investadvisor.model.pamm.PammOfferRisk;
 
 /**
  * Author Dmitriy Liandres
@@ -23,32 +22,20 @@ public class PammOfferFxOpen extends InvestmentTargetOffer {
      */
     private Double assignmentCommissions;
 
-    public PammOfferFxOpen(Double minInvestment,
+    public PammOfferFxOpen(String name,
+                           Double minInvestment,
                            Integer minPeriodInDays,
                            Double commissionFromProfit,
                            Double annualMasterCommission,
                            Double minimumPerformanceConstant,
-                           Double assignmentCommissions) {
-        super(minInvestment, minPeriodInDays, commissionFromProfit);
+                           Double assignmentCommissions,
+                           Currency currency,
+                           Double avgChange,
+                           String link) {
+        super(name, minInvestment, null, minPeriodInDays, commissionFromProfit, link, currency, avgChange, new PammOfferRisk(), new FxOpenPammOfferProfit());
         this.annualMasterCommission = annualMasterCommission;
         this.minimumPerformanceConstant = minimumPerformanceConstant;
         this.assignmentCommissions = assignmentCommissions;
-    }
-
-    @Override
-    public Double calculateProfitAfterMangerCommission(InvestmentTarget pamm, ProvidedParams providedParams) {
-        Double avgChange = pamm.getAvgChange() - annualMasterCommission / 365;
-        //pay attention, this value is not in percentage, it is in percentage/100;
-        Double estimatedIncrease = Math.pow(1 + avgChange/100, providedParams.getPeriodInDays()) - 1;
-        Double finalIncreased = (1 + estimatedIncrease) * (1 - assignmentCommissions / 100);
-
-        if (finalIncreased - 1 < minimumPerformanceConstant / 100) {
-            return finalIncreased;
-        } else {
-            Double managerCommission = (finalIncreased - minimumPerformanceConstant / 100 - 1) * getCommissionFromProfit() / 100;
-            return (finalIncreased - managerCommission);
-        }
-
     }
 
 

@@ -4,7 +4,7 @@ import com.investadvisor.Currency;
 import com.investadvisor.ProvidedParams;
 import com.investadvisor.exchangerates.YahooExchangeRates;
 import com.investadvisor.model.InvestmentTarget;
-import com.investadvisor.model.InvestmentTargetRisk;
+import com.investadvisor.model.InvestmentTargetOfferRisk;
 
 import java.io.IOException;
 
@@ -13,7 +13,7 @@ import java.io.IOException;
  * Author Dmitriy Liandres
  * Date 25.05.2016
  */
-public class PammRisk extends InvestmentTargetRisk {
+public class PammOfferRisk extends InvestmentTargetOfferRisk {
 
     private Double brokerCoefficient;
     private Double pammAgeCoefficient;
@@ -46,9 +46,11 @@ public class PammRisk extends InvestmentTargetRisk {
             default:
                 throw new RuntimeException("No broker coefficient specified");
         }
+        //get currency
+        InvestmentTargetOffer offer = pamm.getInvestmentTargetOffers().get(0);
 
-        Double managerMoneyInUsd = YahooExchangeRates.convertToUSD(pamm.getManagerMoney(), pamm.getCurrency(), Currency.USD);
-        Double totalMoneyInUsd = YahooExchangeRates.convertToUSD(pamm.getTotalMoney(), pamm.getCurrency(), Currency.USD);
+        Double managerMoneyInUsd = YahooExchangeRates.convertToUSD(pamm.getManagerMoney(), offer.getCurrency(), Currency.USD);
+        Double totalMoneyInUsd = YahooExchangeRates.convertToUSD(pamm.getTotalMoney(), offer.getCurrency(), Currency.USD);
         Double providedMoneyInUsd = YahooExchangeRates.convertToUSD(providedParams.getSumm(), providedParams.getCurrency(), Currency.USD);
 
         pammAgeCoefficient = pamm.getAgeInDays() < 90 ? 3 : pamm.getAgeInDays() < 180 ? 2 : pamm.getAgeInDays() < 365 ? 1.5 : 1;

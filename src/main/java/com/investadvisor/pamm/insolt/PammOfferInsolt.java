@@ -1,28 +1,22 @@
 package com.investadvisor.pamm.insolt;
 
-import com.investadvisor.ProvidedParams;
-import com.investadvisor.model.InvestmentTarget;
+import com.investadvisor.Currency;
 import com.investadvisor.model.pamm.InvestmentTargetOffer;
+import com.investadvisor.model.pamm.PammOfferRisk;
 import com.investadvisor.pamm.insolt.model.InsoltInvestmentPlan;
+import com.investadvisor.pamm.insolt.model.InsoltPammOfferProfit;
 
 /**
  * Author Dmitriy Liandres
  * Date 27.05.2016
  */
 public class PammOfferInsolt extends InvestmentTargetOffer {
-    private InsoltInvestmentPlan insoltInvestmentPlan;
-
-    public PammOfferInsolt(InsoltInvestmentPlan insoltInvestmentPlan) {
-        super(insoltInvestmentPlan.getMinimalInvestment(), insoltInvestmentPlan.getDays(), insoltInvestmentPlan.getManagerCommission());
-        this.insoltInvestmentPlan = insoltInvestmentPlan;
+    public PammOfferInsolt(InsoltInvestmentPlan insoltInvestmentPlan, Double avgChange) {
+        super(insoltInvestmentPlan.getName(), insoltInvestmentPlan.getMinimalInvestment(), null, insoltInvestmentPlan.getDays(), insoltInvestmentPlan.getManagerCommission(), insoltInvestmentPlan.getLink(), Currency.USD, avgChange, new PammOfferRisk(), new InsoltPammOfferProfit(insoltInvestmentPlan));
     }
 
     @Override
-    public Double calculateProfitAfterMangerCommission(InvestmentTarget pamm, ProvidedParams providedParams) {
-        Double avgChangePerWeek = pamm.getAvgChange() * 7;
-        //recapitalization is done evey week
-        //pay attention, this value is not in percentage, it is in percentage/100;
-        Double estimatedIncrease = Math.pow(1 + avgChangePerWeek / 100, insoltInvestmentPlan.getDays() / 7) - 1;
-        return 1 + estimatedIncrease * (1 - getCommissionFromProfit() / 100);
+    public String toString() {
+        return "PammOfferInsolt{} " + super.toString();
     }
 }

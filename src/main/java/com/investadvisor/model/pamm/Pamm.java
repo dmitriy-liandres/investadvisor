@@ -1,8 +1,7 @@
 package com.investadvisor.model.pamm;
 
 import com.investadvisor.model.InvestmentTarget;
-import com.investadvisor.model.InvestmentTargetProfit;
-import com.investadvisor.model.InvestmentTargetRisk;
+import com.investadvisor.model.InvestmentType;
 
 /**
  * Base Bean for all PAMMS and PAMM based companies
@@ -15,7 +14,7 @@ public abstract class Pamm extends InvestmentTarget {
     private Integer ageInDays;
     private Double managerMoney;
     private Double totalMoney;
-    private String name;
+
     private String id;
 
 
@@ -24,21 +23,9 @@ public abstract class Pamm extends InvestmentTarget {
     private Double averageDailyLoss;
     private Double deviation;
 
-    public Pamm(InvestmentTargetRisk investmentTargetRisk, InvestmentTargetProfit investmentTargetProfit) {
-        super(investmentTargetRisk, investmentTargetProfit);
+    public Pamm(String name) {
+        super(InvestmentType.PAMM, name);
     }
-
-    public Pamm() {
-        super(new PammRisk(), new PammProfit());
-    }
-
-    public Boolean isHyip() {
-        return false;
-
-    }
-
-
-
 
 
     public String getId() {
@@ -81,13 +68,6 @@ public abstract class Pamm extends InvestmentTarget {
         this.totalMoney = totalMoney;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public Double getLossDaysPercentage() {
         return lossDaysPercentage;
@@ -128,7 +108,6 @@ public abstract class Pamm extends InvestmentTarget {
                 ", ageInDays=" + ageInDays +
                 ", managerMoney=" + managerMoney +
                 ", totalMoney=" + totalMoney +
-                ", name='" + name + '\'' +
                 ", id='" + id + '\'' +
                 ", lossDaysPercentage=" + lossDaysPercentage +
                 ", maxDailyLoss=" + maxDailyLoss +

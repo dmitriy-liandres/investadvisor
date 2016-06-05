@@ -1,12 +1,12 @@
 package com.investadvisor;
 
 import com.investadvisor.hyip.itcTravel.ItcTravelLoader;
-import com.investadvisor.hyip.itcTravel.model.ItcTravel;
-import com.investadvisor.hyip.yabankir.YaBankirLoader;
 import com.investadvisor.model.InvestmentTarget;
-import com.investadvisor.model.InvestmentTargetProfit;
+import com.investadvisor.model.InvestmentTargetOfferProfit;
+import com.investadvisor.model.pamm.InvestmentTargetOffer;
 import com.investadvisor.model.pamm.Pamm;
-import com.investadvisor.pamm.insolt.InsoltLoader;
+import com.investadvisor.startups.insolt.InsoltStartupLoader;
+import com.investadvisor.startups.shareinstock.ShareInStockLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,7 +32,7 @@ public class Main {
         List<InvestmentTarget> investmentTargets = new ArrayList<>();
         List<FutureTask<List<Pamm>>> pammLoadersFutureTasks = new ArrayList<>();
 
-
+       ;
         //pammLoadersFutureTasks.add(createAndStartFutureTask(() -> InsoltLoader.getInstance().load()));
         //pammLoadersFutureTasks.add(createAndStartFutureTask(() -> UniTradeLoader.getInstance().load()));
         //pammLoadersFutureTasks.add(createAndStartFutureTask(() -> AlpariLoader.getInstance().load()));
@@ -40,7 +40,12 @@ public class Main {
         //pammLoadersFutureTasks.add(createAndStartFutureTask(() -> FxOpenLoader.getInstance().load()));
 
         //investmentTargets.addAll(YaBankirLoader.getInstance().load());
-        investmentTargets.addAll(ItcTravelLoader.getInstance().load());
+        //investmentTargets.addAll(ItcTravelLoader.getInstance().load());
+
+        investmentTargets.addAll( ShareInStockLoader.getInstance().load());
+        investmentTargets.addAll( InsoltStartupLoader.getInstance().load());
+
+
         pammLoadersFutureTasks.forEach(pammLoadersFutureTask -> {
             try {
                 investmentTargets.addAll(pammLoadersFutureTask.get());
@@ -63,24 +68,24 @@ public class Main {
                 ProvidedParams providedParams = new ProvidedParams(summ, periodInDays, currency, maxAllowedRisk);
 
                 //broker coefficient
-                List<InvestmentTarget> investmentTargetCalculated = new ArrayList<>();
+                List<InvestmentTargetOffer> investmentTargetCalculatedOffers = new ArrayList<>();
                 for (InvestmentTarget investmentTarget : investmentTargets) {
-                    if (investmentTarget.getCurrency() != currency) {
-                        continue;
-                    }
-
-                    investmentTarget.getInvestmentTargetRisk().calculateAndSetRisk(investmentTarget, providedParams);
-                    InvestmentTargetProfit investmentTargetProfit = investmentTarget.getInvestmentTargetProfit();
-                    Boolean isSuitsUser = investmentTargetProfit.calculateProfit(investmentTarget, providedParams);
-                    if (isSuitsUser) {
-                        logger.info("investmentTarget = {} ", investmentTarget);
-                        investmentTargetCalculated.add(investmentTarget);
+                    for (InvestmentTargetOffer offer : investmentTarget.getInvestmentTargetOffers()) {
+                        offer.getInvestmentTargetOfferRisk().calculateAndSetRisk(investmentTarget, providedParams);
+                        InvestmentTargetOfferProfit investmentTargetOfferProfit = offer.getInvestmentTargetOfferProfit();
+                        Boolean isSuitsUser = investmentTargetOfferProfit.calculateProfit(investmentTarget, providedParams);
+                        if (isSuitsUser) {
+                            logger.info("investmentTarget = {}, offer = {} ", investmentTarget, offer);
+                            investmentTargetCalculatedOffers.add(offer);
+                        }
                     }
                 }
                 //filter by max allowed risk
-                investmentTargetCalculated = investmentTargetCalculated.stream().filter(pammRisks -> pammRisks.getInvestmentTargetRisk().getTotalRisk() <= providedParams.getMaxAllowedRisk()).collect(Collectors.toList());
-                investmentTargetCalculated.sort((o1, o2) -> o1.getInvestmentTargetRisk().getTotalRisk().compareTo(o2.getInvestmentTargetRisk().getTotalRisk()));
-                System.out.println(investmentTargetCalculated);
+                investmentTargetCalculatedOffers = investmentTargetCalculatedOffers.stream().filter(offer -> offer.getInvestmentTargetOfferRisk().getTotalRisk() <= providedParams.getMaxAllowedRisk()).collect(Collectors.toList());
+                //filter by currency
+                investmentTargetCalculatedOffers = investmentTargetCalculatedOffers.stream().filter(offer -> offer.getCurrency() == providedParams.getCurrency()).collect(Collectors.toList());
+                investmentTargetCalculatedOffers.sort((offer1, offer2) -> offer1.getInvestmentTargetOfferRisk().getTotalRisk().compareTo(offer2.getInvestmentTargetOfferRisk().getTotalRisk()));
+                System.out.println(investmentTargetCalculatedOffers);
             } catch (Exception e) {
                 e.printStackTrace();
             }

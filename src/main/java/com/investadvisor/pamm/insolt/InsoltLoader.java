@@ -1,7 +1,6 @@
 package com.investadvisor.pamm.insolt;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.investadvisor.Currency;
 import com.investadvisor.model.pamm.Pamm;
 import com.investadvisor.model.pamm.PammBroker;
 import com.investadvisor.model.pamm.PammLoader;
@@ -42,17 +41,18 @@ public class InsoltLoader extends PammLoader {
     Pattern INCOME_PATTERN = Pattern.compile(".*?AmCharts.makeChart\\(\"chartdiv3\".*?dataProvider\":(.*?)\\].*?", Pattern.DOTALL);
 
     static {
-        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Хавьер Перез (CFD)/ОФЕРТА 1", 91, 40., 10, 100., "01.08.2015"));
-        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Хавьер Перез (CFD)/ОФЕРТА 2", 182, 30., 10, 100., "01.08.2015"));
-        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Хавьер Перез (CFD)/ОФЕРТА 3", 357, 20., 10, 100., "01.08.2015"));
+        String link = "https://personal.insolt.com/register/?p=12588";
+        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Хавьер Перез (CFD)/ОФЕРТА 1", 91, 40., 10, 100., "01.08.2015", link));
+        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Хавьер Перез (CFD)/ОФЕРТА 2", 182, 30., 10, 100., "01.08.2015", link));
+        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Хавьер Перез (CFD)/ОФЕРТА 3", 357, 20., 10, 100., "01.08.2015", link));
 
-        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Ли Хевсон (CFD)/ОФЕРТА 1", 28, 35., 20, 200., "01.08.2015"));
-        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Ли Хевсон (CFD)/ОФЕРТА 2", 91, 30., 20, 200., "01.08.2015"));
-        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Ли Хевсон (CFD)/ОФЕРТА 3", 182, 25., 20, 200., "01.08.2015"));
+        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Ли Хевсон (CFD)/ОФЕРТА 1", 28, 35., 20, 200., "01.08.2015", link));
+        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Ли Хевсон (CFD)/ОФЕРТА 2", 91, 30., 20, 200., "01.08.2015", link));
+        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Ли Хевсон (CFD)/ОФЕРТА 3", 182, 25., 20, 200., "01.08.2015", link));
 
-        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Хавьер Перез (Фондовый рынок)/ОФЕРТА 1", 91, 30., 30, 500., "19.09.2015"));
-        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Хавьер Перез (Фондовый рынок)/ОФЕРТА 2", 182, 25., 30, 500., "19.09.2015"));
-        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Хавьер Перез (Фондовый рынок)/ОФЕРТА 3", 357, 20., 30, 500., "19.09.2015"));
+        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Хавьер Перез (Фондовый рынок)/ОФЕРТА 1", 91, 30., 30, 500., "19.09.2015", link));
+        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Хавьер Перез (Фондовый рынок)/ОФЕРТА 2", 182, 25., 30, 500., "19.09.2015", link));
+        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Хавьер Перез (Фондовый рынок)/ОФЕРТА 3", 357, 20., 30, 500., "19.09.2015", link));
     }
 
     private static InsoltLoader instance = new InsoltLoader();
@@ -124,11 +124,7 @@ public class InsoltLoader extends PammLoader {
             pamm.setAgeInDays((int) ChronoUnit.DAYS.between(localDate, now));
             pamm.setTotalMoney(Double.valueOf(totalMoneyText));
             pamm.setManagerMoney(pamm.getTotalMoney() / 10);  //we can't get more accurate data
-            pamm.setCurrency(Currency.USD);
-            pamm.setName(insoltInvestmentPlan.getName());
             pamm.setId(String.valueOf(pamms.size() + 1));
-            PammOfferInsolt pammOffer = new PammOfferInsolt(insoltInvestmentPlan);
-            pamm.addOffer(pammOffer);
 
             List<Double> changes = new ArrayList<>();
             Double previousValue = 0.;
@@ -140,7 +136,10 @@ public class InsoltLoader extends PammLoader {
                 totalIncreaseInPercents = insoltGraphDataOneWeek.getValue();
 
             }
-            addChangesToPamm(changes, totalIncreaseInPercents, pamm);
+            Double avgChange = addChangesToPamm(changes, totalIncreaseInPercents, pamm);
+
+            PammOfferInsolt pammOffer = new PammOfferInsolt(insoltInvestmentPlan, avgChange);
+            pamm.addOffer(pammOffer);
 
             pamms.add(pamm);
         }

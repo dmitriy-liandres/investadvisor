@@ -1,8 +1,6 @@
 package com.investadvisor.hyip.itcTravel.model;
 
 import com.investadvisor.Currency;
-import com.investadvisor.model.InvestmentTargetProfit;
-import com.investadvisor.model.InvestmentTargetRisk;
 import com.investadvisor.model.hyip.Hyip;
 
 import java.io.IOException;
@@ -12,14 +10,8 @@ import java.io.IOException;
  * Date 29.05.2016
  */
 public class ItcTravel extends Hyip {
-    public ItcTravel(InvestmentTargetRisk investmentTargetRisk,
-                     InvestmentTargetProfit investmentTargetProfit) {
-        super(investmentTargetRisk, investmentTargetProfit);
-    }
-
-    @Override
-    public String generateLink() {
-        return "https://itc-travel.biz/investor/investment-offer/?id=688";
+    public ItcTravel() {
+        super("itc-travel");
     }
 
     @Override

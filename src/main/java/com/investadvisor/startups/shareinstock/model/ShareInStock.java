@@ -1,28 +1,28 @@
-package com.investadvisor.pamm.alfaForex.model;
+package com.investadvisor.startups.shareinstock.model;
 
 import com.investadvisor.Currency;
-import com.investadvisor.model.pamm.Pamm;
+import com.investadvisor.model.startup.Startup;
+import com.investadvisor.model.startup.StartupBroker;
 
 import java.io.IOException;
 
-/**
+/**   shareinstock.com
  * Author Dmitriy Liandres
- * Date 29.05.2016
+ * Date 05.06.2016
  */
-public class AlfaForexPamm extends Pamm {
-
-    public AlfaForexPamm() {
-        super("alfa-forex");
+public class ShareInStock extends Startup {
+    public ShareInStock() {
+        super("shareinstock" , StartupBroker.SHARE_IN_STOCK);
     }
 
     @Override
     public Double getCommissionEnterPercentage() {
-        return 2.;
+        return 0.5;
     }
 
     @Override
     public Double getCommissionWithdrawPercentage() {
-        return 0.;
+        return 0.5 + 5.;
     }
 
     @Override

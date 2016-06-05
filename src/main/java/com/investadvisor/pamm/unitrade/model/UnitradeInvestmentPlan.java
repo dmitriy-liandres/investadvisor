@@ -10,13 +10,23 @@ public class UnitradeInvestmentPlan {
     private Integer monthsNumber;
     private Double percentagePerMonth;
     private Double minimalInvestment;
+    private String link;
 
-    public UnitradeInvestmentPlan(String name, Integer days, Double percentagePerMonth, Integer monthsNumber, Double minimalInvestment) {
+    public UnitradeInvestmentPlan(String name, Integer days, Double percentagePerMonth, Integer monthsNumber, Double minimalInvestment, String link) {
         this.name = name;
         this.days = days;
         this.monthsNumber = monthsNumber;
         this.percentagePerMonth = percentagePerMonth;
         this.minimalInvestment = minimalInvestment;
+        this.link = link;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 
     public Double getMinimalInvestment() {

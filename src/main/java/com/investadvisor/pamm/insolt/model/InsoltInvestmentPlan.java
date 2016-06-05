@@ -11,14 +11,20 @@ public class InsoltInvestmentPlan {
     private Integer insoltId;
     private Double minimalInvestment;
     private String startDate;
+    private String link;
 
-    public InsoltInvestmentPlan(String name, Integer days, Double managerCommission, Integer insoltId, Double minimalInvestment, String startDate) {
+    public InsoltInvestmentPlan(String name, Integer days, Double managerCommission, Integer insoltId, Double minimalInvestment, String startDate, String link) {
         this.name = name;
         this.days = days;
         this.managerCommission = managerCommission;
         this.insoltId = insoltId;
         this.minimalInvestment = minimalInvestment;
         this.startDate = startDate;
+        this.link = link;
+    }
+
+    public String getLink() {
+        return link;
     }
 
     public String getName() {

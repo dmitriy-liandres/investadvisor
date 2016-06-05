@@ -10,9 +10,9 @@ import java.io.IOException;
  * Date 29.05.2016
  */
 public class InsoltPamm extends Pamm {
-    @Override
-    public String generateLink() {
-        return "https://personal.insolt.com/register/?p=12588";
+
+    public InsoltPamm() {
+        super("insolt");
     }
 
     @Override

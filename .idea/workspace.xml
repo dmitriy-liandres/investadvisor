@@ -1,19 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://D:/ODESK/Agora/ptc/ds-service/src/main/java/com/odesk/agora/ptc/ds/resource/JobsResource.java" description="if (job == null) {" line="493" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="61750af9-911b-45cd-b248-65800faea99a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/model/hyip/HyipProfit.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/ItcTravel.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/ItcTravelInvestmentPlan.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/ItcTravelLoader.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/ItcTravelRisk.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/OfferItcTravel.java" />
-      <change type="DELETED" beforePath="D:\MONEY_INVEST\investadvisor\src\main\java\com\investadvisor\hyip\yabankir\model\YaBankirProfit.java" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/fxopen/model/FxOpenPammOfferProfit.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/model/hyip/HyipOfferProfit.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/insolt/model/InsoltPammOfferProfit.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/startups/insolt/model/InsoltStartup.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/startups/insolt/InsoltStartupLoader.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/startups/insolt/model/InsoltStartupOfferProfit.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/model/InvestmentType.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/ItcTravelProfit.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/model/pamm/PammOfferProfit.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/startups/shareinstock/model/ShareInStock.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/startups/shareinstock/ShareInStockLoader.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/startups/shareinstock/model/ShareInStockOfferProfit.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/model/startup/Startup.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/model/startup/StartupBroker.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/model/startup/StartupDetails.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/model/startup/StartupOffer.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/model/startup/StartupOfferRisk.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/unitrade/model/UnitradePammOfferProfit.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/yabankir/model/YaBankirOfferRisk.java" />
+      <change type="DELETED" beforePath="D:\MONEY_INVEST\investadvisor\src\main\java\com\investadvisor\hyip\yabankir\model\YabankirRisk.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\MONEY_INVEST\investadvisor\src\main\java\com\investadvisor\model\hyip\HyipProfit.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\MONEY_INVEST\investadvisor\src\main\java\com\investadvisor\model\pamm\PammProfit.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/alfaForex/AlfaForexLoader.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/alfaForex/AlfaForexLoader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/alfaForex/model/AlfaForexPamm.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/alfaForex/model/AlfaForexPamm.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/alpari/AlpariLoader.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/alpari/AlpariLoader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/alpari/model/AlpariPamm.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/alpari/model/AlpariPamm.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/fxopen/FxOpenLoader.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/fxopen/FxOpenLoader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/fxopen/model/FxOpenPamm.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/fxopen/model/FxOpenPamm.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/investadvisor/model/hyip/Hyip.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/model/hyip/Hyip.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/insolt/model/InsoltInvestmentPlan.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/insolt/model/InsoltInvestmentPlan.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/insolt/InsoltLoader.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/insolt/InsoltLoader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/insolt/model/InsoltPamm.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/insolt/model/InsoltPamm.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/investadvisor/model/InvestmentTarget.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/model/InvestmentTarget.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/investadvisor/model/pamm/InvestmentTargetOffer.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/model/pamm/InvestmentTargetOffer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/ItcTravel.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/ItcTravel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/ItcTravelInvestmentPlan.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/ItcTravelInvestmentPlan.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/ItcTravelLoader.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/ItcTravelLoader.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/investadvisor/Main.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/OfferItcTravel.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/OfferItcTravel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/investadvisor/model/pamm/Pamm.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/model/pamm/Pamm.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/investadvisor/model/pamm/PammLoader.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/model/pamm/PammLoader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/fxopen/model/PammOfferFxOpen.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/fxopen/model/PammOfferFxOpen.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/insolt/PammOfferInsolt.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/insolt/PammOfferInsolt.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/investadvisor/model/PammOfferTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/investadvisor/model/PammOfferTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/unitrade/PammOfferUniTrade.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/unitrade/PammOfferUniTrade.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/unitrade/UniTradeLoader.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/unitrade/UniTradeLoader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/unitrade/model/UniTradePamm.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/unitrade/model/UniTradePamm.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/unitrade/model/UnitradeInvestmentPlan.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/unitrade/model/UnitradeInvestmentPlan.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/yabankir/model/YaBankir.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/yabankir/model/YaBankir.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MOVED" beforePath="D:\MONEY_INVEST\investadvisor\src\main\java\com\investadvisor\hyip\itcTravel\model\ItcTravelRisk.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/ItcTravelOfferRisk.java" />
       <change type="MOVED" beforePath="D:\MONEY_INVEST\investadvisor\src\main\java\com\investadvisor\hyip\yabankir\YabankirLoader.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/yabankir/YaBankirLoader.java" />
-      <change type="MOVED" beforePath="D:\MONEY_INVEST\investadvisor\src\main\java\com\investadvisor\hyip\yabankir\model\YabankirRisk.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/yabankir/model/YaBankirRisk.java" />
+      <change type="MOVED" beforePath="D:\MONEY_INVEST\investadvisor\src\main\java\com\investadvisor\model\InvestmentTargetProfit.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/model/InvestmentTargetOfferProfit.java" />
+      <change type="MOVED" beforePath="D:\MONEY_INVEST\investadvisor\src\main\java\com\investadvisor\model\InvestmentTargetRisk.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/model/InvestmentTargetOfferRisk.java" />
+      <change type="MOVED" beforePath="D:\MONEY_INVEST\investadvisor\src\main\java\com\investadvisor\model\pamm\PammRisk.java" afterPath="$PROJECT_DIR$/src/main/java/com/investadvisor/model/pamm/PammOfferRisk.java" />
     </list>
     <ignored path="investadvisor.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,101 +85,72 @@
     <favorites_list name="investadvisor" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.46412805">
-      <split-first>
-        <leaf>
-          <file leaf-file-name="OfferItcTravel.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/OfferItcTravel.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="14" column="29" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="ItcTravelRisk.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/ItcTravelRisk.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.55060726">
-                  <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="InvestmentTargetOffer.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/model/pamm/InvestmentTargetOffer.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="50" column="18" selection-start-line="50" selection-start-column="18" selection-end-line="50" selection-end-column="18" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="InvestmentTargetProfit.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/model/InvestmentTargetProfit.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="ItcTravelInvestmentPlan.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/ItcTravelInvestmentPlan.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="14" column="35" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
-                  <folding>
-                    <element signature="e#822#823#0" expanded="true" />
-                    <element signature="e#849#850#0" expanded="true" />
-                    <element signature="e#1115#1116#0" expanded="true" />
-                    <element signature="e#1153#1154#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/Main.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.3319838">
-                  <caret line="82" column="88" selection-start-line="82" selection-start-column="63" selection-end-line="82" selection-end-column="63" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="ItcTravelLoader.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/ItcTravelLoader.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="30" column="90" selection-start-line="30" selection-start-column="86" selection-end-line="30" selection-end-column="90" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf>
+      <file leaf-file-name="AlfaForexLoader.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/alfaForex/AlfaForexLoader.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.206897">
+              <caret line="139" column="69" selection-start-line="139" selection-start-column="56" selection-end-line="139" selection-end-column="69" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.7275495">
+              <caret line="81" column="73" selection-start-line="81" selection-start-column="17" selection-end-line="81" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InsoltPammOfferProfit.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/insolt/model/InsoltPammOfferProfit.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InsoltStartupLoader.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/startups/insolt/InsoltStartupLoader.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="50" column="390" selection-start-line="50" selection-start-column="390" selection-end-line="50" selection-end-column="390" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InsoltStartupOfferProfit.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/startups/insolt/model/InsoltStartupOfferProfit.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="40" column="69" selection-start-line="40" selection-start-column="69" selection-end-line="40" selection-end-column="69" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InsoltLoader.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/insolt/InsoltLoader.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="123" column="75" selection-start-line="123" selection-start-column="36" selection-end-line="123" selection-end-column="75" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -150,56 +167,56 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/model/PammCommission.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/alfaForex/AlfaForexLoader.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/model/Pamm.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/fxopen/FxOpenLoader.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/investadvisor/model/PammCommissionTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/model/PammRiskProfit.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/model/InvestmenttargetRiskProfit.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/model/InvestmentTargetRiskProfit.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/ItcTravelInvestmentPlan.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/model/pamm/PammLoader.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/model/InvestmentTargetLoader.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/yabankir/YabankirLoader.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/yabankir/model/YabankirRisk.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/model/pamm/PammCommission.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/insolt/InsoltLoader.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/unitrade/PammCommissionUniTrade.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/unitrade/UniTradeLoader.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/model/pamm/PammRisk.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/model/InvestmentTargetOfferProfit.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/model/hyip/Hyip.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/ItcTravel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/yabankir/model/YaBankir.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/model/pamm/Pamm.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/alfaForex/model/AlfaForexPamm.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/alpari/model/AlpariPamm.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/fxopen/model/FxOpenPamm.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/alfaForex/model/AlfaForexPamm.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/unitrade/model/UniTradePamm.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/model/InvestmentTarget.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/insolt/model/InsoltPamm.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/investadvisor/model/PammOfferTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/model/pamm/PammOffer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/model/pamm/Pamm.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/insolt/InsoltLoader.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/unitrade/model/UniTradePamm.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/unitrade/UniTradeLoader.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/startups/shareinstock/model/ShareInStockOfferRisk.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/model/pamm/PammOfferRisk.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/model/startup/Startup.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/model/pamm/InvestmentTargetOffer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/yabankir/model/YaBankirProfit.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/fxopen/FxOpenLoader.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/OfferItcTravel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/yabankir/YaBankirLoader.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/alfaForex/AlfaForexLoader.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/alpari/AlpariLoader.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/fxopen/model/PammOfferFxOpen.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/unitrade/PammOfferUniTrade.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/model/pamm/PammProfit.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/exchangerates/YahooExchangeRates.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/yabankir/model/YaBankir.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/model/hyip/Hyip.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/model/InvestmentTarget.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/model/InvestmentTargetRisk.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/model/InvestmentTargetProfit.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/model/hyip/HyipProfit.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/yabankir/YaBankirLoader.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/model/hyip/HyipRisk.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/yabankir/model/YaBankirRisk.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/ItcTravelPlan.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/insolt/PammOfferInsolt.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/PammOfferItsTravel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/ItcTravel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/OfferItsTravel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/ItcTravelLoader.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/ItcTravelInvestmentPlan.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/OfferItcTravel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/ItcTravelRisk.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/unitrade/PammOfferUniTrade.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/startups/shareinstock/model/ShareInStock.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/fxopen/model/FxOpenPammOfferProfit.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/investadvisor/model/PammOfferTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/model/startup/StartupOfferProfit.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/startups/shareinstock/model/ShareInStockStartupDetails.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/startups/shareinstock/model/StartupOfferProfit.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/startups/shareinstock/model/ShareInStockOffer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/startups/shareinstock/model/StartupOffer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/model/startup/StartupOffer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/model/startup/StartupBroker.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/startups/insolt/model/InsoltStartupLoader.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/model/startup/StartupOfferRisk.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/startups/InsoltStartupLoader.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/startups/insolt/model/InsoltStartup.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/startups/insolt/model/InsoltOfferProfit.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/model/startup/ShareInStockStartupDetails.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/insolt/model/InsoltPammOfferProfit.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/insolt/model/InsoltInvestmentPlan.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/model/startup/StartupDetails.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/startups/shareinstock/ShareInStockLoader.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/startups/shareinstock/model/ShareInStockOfferProfit.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/startups/insolt/model/InsoltStartupOfferProfit.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/startups/insolt/InsoltStartupLoader.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/investadvisor/Main.java" />
       </list>
     </option>
@@ -249,7 +266,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1872" />
+    <option name="width" value="1874" />
     <option name="height" value="1096" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -275,6 +292,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
@@ -540,6 +558,40 @@
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="investadvisor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; 1.8 &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rt.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="function" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -564,6 +616,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="time" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="investadvisor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="&lt; 1.8 &gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rt.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -713,6 +787,150 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="startups" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shareinstock" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="investadvisor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="investadvisor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="investadvisor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="startups" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shareinstock" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="investadvisor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="investadvisor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="investadvisor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="startups" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="insolt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="investadvisor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="investadvisor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="investadvisor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="startups" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="insolt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="investadvisor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="investadvisor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="investadvisor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="pamm" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -777,6 +995,14 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="pamm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="insolt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="model" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -804,48 +1030,14 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="investadvisor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="pamm" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="investadvisor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="investadvisor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="investadvisor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hyip" />
+              <option name="myItemId" value="alfaForex" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -872,48 +1064,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="investadvisor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hyip" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="yabankir" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="investadvisor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="investadvisor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="investadvisor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hyip" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="yabankir" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -947,55 +1097,16 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="hyip" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="itcTravel" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="investadvisor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="investadvisor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="investadvisor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hyip" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="itcTravel" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="startup" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1076,32 +1187,6 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="PammOfferTest.testFxOpenPositivehighProfit" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.investadvisor.model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="investadvisor" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.investadvisor.model" />
-      <option name="MAIN_CLASS_NAME" value="com.investadvisor.model.PammOfferTest" />
-      <option name="METHOD_NAME" value="testFxOpenPositivehighProfit" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
     <configuration default="false" name="PammOfferTest.testFxOpenPositiveHighProfit" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -1141,6 +1226,32 @@
       <option name="PACKAGE_NAME" value="com.investadvisor.model" />
       <option name="MAIN_CLASS_NAME" value="com.investadvisor.model.PammOfferTest" />
       <option name="METHOD_NAME" value="testGeneralCase" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="PammOfferTest.testFxOpenNegativeProfit" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.investadvisor.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="investadvisor" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.investadvisor.model" />
+      <option name="MAIN_CLASS_NAME" value="com.investadvisor.model.PammOfferTest" />
+      <option name="METHOD_NAME" value="testFxOpenNegativeProfit" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -1302,17 +1413,17 @@
       <item index="0" class="java.lang.String" itemvalue="Application.Main" />
       <item index="1" class="java.lang.String" itemvalue="JUnit.PammOfferTest" />
       <item index="2" class="java.lang.String" itemvalue="JUnit.PammOfferTest.testFxOpenPositiveSmallProfit" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.PammOfferTest.testFxOpenPositivehighProfit" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.PammOfferTest.testFxOpenPositiveHighProfit" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.PammOfferTest.testGeneralCase" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.PammOfferTest.testFxOpenPositiveHighProfit" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.PammOfferTest.testGeneralCase" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.PammOfferTest.testFxOpenNegativeProfit" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="JUnit.PammOfferTest" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.PammOfferTest.testFxOpenPositiveSmallProfit" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.PammOfferTest.testFxOpenNegativeProfit" />
         <item index="2" class="java.lang.String" itemvalue="JUnit.PammOfferTest.testGeneralCase" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.PammOfferTest.testFxOpenPositiveHighProfit" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.PammOfferTest.testFxOpenPositivehighProfit" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.PammOfferTest.testFxOpenPositiveSmallProfit" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.PammOfferTest.testFxOpenPositiveHighProfit" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="TestNG" default="true" selected="false">
@@ -1335,15 +1446,16 @@
       <workItem from="1464097724027" duration="35759000" />
       <workItem from="1464194158007" duration="9312000" />
       <workItem from="1464203947271" duration="12531000" />
-      <workItem from="1464260552617" duration="73816000" />
+      <workItem from="1464260552617" duration="77547000" />
+      <workItem from="1465105010420" duration="31919000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="131418000" />
+    <option name="totallyTimeSpent" value="167068000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1872" height="1096" extended-state="6" />
+    <frame x="-8" y="-8" width="1874" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1357,13 +1469,13 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32985386" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1589404" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24807057" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2910603" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2910603" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2498618" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.46049896" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33575884" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1385,42 +1497,14 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/fxopen/FxOpenLoader.java</url>
-          <line>62</line>
-          <properties />
-          <option name="timeStamp" value="212" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/investadvisor/Main.java</url>
-          <line>82</line>
-          <properties />
-          <option name="timeStamp" value="221" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/ItcTravelRisk.java</url>
-          <line>16</line>
-          <properties />
-          <option name="timeStamp" value="224" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="225" />
+      <option name="time" value="256" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
-        <watch expression="fxOpenOffersResultData" language="JAVA" custom="" />
-        <watch expression="fxOpenOffersResult.getData()" language="JAVA" custom="" />
-        <watch expression="pammRisksProfit" language="JAVA" custom="" />
-        <watch expression="urlManager" language="JAVA" custom="" />
-        <watch expression="expectedCalculateProfitAfterMangerCommission" language="JAVA" custom="" />
-      </configuration>
-      <configuration name="Application">
-        <watch expression="investmentTargetCalculated" language="JAVA" custom="" />
-        <watch expression="100. * (9 * 12 * 15 + 18 + 21) / 5/30" language="JAVA" custom="" />
-        <watch expression="(9 * 12 * 15 + 18 + 21) / 5" language="JAVA" custom="" />
-        <watch expression="100. * (9 + 12 *+15 + 18 + 21) / 5/30" language="JAVA" custom="" />
-        <watch expression="getTotalRisk()" language="JAVA" custom="" />
+        <watch expression="investmentTargetCalculatedOffers" language="JAVA" custom="" />
+        <watch expression="1 - investmentTargetOffer.getCommissionFromProfit()/100" language="JAVA" custom="" />
+        <watch expression="providedParams.getPeriodInDays()" language="JAVA" custom="" />
+        <watch expression="Math.pow(1. + avgChange, providedParams.getPeriodInDays())" language="JAVA" custom="" />
       </configuration>
     </watches-manager>
   </component>
@@ -1429,133 +1513,58 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/.m2/repository/org/jsoup/jsoup/1.9.2/jsoup-1.9.2.jar!/org/jsoup/helper/HttpConnection.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.02556391">
-          <caret line="258" column="0" selection-start-line="258" selection-start-column="0" selection-end-line="258" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/alfaForex/model/PammAlfaForexManagerMoneyResultItem.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/ItcTravelInvestmentPlan.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/fxopen/model/FXOpenDepositLoad.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="30" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="30" />
+          <caret line="41" column="15" selection-start-line="41" selection-start-column="15" selection-end-line="41" selection-end-column="15" />
           <folding>
-            <element signature="e#214#215#0" expanded="false" />
-            <element signature="e#241#242#0" expanded="false" />
-            <element signature="e#281#282#0" expanded="false" />
-            <element signature="e#313#314#0" expanded="false" />
-            <element signature="e#345#346#0" expanded="false" />
-            <element signature="e#373#374#0" expanded="false" />
-            <element signature="e#415#416#0" expanded="false" />
-            <element signature="e#449#450#0" expanded="false" />
+            <element signature="e#895#896#0" expanded="false" />
+            <element signature="e#922#923#0" expanded="false" />
+            <element signature="e#1102#1103#0" expanded="false" />
+            <element signature="e#1189#1190#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/fxopen/model/FXOpenManagerGeneral.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/yabankir/model/YaBankirOfferRisk.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/fxopen/model/FxOpenOffersResult.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/model/hyip/Hyip.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="28" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
+          <caret line="20" column="12" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/fxopen/model/FxOpenOffersResultData.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/yabankir/model/YaBankir.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <caret line="14" column="23" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_65/src.zip!/java/time/LocalDate.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/model/pamm/PammLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33282673">
-          <caret line="1345" column="21" selection-start-line="1345" selection-start-column="21" selection-end-line="1345" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.6286149">
+          <caret line="76" column="28" selection-start-line="76" selection-start-column="28" selection-end-line="76" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/ProvidedParams.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/alfaForex/model/AlfaForexPamm.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="3" selection-start-line="7" selection-start-column="3" selection-end-line="10" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.m2/repository/commons-io/commons-io/2.5/commons-io-2.5-sources.jar!/org/apache/commons/io/IOUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1063" column="25" selection-start-line="1063" selection-start-column="25" selection-end-line="1063" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/insolt/model/InsoltGraphData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="28" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="28" />
+          <caret line="13" column="25" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
           <folding>
-            <element signature="e#212#213#0" expanded="false" />
-            <element signature="e#239#240#0" expanded="false" />
-            <element signature="e#279#280#0" expanded="false" />
-            <element signature="e#311#312#0" expanded="false" />
-            <element signature="e#343#344#0" expanded="false" />
-            <element signature="e#371#372#0" expanded="false" />
-            <element signature="e#413#414#0" expanded="false" />
-            <element signature="e#447#448#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/insolt/model/InsoltInvestmentPlan.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.551724">
-          <caret line="79" column="42" selection-start-line="79" selection-start-column="42" selection-end-line="79" selection-end-column="42" />
-          <folding>
-            <element signature="e#734#735#0" expanded="true" />
-            <element signature="e#761#762#0" expanded="true" />
-            <element signature="e#801#802#0" expanded="true" />
-            <element signature="e#833#834#0" expanded="true" />
-            <element signature="e#865#866#0" expanded="true" />
-            <element signature="e#892#893#0" expanded="true" />
-            <element signature="e#933#934#0" expanded="true" />
-            <element signature="e#965#966#0" expanded="true" />
-            <element signature="e#1009#1010#0" expanded="true" />
-            <element signature="e#1049#1050#0" expanded="true" />
-            <element signature="e#1115#1116#0" expanded="true" />
-            <element signature="e#1173#1174#0" expanded="true" />
-            <element signature="e#1209#1210#0" expanded="true" />
-            <element signature="e#1240#1241#0" expanded="true" />
-            <element signature="e#1289#1290#0" expanded="true" />
-            <element signature="e#1329#1330#0" expanded="true" />
-            <element signature="e#1373#1374#0" expanded="true" />
-            <element signature="e#1413#1414#0" expanded="true" />
-            <element signature="e#1479#1480#0" expanded="true" />
-            <element signature="e#1537#1538#0" expanded="true" />
-            <element signature="e#1573#1574#0" expanded="true" />
-            <element signature="e#1605#1606#0" expanded="true" />
-            <element signature="e#1655#1656#0" expanded="true" />
-            <element signature="e#1697#1698#0" expanded="true" />
+            <element signature="e#280#281#0" expanded="false" />
+            <element signature="e#315#316#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1568,137 +1577,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/fxopen/FxOpenLoader.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/alpari/model/AlpariPamm.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/fxopen/model/PammFxOpenManagerMoney.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="41" column="28" selection-start-line="41" selection-start-column="28" selection-end-line="41" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/Currency.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="20" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/alfaForex/AlfaForexLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="40" selection-start-line="36" selection-start-column="40" selection-end-line="36" selection-end-column="40" />
+          <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
           <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/model/pamm/PammLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="56" selection-start-line="14" selection-start-column="56" selection-end-line="14" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/model/InvestmentTargetLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/model/pamm/PammBroker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/insolt/InsoltLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="129" column="37" selection-start-line="129" selection-start-column="37" selection-end-line="129" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2969#2970#0" expanded="true" />
-            <element signature="e#3000#3001#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/model/pamm/PammRisk.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.896552">
-          <caret line="39" column="17" selection-start-line="39" selection-start-column="17" selection-end-line="39" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/investadvisor/model/PammOfferTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="133" column="27" selection-start-line="133" selection-start-column="23" selection-end-line="133" selection-end-column="27" />
-          <folding>
-            <element signature="e#5705#5706#0" expanded="true" />
-            <element signature="e#5748#5749#0" expanded="true" />
-            <element signature="e#5833#5834#0" expanded="true" />
-            <element signature="e#5876#5877#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/unitrade/model/UniTradePamm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="36" selection-start-line="11" selection-start-column="36" selection-end-line="11" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#431#432#0" expanded="true" />
-            <element signature="e#459#460#0" expanded="true" />
-            <element signature="e#528#529#0" expanded="true" />
-            <element signature="e#573#574#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/insolt/model/InsoltPamm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="34" column="17" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#429#430#0" expanded="true" />
-            <element signature="e#456#457#0" expanded="true" />
-            <element signature="e#525#526#0" expanded="true" />
-            <element signature="e#550#551#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/alfaForex/model/AlfaForexPamm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="36" selection-start-line="11" selection-start-column="36" selection-end-line="11" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#465#466#0" expanded="true" />
-            <element signature="e#490#491#0" expanded="true" />
-            <element signature="e#559#560#0" expanded="true" />
-            <element signature="e#584#585#0" expanded="true" />
+            <element signature="e#330#331#0" expanded="false" />
+            <element signature="e#361#362#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1706,154 +1591,180 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/fxopen/model/FxOpenPamm.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="96" selection-start-line="30" selection-start-column="15" selection-end-line="30" selection-end-column="77" />
+          <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#500#501#0" expanded="true" />
-            <element signature="e#527#528#0" expanded="true" />
-            <element signature="e#596#597#0" expanded="true" />
-            <element signature="e#622#623#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/unitrade/model/UnitradeInvestmentPlan.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.24138">
-          <caret line="46" column="20" selection-start-line="46" selection-start-column="20" selection-end-line="46" selection-end-column="20" />
-          <folding>
-            <element signature="e#1160#1161#0" expanded="true" />
-            <element signature="e#1201#1202#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/unitrade/UniTradeLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="1" selection-start-line="36" selection-start-column="1" selection-end-line="44" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/alpari/model/AlpariPamm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="53" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#516#517#0" expanded="true" />
-            <element signature="e#542#543#0" expanded="true" />
-            <element signature="e#611#612#0" expanded="true" />
-            <element signature="e#637#638#0" expanded="true" />
-            <element signature="e#715#716#0" expanded="true" />
-            <element signature="e#740#741#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/alpari/AlpariLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="137" column="27" selection-start-line="137" selection-start-column="27" selection-end-line="137" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/unitrade/PammOfferUniTrade.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="70" selection-start-line="20" selection-start-column="70" selection-end-line="20" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/model/hyip/Hyip.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2782324">
-          <caret line="10" column="39" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#613#614#0" expanded="true" />
-            <element signature="e#664#665#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/exchangerates/YahooExchangeRates.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/model/InvestmentTarget.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="61" column="11" selection-start-line="61" selection-start-column="11" selection-end-line="61" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#888#889#0" expanded="true" />
-            <element signature="e#933#934#0" expanded="true" />
-            <element signature="e#1351#1352#0" expanded="true" />
-            <element signature="e#1383#1384#0" expanded="true" />
+            <element signature="e#330#331#0" expanded="false" />
+            <element signature="e#361#362#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/model/pamm/Pamm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="39" selection-start-line="31" selection-start-column="39" selection-end-line="31" selection-end-column="39" />
+        <state vertical-scroll-proportion="-5.862069">
+          <caret line="10" column="40" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#872#873#0" expanded="true" />
-            <element signature="e#927#928#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/model/pamm/PammProfit.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/model/startup/Startup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26608697">
+          <caret line="9" column="44" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/model/InvestmentTarget.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36695653">
+          <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/model/hyip/HyipOfferProfit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2190016">
+          <caret line="8" column="45" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_65/src.zip!/java/lang/Math.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="23" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="23" />
+          <caret line="440" column="25" selection-start-line="440" selection-start-column="25" selection-end-line="440" selection-end-column="25" />
+          <folding>
+            <element signature="e#17181#17182#0" expanded="true" />
+            <element signature="e#17264#17265#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/ItcTravel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="11" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
+          <folding>
+            <element signature="e#271#272#0" expanded="false" />
+            <element signature="e#306#307#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/model/pamm/PammOfferRisk.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.28922495">
+          <caret line="15" column="41" selection-start-line="15" selection-start-column="41" selection-end-line="15" selection-end-column="41" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/OfferItcTravel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="93" selection-start-line="13" selection-start-column="93" selection-end-line="13" selection-end-column="93" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/yabankir/YaBankirLoader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="62" column="10" selection-start-line="20" selection-start-column="27" selection-end-line="62" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#946#947#0" expanded="true" />
-            <element signature="e#977#978#0" expanded="true" />
-          </folding>
+          <caret line="51" column="101" selection-start-line="51" selection-start-column="101" selection-end-line="51" selection-end-column="101" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/yabankir/model/YaBankir.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/alpari/AlpariLoader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="43" column="17" selection-start-line="14" selection-start-column="22" selection-end-line="43" selection-end-column="5" />
+          <caret line="136" column="131" selection-start-line="136" selection-start-column="131" selection-end-line="136" selection-end-column="131" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/insolt/PammOfferInsolt.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="91" selection-start-line="14" selection-start-column="91" selection-end-line="14" selection-end-column="91" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/unitrade/model/UnitradePammOfferProfit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="54" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="54" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/model/InvestmentTargetRisk.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/unitrade/model/UnitradeInvestmentPlan.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.49162862">
-          <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/unitrade/model/UniTradePamm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="24" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
+          <folding>
+            <element signature="e#277#278#0" expanded="false" />
+            <element signature="e#311#312#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/unitrade/PammOfferUniTrade.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="101" selection-start-line="16" selection-start-column="101" selection-end-line="16" selection-end-column="101" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/ItcTravelLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="44" column="7" selection-start-line="36" selection-start-column="1" selection-end-line="44" selection-end-column="5" />
+          <folding>
+            <element signature="e#1713#1714#0" expanded="true" />
+            <element signature="e#1744#1745#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/model/InvestmentTargetLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="35" column="31" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/fxopen/FxOpenLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="44" column="10" selection-start-line="44" selection-start-column="4" selection-end-line="44" selection-end-column="10" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#401#402#0" expanded="true" />
-            <element signature="e#443#444#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1861,66 +1772,151 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/fxopen/model/PammOfferFxOpen.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="18" selection-start-line="38" selection-start-column="18" selection-end-line="38" selection-end-column="18" />
+          <caret line="24" column="11" selection-start-line="24" selection-start-column="11" selection-end-line="24" selection-end-column="11" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/yabankir/model/YaBankirRisk.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.56309146">
-          <caret line="21" column="43" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/insolt/PammOfferInsolt.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/investadvisor/model/PammOfferTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="26" selection-start-line="11" selection-start-column="28" selection-end-line="27" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/model/hyip/HyipProfit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="44" selection-start-line="8" selection-start-column="44" selection-end-line="8" selection-end-column="44" />
+          <caret line="20" column="17" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/ItcTravelInvestmentPlan.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_65/src.zip!/java/util/function/Consumer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="35" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
+          <caret line="48" column="9" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/fxopen/model/FxOpenPammOfferProfit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="48" selection-start-line="17" selection-start-column="48" selection-end-line="17" selection-end-column="48" />
           <folding>
-            <element signature="e#822#823#0" expanded="true" />
-            <element signature="e#849#850#0" expanded="true" />
-            <element signature="e#1115#1116#0" expanded="true" />
-            <element signature="e#1153#1154#0" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/ItcTravel.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/model/InvestmentTargetOfferRisk.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1978691">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="27" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/ItcTravelLoader.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/model/InvestmentTargetOfferProfit.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="90" selection-start-line="30" selection-start-column="86" selection-end-line="30" selection-end-column="90" />
+          <caret line="85" column="72" selection-start-line="85" selection-start-column="7" selection-end-line="85" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/unitrade/UniTradeLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="49" column="70" selection-start-line="49" selection-start-column="6" selection-end-line="49" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/model/startup/StartupOffer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="28" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/model/startup/StartupBroker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/insolt/model/InsoltPamm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="35" column="6" selection-start-line="17" selection-start-column="3" selection-end-line="35" selection-end-column="5" />
+          <folding>
+            <element signature="e#271#272#0" expanded="true" />
+            <element signature="e#302#303#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/model/startup/StartupOfferRisk.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="40" column="37" selection-start-line="40" selection-start-column="37" selection-end-line="40" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/startups/shareinstock/model/ShareInStock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="11" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#366#367#0" expanded="true" />
+            <element signature="e#434#435#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/insolt/model/InsoltInvestmentPlan.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.206897">
+          <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/model/startup/StartupDetails.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="72" column="18" selection-start-line="72" selection-start-column="18" selection-end-line="72" selection-end-column="18" />
+          <folding>
+            <element signature="e#1789#1790#0" expanded="true" />
+            <element signature="e#1828#1829#0" expanded="true" />
+            <element signature="e#1864#1865#0" expanded="true" />
+            <element signature="e#1896#1897#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/startups/shareinstock/ShareInStockLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="245" selection-start-line="34" selection-start-column="245" selection-end-line="34" selection-end-column="245" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/alfaForex/AlfaForexLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.206897">
+          <caret line="139" column="69" selection-start-line="139" selection-start-column="56" selection-end-line="139" selection-end-column="69" />
           <folding />
         </state>
       </provider>
@@ -1928,37 +1924,65 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/model/pamm/InvestmentTargetOffer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="50" column="18" selection-start-line="50" selection-start-column="18" selection-end-line="50" selection-end-column="18" />
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/model/InvestmentTargetProfit.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/insolt/model/InsoltPammOfferProfit.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/OfferItcTravel.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/startups/insolt/model/InsoltStartup.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="29" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
+          <caret line="13" column="25" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#343#344#0" expanded="true" />
+            <element signature="e#396#397#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/startups/shareinstock/model/ShareInStockOfferProfit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.53424656">
+          <caret line="25" column="80" selection-start-line="25" selection-start-column="73" selection-end-line="25" selection-end-column="73" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/hyip/itcTravel/model/ItcTravelRisk.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/pamm/insolt/InsoltLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.55060726">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="123" column="75" selection-start-line="123" selection-start-column="36" selection-end-line="123" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/startups/insolt/model/InsoltStartupOfferProfit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="40" column="69" selection-start-line="40" selection-start-column="69" selection-end-line="40" selection-end-column="69" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/startups/insolt/InsoltStartupLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="50" column="390" selection-start-line="50" selection-start-column="390" selection-end-line="50" selection-end-column="390" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1967,11 +1991,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/investadvisor/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3319838">
-          <caret line="82" column="88" selection-start-line="82" selection-start-column="63" selection-end-line="82" selection-end-column="63" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.7275495">
+          <caret line="81" column="73" selection-start-line="81" selection-start-column="17" selection-end-line="81" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>

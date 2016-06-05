@@ -10,9 +10,9 @@ import java.io.IOException;
  * Date 29.05.2016
  */
 public class UniTradePamm extends Pamm {
-    @Override
-    public String generateLink() {
-        return "https://uni-trade.net/registration?par=dima";
+
+    public UniTradePamm() {
+        super("uni-trade");
     }
 
     @Override

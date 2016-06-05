@@ -2,9 +2,9 @@ package com.investadvisor.hyip.yabankir;
 
 import com.investadvisor.Currency;
 import com.investadvisor.hyip.yabankir.model.YaBankir;
-import com.investadvisor.hyip.yabankir.model.YaBankirRisk;
+import com.investadvisor.hyip.yabankir.model.YaBankirOfferRisk;
 import com.investadvisor.model.InvestmentTargetLoader;
-import com.investadvisor.model.hyip.HyipProfit;
+import com.investadvisor.model.hyip.HyipOfferProfit;
 import com.investadvisor.model.pamm.InvestmentTargetOffer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,21 +39,17 @@ public class YaBankirLoader extends InvestmentTargetLoader<YaBankir> {
         //add offer in usd
 
         Double avgPercentage = (Math.pow(3.65, 1. / 365) - 1) * 100;
+        YaBankirOfferRisk yaBankirRisk = new YaBankirOfferRisk();
+        HyipOfferProfit hyipProfit = new HyipOfferProfit();
+        YaBankir yaBankirUsd = new YaBankir();
 
-        YaBankir yaBankirUsd = new YaBankir(new YaBankirRisk(), new HyipProfit());
-        yaBankirUsd.setAvgChange(avgPercentage);
-        yaBankirUsd.setCurrency(Currency.USD);
-
-        InvestmentTargetOffer investmentTargetOfferUsd = new InvestmentTargetOffer(10., 365, 0.);
+        InvestmentTargetOffer investmentTargetOfferUsd = new InvestmentTargetOffer("yabankir", 10., null, 365, 0., "https://yabankir.com/?aid=dima-amid", Currency.USD, avgPercentage, yaBankirRisk, hyipProfit);
         yaBankirUsd.addOffer(investmentTargetOfferUsd);
         hyips.add(yaBankirUsd);
 
         //add offer in RUB
-        YaBankir yaBankirRub = new YaBankir(new YaBankirRisk(), new HyipProfit());
-        yaBankirUsd.setAvgChange(avgPercentage);
-        yaBankirRub.setCurrency(Currency.RUB);
-
-        InvestmentTargetOffer investmentTargetOfferRub = new InvestmentTargetOffer(500., 365, 0.);
+        YaBankir yaBankirRub = new YaBankir();
+        InvestmentTargetOffer investmentTargetOfferRub = new InvestmentTargetOffer("yabankir", 500., null, 365, 0., "https://yabankir.com/?aid=dima-amid", Currency.RUB, avgPercentage, yaBankirRisk, hyipProfit);
         yaBankirRub.addOffer(investmentTargetOfferRub);
         hyips.add(yaBankirRub);
         logger.info("Finish download all yabankir.com offers");

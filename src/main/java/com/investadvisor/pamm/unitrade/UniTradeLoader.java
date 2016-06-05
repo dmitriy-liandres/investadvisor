@@ -28,10 +28,11 @@ public class UniTradeLoader extends PammLoader {
     private static final List<UnitradeInvestmentPlan> UNITRADE_INVESTMENT_PLANS = new ArrayList<>();
 
     static {
-        UNITRADE_INVESTMENT_PLANS.add(new UnitradeInvestmentPlan("Start", 30, 9.5, 1, 25.));
-        UNITRADE_INVESTMENT_PLANS.add(new UnitradeInvestmentPlan("Index", 91, 12., 3, 100.));
-        UNITRADE_INVESTMENT_PLANS.add(new UnitradeInvestmentPlan("Gold", 182, 14., 6, 500.));
-        UNITRADE_INVESTMENT_PLANS.add(new UnitradeInvestmentPlan("Top1", 365, 16.5, 12, 1000.));
+        String link = "https://uni-trade.net/registration?par=dima";
+        UNITRADE_INVESTMENT_PLANS.add(new UnitradeInvestmentPlan("Start", 30, 9.5, 1, 25., link));
+        UNITRADE_INVESTMENT_PLANS.add(new UnitradeInvestmentPlan("Index", 91, 12., 3, 100., link));
+        UNITRADE_INVESTMENT_PLANS.add(new UnitradeInvestmentPlan("Gold", 182, 14., 6, 500., link));
+        UNITRADE_INVESTMENT_PLANS.add(new UnitradeInvestmentPlan("Top1", 365, 16.5, 12, 1000., link));
     }
 
     private static UniTradeLoader instance = new UniTradeLoader();
@@ -59,9 +60,6 @@ public class UniTradeLoader extends PammLoader {
             pamm.setTotalMoney(1500000.);//asked their support
             pamm.setManagerMoney(pamm.getTotalMoney() / 10);  //we can't get more accirate data
 
-            pamm.setCurrency(Currency.USD);
-
-            pamm.setName(unitradeInvestmentPlan.getName());
             pamm.setId(String.valueOf(pamms.size() + 1));
             PammOfferUniTrade pammOffer = new PammOfferUniTrade(unitradeInvestmentPlan);
             pamm.addOffer(pammOffer);
@@ -69,7 +67,6 @@ public class UniTradeLoader extends PammLoader {
             pamm.setMaxDailyLoss(5.); //we can't get more accurate data
             pamm.setAverageDailyLoss(2.5);   //we can't get more accurate data
             pamm.setDeviation(10.);   //we can't get more accurate data
-            pamm.setAvgChange(null);
             pamms.add(pamm);
         }
         logger.info("Finish download all offers for Insolt, pamms = {}", pamms);

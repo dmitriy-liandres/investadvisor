@@ -1,8 +1,7 @@
 package com.investadvisor.model.hyip;
 
 import com.investadvisor.model.InvestmentTarget;
-import com.investadvisor.model.InvestmentTargetProfit;
-import com.investadvisor.model.InvestmentTargetRisk;
+import com.investadvisor.model.InvestmentType;
 
 /**
  * Author Dmitriy Liandres
@@ -10,15 +9,10 @@ import com.investadvisor.model.InvestmentTargetRisk;
  */
 public abstract class Hyip extends InvestmentTarget {
 
-    public Hyip(InvestmentTargetRisk investmentTargetRisk,
-                InvestmentTargetProfit investmentTargetProfit) {
-        super(investmentTargetRisk, investmentTargetProfit);
+    public Hyip(String name) {
+        super(InvestmentType.HYIP, name);
     }
 
-    @Override
-    public Boolean isHyip() {
-        return true;
-    }
 
     @Override
     public String toString() {

@@ -13,18 +13,16 @@ import java.util.List;
  */
 public abstract class InvestmentTarget {
 
-    private Currency currency;
-    private Double avgChange;
+    private String name;
+    private InvestmentType investmentType;
 
-    private InvestmentTargetRisk investmentTargetRisk;
-    private InvestmentTargetProfit investmentTargetProfit;
+    public InvestmentTarget(InvestmentType investmentType, String name) {
+        this.investmentType = investmentType;
+        this.name = name;
+    }
+
     private List<InvestmentTargetOffer> investmentTargetOffers;
 
-    public InvestmentTarget(InvestmentTargetRisk investmentTargetRisk,
-                            InvestmentTargetProfit investmentTargetProfit) {
-        this.investmentTargetRisk = investmentTargetRisk;
-        this.investmentTargetProfit = investmentTargetProfit;
-    }
 
     public List<InvestmentTargetOffer> getInvestmentTargetOffers() {
         return investmentTargetOffers;
@@ -40,39 +38,10 @@ public abstract class InvestmentTarget {
         }
         investmentTargetOffers.add(offer);
     }
-    public Double getAvgChange() {
-        return avgChange;
+
+    public InvestmentType getInvestmentType() {
+        return investmentType;
     }
-
-    public void setAvgChange(Double avgChange) {
-        this.avgChange = avgChange;
-    }
-
-
-
-    public InvestmentTargetProfit getInvestmentTargetProfit() {
-        return investmentTargetProfit;
-    }
-
-    public InvestmentTargetRisk getInvestmentTargetRisk() {
-        return investmentTargetRisk;
-    }
-
-    public Currency getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
-    }
-
-
-    /**
-     * generates link to investment target (PAMM, HIPE and so on)
-     */
-    public abstract String generateLink();
-
-    public abstract Boolean isHyip();
 
     public abstract Double getCommissionEnterPercentage();
 
@@ -82,13 +51,16 @@ public abstract class InvestmentTarget {
 
     public abstract Double getCommissionWithdrawFixed(Currency currency) throws IOException;
 
+    public String getName() {
+        return name;
+    }
+
+
     @Override
     public String toString() {
         return "InvestmentTarget{" +
-                "currency=" + currency +
-                ", avgChange=" + avgChange +
-                ", investmentTargetRisk=" + investmentTargetRisk +
-                ", investmentTargetProfit=" + investmentTargetProfit +
+                "name='" + name + '\'' +
+                ", investmentType=" + investmentType +
                 ", investmentTargetOffers=" + investmentTargetOffers +
                 '}';
     }

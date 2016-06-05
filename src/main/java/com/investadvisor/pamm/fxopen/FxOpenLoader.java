@@ -47,7 +47,8 @@ public class FxOpenLoader extends PammLoader {
 
         List<Pamm> pamms = new ArrayList<>();
 
-        URL urlBase = new URL("https://datastore5.soft-fx.com/Pamm/GetRating?BrokerId=D5CBE825-CC28-4DF8-A52A-12F20165C794&Count=500&WithOffers=false");
+        //load all pamms
+        URL urlBase = new URL("https://datastore5.soft-fx.com/Pamm/GetRating?BrokerId=D5CBE825-CC28-4DF8-A52A-12F20165C794&Count=500&WithOffers=true");
 
         List<FXOpenManagerGeneral> allValues = objectMapper.readValue(urlBase, new TypeReference<List<FXOpenManagerGeneral>>() {
         });
@@ -60,12 +61,12 @@ public class FxOpenLoader extends PammLoader {
             pamm.setAgeInDays(manager.getDays());
             pamm.setManagerMoney(manager.getMasterCapital());
             pamm.setTotalMoney(manager.getBalance());
-            pamm.setName(manager.getName());
             pamm.setId(manager.getId());
-            pamm.setCurrency(manager.getCurrency());
+
+            Double avgChange = null;
 
             //load commissions
-            //1. get reqiered cookie
+            //1. get required cookie
 
             URL urlGetCookie = new URL("https://pamm.fxopen.ru/login/authenticate?email=fsDeJgBRPkFI0xfA541l3wFHQ9DI1zQFSrZzCOb2cdXiZwU9mjRwgOQUuJXbxmQeRTTrz7Nby43HKXgWtFCjSOjeqVDynu0lsgmWIiBjKk3ikr+/SvzaDKCL9G0uItNwg2F2iObwPh2+CgU7aJ/TFhC6qU/OOP/A20qnf8sHBuc=");
             HttpURLConnection conGetCookie = (HttpURLConnection) urlGetCookie.openConnection();
@@ -77,7 +78,47 @@ public class FxOpenLoader extends PammLoader {
                     break;
                 }
             }
-            //2. get offers
+
+
+
+
+            //2. load changes
+            LocalDate now = LocalDate.now();
+            String nowFormatted = now.format(dateFormatter);
+
+            LocalDate theFirstWorkingDate = now.minusDays(pamm.getAgeInDays());
+            String theFirstWorkingDateStr = theFirstWorkingDate.format(dateFormatter);
+
+            URL urlLoadGain = new URL("https://datastore5.soft-fx.com/Chart/Gain?BrokerId=D5CBE825-CC28-4DF8-A52A-12F20165C794&id=" + manager.getId() + "&from=" + theFirstWorkingDateStr + "&to=" + nowFormatted);
+            InputStreamReader readerLoadGain = new InputStreamReader(new GZIPInputStream(urlLoadGain.openStream()));
+            List<PammFxOpenManagerMoney> dailyGains = objectMapper.readValue(readerLoadGain, new TypeReference<List<PammFxOpenManagerMoney>>() {
+            });
+            if (dailyGains.size() > 0) {
+                //get deposit load
+                URL urlDepositLoad = new URL("https://datastore5.soft-fx.com/Chart/AccountDepositLoad?BrokerId=D5CBE825-CC28-4DF8-A52A-12F20165C794&id=" + manager.getId() + "&from=" + theFirstWorkingDateStr + "&to=" + nowFormatted);
+                InputStreamReader readerDepositLoad = new InputStreamReader(new GZIPInputStream(urlDepositLoad.openStream()));
+                List<FXOpenDepositLoad> allDepositLoads = objectMapper.readValue(readerDepositLoad, new TypeReference<List<FXOpenDepositLoad>>() {
+                });
+
+
+                Map<String, Double> depositLoadPerDate = new HashMap<>();
+                allDepositLoads.forEach(depositLoad -> depositLoadPerDate.put(depositLoad.getDate(), depositLoad.getValue()));
+                List<Double> changes = new ArrayList<>();
+                Double totalIncreaseInPercents = 0.;
+
+                for (PammFxOpenManagerMoney dailyGain : dailyGains) {
+                    if (depositLoadPerDate.get(dailyGain.getDate()) > 0.) {
+                        changes.add(dailyGain.getDailyGain());
+                    }
+                    totalIncreaseInPercents = dailyGain.getTotalGain();
+                }
+                //all days are returned
+                avgChange = addChangesToPamm(changes, totalIncreaseInPercents, pamm);
+                pamms.add(pamm);
+            }
+
+
+            //3. get offers
             URL urlGetOffers = new URL("https://pamm.fxopen.ru/ru/Slave/Account/Offers_Read/" + manager.getId() + "?accountId=00000000-0000-0000-0000-000000000000");
             HttpURLConnection conGetOffer = (HttpURLConnection) urlGetOffers.openConnection();
             conGetOffer.setRequestProperty("content-type", "application/x-www-form-urlencoded; charset=UTF-8");
@@ -100,13 +141,9 @@ public class FxOpenLoader extends PammLoader {
                 continue;
             }
 
-
-            Double minInvestment = null;
             for (FxOpenOffersResultData fxOpenOffersResultData : fxOpenOffersResult.getData()) {
                 if (fxOpenOffersResultData.getOfferTypeStr().equals("Active")) {
-                    if (minInvestment == null || minInvestment > fxOpenOffersResultData.getInitialDeposit()) {
-                        minInvestment = fxOpenOffersResultData.getInitialDeposit();
-                    }
+
                     Integer minPeriodInDays = null;
                     switch (fxOpenOffersResultData.getInterval()) {
                         case 3:
@@ -123,7 +160,9 @@ public class FxOpenLoader extends PammLoader {
                     }
 
 
-                    PammOfferFxOpen pammOfferFxOpen = new PammOfferFxOpen(fxOpenOffersResultData.getInitialDeposit(), minPeriodInDays, fxOpenOffersResultData.getPerformanceFee(), fxOpenOffersResultData.getManagementFee(), fxOpenOffersResultData.getMinimumPerformanceConstraint(), fxOpenOffersResultData.getDepositCommision());
+                    PammOfferFxOpen pammOfferFxOpen = new PammOfferFxOpen(manager.getName(), fxOpenOffersResultData.getInitialDeposit(), minPeriodInDays, fxOpenOffersResultData.getPerformanceFee(), fxOpenOffersResultData.getManagementFee(),
+                            fxOpenOffersResultData.getMinimumPerformanceConstraint(), fxOpenOffersResultData.getDepositCommision(),
+                            manager.getCurrency(), avgChange, "https://pamm.fxopen.ru/Pamm/" + manager.getName() + "?agent=691142");
                     pamm.addOffer(pammOfferFxOpen);
                 }
             }
@@ -133,43 +172,6 @@ public class FxOpenLoader extends PammLoader {
             }
 
 
-            //load changes
-            LocalDate now = LocalDate.now();
-            String nowFormatted = now.format(dateFormatter);
-
-            LocalDate theFirstWorkingDate = now.minusDays(pamm.getAgeInDays());
-            String theFirstWorkingDateStr = theFirstWorkingDate.format(dateFormatter);
-
-            URL urlLoadGain = new URL("https://datastore5.soft-fx.com/Chart/Gain?BrokerId=D5CBE825-CC28-4DF8-A52A-12F20165C794&id=" + manager.getId() + "&from=" + theFirstWorkingDateStr + "&to=" + nowFormatted);
-            InputStreamReader readerLoadGain = new InputStreamReader(new GZIPInputStream(urlLoadGain.openStream()));
-            List<PammFxOpenManagerMoney> dailyGains = objectMapper.readValue(readerLoadGain, new TypeReference<List<PammFxOpenManagerMoney>>() {
-            });
-
-            if (dailyGains.size() > 0) {
-                //get deposit load
-                URL urlDepositLoad = new URL("https://datastore5.soft-fx.com/Chart/AccountDepositLoad?BrokerId=D5CBE825-CC28-4DF8-A52A-12F20165C794&id=" + manager.getId() + "&from=" + theFirstWorkingDateStr + "&to=" + nowFormatted);
-                InputStreamReader readerDepositLoad = new InputStreamReader(new GZIPInputStream(urlDepositLoad.openStream()));
-                List<FXOpenDepositLoad> allDepositLoads = objectMapper.readValue(readerDepositLoad, new TypeReference<List<FXOpenDepositLoad>>() {
-                });
-
-
-                Map<String, Double> depositLoadPerDate = new HashMap<>();
-                allDepositLoads.forEach(depositLoad -> depositLoadPerDate.put(depositLoad.getDate(), depositLoad.getValue()));
-                List<Double> changes = new ArrayList<>();
-                Double totalIncreaseInPercents = 0.;
-
-                for (PammFxOpenManagerMoney dailyGain : dailyGains) {
-                    if (depositLoadPerDate.get(dailyGain.getDate()) > 0.) {
-                        changes.add(dailyGain.getDailyGain());
-                    }
-                    totalIncreaseInPercents = dailyGain.getTotalGain();
-                }
-                //all days are returned
-                addChangesToPamm(changes, totalIncreaseInPercents, pamm);
-                pamms.add(pamm);
-
-
-            }
             logger.info("Finish load FxOpen manager details, pammId = {}", manager.getId());
         }
 

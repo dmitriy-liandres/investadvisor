@@ -1,11 +1,10 @@
 package com.investadvisor.model.pamm;
 
 import com.investadvisor.model.InvestmentTargetLoader;
+import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Base class for all Pamm loaders
@@ -20,8 +19,9 @@ public abstract class PammLoader extends InvestmentTargetLoader<Pamm> {
      * @param changes                 list with changes
      * @param totalIncreaseInPercents total change for all work time. 13 means that at the end manager had start value * 1.13
      * @param pamm                    pamm to which we should set values
+     * @return avgChange
      */
-    protected void addChangesToPamm(List<Double> changes, Double totalIncreaseInPercents, Pamm pamm) {
+    protected Double addChangesToPamm(List<Double> changes, Double totalIncreaseInPercents, Pamm pamm) {
         Double lossDaysNumber = 0.;
         Double maxDailyLoss = 0.;
         Double sumDailyLoss = 0.;
@@ -49,7 +49,7 @@ public abstract class PammLoader extends InvestmentTargetLoader<Pamm> {
         pamm.setMaxDailyLoss(maxDailyLoss == 0. ? -2 : maxDailyLoss);
         pamm.setAverageDailyLoss(sumDailyLoss == 0 ? 2 : sumDailyLoss / lossDaysNumber);
         pamm.setDeviation(deviation);
-        pamm.setAvgChange(avgChangePerAllDays);
+        return avgChangePerAllDays;
     }
 
     /**
@@ -61,7 +61,26 @@ public abstract class PammLoader extends InvestmentTargetLoader<Pamm> {
         Iterator<Pamm> pammIterator = pamms.iterator();
         while (pammIterator.hasNext()) {
             Pamm pamm = pammIterator.next();
-            if (pamm.getTotalMoney() == 0. || pamm.getAgeInDays() < 7 || pamm.getAvgChange() <= 0) {
+            //no offers
+            if (CollectionUtils.isEmpty(pamm.getInvestmentTargetOffers())) {
+                pammIterator.remove();
+                continue;
+            }
+            //remove offers with percentage less than 0
+            Iterator<InvestmentTargetOffer> offersIt = pamm.getInvestmentTargetOffers().iterator();
+            while (offersIt.hasNext()) {
+                InvestmentTargetOffer offer = offersIt.next();
+                if (offer.getAvgChange() <= 0) {
+                    offersIt.remove();
+                }
+            }
+            //no profitable offers
+            if (CollectionUtils.isEmpty(pamm.getInvestmentTargetOffers())) {
+                pammIterator.remove();
+                continue;
+            }
+            //no money of two young pamm
+            if (pamm.getTotalMoney() == 0. || pamm.getAgeInDays() < 7) {
                 pammIterator.remove();
             }
         }

@@ -11,9 +11,9 @@ import java.io.IOException;
  * Date 29.05.2016
  */
 public class FxOpenPamm extends Pamm {
-    @Override
-    public String generateLink() {
-        return "https://pamm.fxopen.ru/Pamm/" + getName() +"?agent=691142";
+
+    public FxOpenPamm() {
+        super("fxopen");
     }
 
     @Override

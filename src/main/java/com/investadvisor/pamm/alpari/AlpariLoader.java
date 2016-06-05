@@ -1,10 +1,7 @@
 package com.investadvisor.pamm.alpari;
 
 import com.investadvisor.Currency;
-import com.investadvisor.model.pamm.InvestmentTargetOffer;
-import com.investadvisor.model.pamm.Pamm;
-import com.investadvisor.model.pamm.PammBroker;
-import com.investadvisor.model.pamm.PammLoader;
+import com.investadvisor.model.pamm.*;
 import com.investadvisor.pamm.alpari.model.AlpariPamm;
 import com.investadvisor.pamm.alpari.model.PAMMAlpariGeneral;
 import org.apache.commons.csv.CSVFormat;
@@ -22,7 +19,9 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Loads Pamms for alpari.ru
@@ -60,11 +59,15 @@ public class AlpariLoader extends PammLoader {
         //maps returned json to the object
         PAMMAlpariGeneral allValue = objectMapper.readValue(urlAll.openStream(), PAMMAlpariGeneral.class);
 
+        //pamm id->curreny
+        Map<String, Currency> currencyPerPamm = new HashMap<>();
+        //pamm id->name
+        Map<String, String> namePerPamm = new HashMap<>();
         allValue.getElements().forEach(onePammElements -> {
             Pamm pamm = new AlpariPamm();
             pamm.setPammBroker(PammBroker.ALPARI);
             pamm.setId(String.valueOf(onePammElements.get(0)));
-            pamm.setName(String.valueOf(onePammElements.get(1)));
+            String name = String.valueOf(onePammElements.get(1));
             pamm.setAgeInDays(Integer.valueOf(String.valueOf(onePammElements.get(27))));
             pamm.setManagerMoney(Double.valueOf(String.valueOf(onePammElements.get(12))));
             pamm.setTotalMoney(Double.valueOf(String.valueOf(onePammElements.get(10))));
@@ -75,7 +78,9 @@ public class AlpariLoader extends PammLoader {
                 return;
             }
 
-            pamm.setCurrency(Currency.valueOf(currency));
+            currencyPerPamm.put(pamm.getId(), Currency.valueOf(currency));
+            namePerPamm.put(pamm.getId(), name);
+
             pamms.add(pamm);
 
         });
@@ -117,7 +122,7 @@ public class AlpariLoader extends PammLoader {
                 changes.add(change);
                 totalIncreaseInPercents = close;
             }
-            addChangesToPamm(changes, totalIncreaseInPercents, pamm);
+            Double avgChange = addChangesToPamm(changes, totalIncreaseInPercents, pamm);
 
             //let's load commissions
             Document doc = Jsoup.connect("http://www.alpari.ru/ru/investor/pamm/" + pamm.getId()).timeout(30000).get();
@@ -129,7 +134,7 @@ public class AlpariLoader extends PammLoader {
             for (int i = 1; i < minBalances.size(); i++) {
                 Double minBalance = Double.valueOf(minBalances.get(i).text().replace(spaceCharStr, "").trim());
                 Double commission = Double.valueOf(commissions.get(i).text().replace("%", "").trim());
-                InvestmentTargetOffer investmentTargetOffer = new InvestmentTargetOffer(minBalance, 1, commission);
+                InvestmentTargetOffer investmentTargetOffer = new InvestmentTargetOffer(namePerPamm.get(pamm.getId()), minBalance, null, 1, commission, "http://www.alpari.ru/ru/investor/pamm/" + pamm.getId() + "/?partner_id=1231285", currencyPerPamm.get(pamm.getId()), avgChange, new PammOfferRisk(), new PammOfferProfit());
                 pamm.addOffer(investmentTargetOffer);
             }
 

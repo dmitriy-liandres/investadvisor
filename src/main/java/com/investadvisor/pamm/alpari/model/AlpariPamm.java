@@ -11,9 +11,9 @@ import java.io.IOException;
  * Date 29.05.2016
  */
 public class AlpariPamm extends Pamm {
-    @Override
-    public String generateLink() {
-        return "http://www.alpari.ru/ru/investor/pamm/" + getId() + "/?partner_id=1231285";
+
+    public AlpariPamm() {
+        super("Alpari");
     }
 
     @Override

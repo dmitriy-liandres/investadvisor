@@ -2,8 +2,11 @@ package com.investadvisor.model;
 
 import com.investadvisor.Currency;
 import com.investadvisor.ProvidedParams;
-import com.investadvisor.model.pamm.Pamm;
 import com.investadvisor.model.pamm.InvestmentTargetOffer;
+import com.investadvisor.model.pamm.Pamm;
+import com.investadvisor.model.pamm.PammOfferProfit;
+import com.investadvisor.model.pamm.PammOfferRisk;
+import com.investadvisor.pamm.fxopen.model.FxOpenPammOfferProfit;
 import com.investadvisor.pamm.fxopen.model.PammOfferFxOpen;
 import org.junit.Test;
 
@@ -22,15 +25,16 @@ public class PammOfferTest {
         Double minBalance = 100.;
         Double managerCommission = 20.;
         Integer minPeriodInDays = 0;
+        Double avgChange = 0.1;
         Pamm pamm = generatePamm();
-        pamm.setAvgChange(0.1);
+
 
         ProvidedParams providedParams = generateProvidedParams();
-        InvestmentTargetOffer investmentTargetOffer = new InvestmentTargetOffer(minBalance, minPeriodInDays, managerCommission);
-        Double calculateProfitAfterMangerCommission = investmentTargetOffer.calculateProfitAfterMangerCommission(pamm, providedParams);
+        InvestmentTargetOffer investmentTargetOffer = new InvestmentTargetOffer("name", minBalance, null, minPeriodInDays, managerCommission, "link", Currency.USD, avgChange, new PammOfferRisk(), new PammOfferProfit());
 
-        Double avgChange = pamm.getAvgChange();
-        Double estimatedIncrease = Math.pow(1 + avgChange, providedParams.getPeriodInDays()) - 1;
+        Double calculateProfitAfterMangerCommission = new PammOfferProfit().calculateProfitAfterMangerCommission(pamm, investmentTargetOffer, providedParams);
+
+        Double estimatedIncrease = Math.pow(1 + avgChange / 100, providedParams.getPeriodInDays()) - 1;
         Double expectedCalculateProfitAfterMangerCommission = 1 + estimatedIncrease * (1 - managerCommission / 100);
 
         assertEquals(expectedCalculateProfitAfterMangerCommission, calculateProfitAfterMangerCommission);
@@ -50,13 +54,12 @@ public class PammOfferTest {
         Integer minPeriodInDays = 0;
 
         Pamm pamm = generatePamm();
-        pamm.setAvgChange(avgChange);
         ProvidedParams providedParams = generateProvidedParams();
-        PammOfferFxOpen pammOfferFxOpen = new PammOfferFxOpen(minBalance, minPeriodInDays, managerCommission, annualMasterCommission, minimumPerformanceConstant, assignmentCommissions);
+        PammOfferFxOpen pammOfferFxOpen = new PammOfferFxOpen("name", minBalance, minPeriodInDays, managerCommission, annualMasterCommission, minimumPerformanceConstant, assignmentCommissions, Currency.USD, avgChange, "link");
 
-        Double calculateProfitAfterMangerCommission = pammOfferFxOpen.calculateProfitAfterMangerCommission(pamm, providedParams);
+        Double calculateProfitAfterMangerCommission = new FxOpenPammOfferProfit().calculateProfitAfterMangerCommission(pamm, pammOfferFxOpen, providedParams);
         avgChange -= annualMasterCommission / 365;
-        Double estimatedIncrease = Math.pow(1 + avgChange, providedParams.getPeriodInDays()) - 1;
+        Double estimatedIncrease = Math.pow(1 + avgChange / 100, providedParams.getPeriodInDays()) - 1;
         Double finalIncreased = (1 + estimatedIncrease) * (1 - assignmentCommissions / 100);
         assertEquals(finalIncreased, calculateProfitAfterMangerCommission);
     }
@@ -75,13 +78,12 @@ public class PammOfferTest {
         Integer minPeriodInDays = 0;
 
         Pamm pamm = generatePamm();
-        pamm.setAvgChange(avgChange);
         ProvidedParams providedParams = generateProvidedParams();
-        PammOfferFxOpen pammOfferFxOpen = new PammOfferFxOpen(minBalance, minPeriodInDays, managerCommission, annualMasterCommission, minimumPerformanceConstant, assignmentCommissions);
+        PammOfferFxOpen pammOfferFxOpen = new PammOfferFxOpen("name", minBalance, minPeriodInDays, managerCommission, annualMasterCommission, minimumPerformanceConstant, assignmentCommissions, Currency.USD, avgChange, "link");
 
-        Double calculateProfitAfterMangerCommission = pammOfferFxOpen.calculateProfitAfterMangerCommission(pamm, providedParams);
+        Double calculateProfitAfterMangerCommission = new FxOpenPammOfferProfit().calculateProfitAfterMangerCommission(pamm, pammOfferFxOpen, providedParams);
         avgChange -= annualMasterCommission / 365;
-        Double estimatedIncrease = Math.pow(1 + avgChange, providedParams.getPeriodInDays()) - 1;
+        Double estimatedIncrease = Math.pow(1 + avgChange / 100, providedParams.getPeriodInDays()) - 1;
         Double finalIncreased = (1 + estimatedIncrease) * (1 - assignmentCommissions / 100);
         assertEquals(finalIncreased, calculateProfitAfterMangerCommission);
 
@@ -97,17 +99,16 @@ public class PammOfferTest {
         Double annualMasterCommission = 10.;
         Double minimumPerformanceConstant = 10.;
         Double assignmentCommissions = 10.;
-        Double avgChange = annualMasterCommission / 365 + 0.001;
+        Double avgChange = annualMasterCommission / 365 + 0.1;
         Integer minPeriodInDays = 0;
 
         Pamm pamm = generatePamm();
-        pamm.setAvgChange(avgChange);
         ProvidedParams providedParams = generateProvidedParams();
-        PammOfferFxOpen pammOfferFxOpen = new PammOfferFxOpen(minBalance, minPeriodInDays, managerCommission, annualMasterCommission, minimumPerformanceConstant, assignmentCommissions);
+        PammOfferFxOpen pammOfferFxOpen = new PammOfferFxOpen("name", minBalance, minPeriodInDays, managerCommission, annualMasterCommission, minimumPerformanceConstant, assignmentCommissions, Currency.USD, avgChange, "link");
 
-        Double calculateProfitAfterMangerCommission = pammOfferFxOpen.calculateProfitAfterMangerCommission(pamm, providedParams);
+        Double calculateProfitAfterMangerCommission = new FxOpenPammOfferProfit().calculateProfitAfterMangerCommission(pamm, pammOfferFxOpen, providedParams);
         avgChange -= annualMasterCommission / 365;
-        Double estimatedIncrease = Math.pow(1 + avgChange, providedParams.getPeriodInDays()) - 1;
+        Double estimatedIncrease = Math.pow(1 + avgChange / 100, providedParams.getPeriodInDays()) - 1;
         Double finalIncreased = (1 + estimatedIncrease) * (1 - assignmentCommissions / 100);
         finalIncreased -= (finalIncreased - minimumPerformanceConstant / 100 - 1) * managerCommission / 100;
         assertEquals(finalIncreased, calculateProfitAfterMangerCommission);
@@ -123,11 +124,7 @@ public class PammOfferTest {
     }
 
     private Pamm generatePamm() {
-        return new Pamm() {
-            @Override
-            public String generateLink() {
-                return null;
-            }
+        return new Pamm("name") {
 
             @Override
             public Double getCommissionEnterPercentage() {

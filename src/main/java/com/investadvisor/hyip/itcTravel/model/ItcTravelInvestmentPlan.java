@@ -12,15 +12,22 @@ public class ItcTravelInvestmentPlan {
     /**
      * If true, than after particular period deposit is closed and user have to reopen again. Otherwise deposit works forever
      */
-    private Boolean isDepositClosed;
+    private Boolean isDepositClosable;
     private Double minInvestment;
 
-    public ItcTravelInvestmentPlan(String name, Double percentsPerMonth, Integer minDays, Boolean isDepositClosed, Double minInvestment) {
+    private String link;
+
+    public ItcTravelInvestmentPlan(String name, Double percentsPerMonth, Integer minDays, Boolean isDepositClosable, Double minInvestment, String link) {
         this.name = name;
         this.percentsPerMonth = percentsPerMonth;
         this.minDays = minDays;
-        this.isDepositClosed = isDepositClosed;
+        this.isDepositClosable = isDepositClosable;
         this.minInvestment = minInvestment;
+        this.link = link;
+    }
+
+    public String getLink() {
+        return link;
     }
 
     public String getName() {
@@ -31,6 +38,10 @@ public class ItcTravelInvestmentPlan {
         return percentsPerMonth;
     }
 
+    public Double getAvgPercentage() {
+        return (Math.pow((1 + getPercentsPerMonth() / 100), 1. / 30) - 1) * 100;
+    }
+
     public Integer getMinDays() {
         return minDays;
     }
@@ -39,8 +50,8 @@ public class ItcTravelInvestmentPlan {
         return minInvestment;
     }
 
-    public Boolean getIsDepositClosed() {
-        return isDepositClosed;
+    public Boolean getIsDepositClosable() {
+        return isDepositClosable;
     }
 
     @Override
@@ -49,7 +60,7 @@ public class ItcTravelInvestmentPlan {
                 "name='" + name + '\'' +
                 ", percentsPerMonth=" + percentsPerMonth +
                 ", minDays=" + minDays +
-                ", isDepositClosed=" + isDepositClosed +
+                ", isDepositClosable=" + isDepositClosable +
                 ", minInvestment=" + minInvestment +
                 '}';
     }

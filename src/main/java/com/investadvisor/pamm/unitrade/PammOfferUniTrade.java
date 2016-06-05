@@ -1,9 +1,10 @@
 package com.investadvisor.pamm.unitrade;
 
-import com.investadvisor.ProvidedParams;
-import com.investadvisor.model.InvestmentTarget;
+import com.investadvisor.Currency;
 import com.investadvisor.model.pamm.InvestmentTargetOffer;
+import com.investadvisor.model.pamm.PammOfferRisk;
 import com.investadvisor.pamm.unitrade.model.UnitradeInvestmentPlan;
+import com.investadvisor.pamm.unitrade.model.UnitradePammOfferProfit;
 
 /**
  * Author Dmitriy Liandres
@@ -13,12 +14,14 @@ public class PammOfferUniTrade extends InvestmentTargetOffer {
     private UnitradeInvestmentPlan unitradeInvestmentPlan;
 
     public PammOfferUniTrade(UnitradeInvestmentPlan unitradeInvestmentPlan) {
-        super(unitradeInvestmentPlan.getMinimalInvestment(), unitradeInvestmentPlan.getDays(), 0.);
+        super(unitradeInvestmentPlan.getName(), unitradeInvestmentPlan.getMinimalInvestment(), null, unitradeInvestmentPlan.getDays(), 0., unitradeInvestmentPlan.getLink(), Currency.USD, null, new PammOfferRisk(), new UnitradePammOfferProfit(unitradeInvestmentPlan));
         this.unitradeInvestmentPlan = unitradeInvestmentPlan;
     }
 
     @Override
-    public Double calculateProfitAfterMangerCommission(InvestmentTarget pamm, ProvidedParams providedParams) {
-        return 1 + unitradeInvestmentPlan.getPercentagePerMonth() * unitradeInvestmentPlan.getMonthsNumber() / 100;
+    public String toString() {
+        return "PammOfferUniTrade{" +
+                "unitradeInvestmentPlan=" + unitradeInvestmentPlan +
+                "} " + super.toString();
     }
 }

@@ -3,10 +3,8 @@ package com.investadvisor.hyip.itcTravel;
 import com.investadvisor.Currency;
 import com.investadvisor.hyip.itcTravel.model.ItcTravel;
 import com.investadvisor.hyip.itcTravel.model.ItcTravelInvestmentPlan;
-import com.investadvisor.hyip.itcTravel.model.ItcTravelRisk;
 import com.investadvisor.hyip.itcTravel.model.OfferItcTravel;
 import com.investadvisor.model.InvestmentTargetLoader;
-import com.investadvisor.model.hyip.HyipProfit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,12 +24,13 @@ public class ItcTravelLoader extends InvestmentTargetLoader<ItcTravel> {
     private static final List<ItcTravelInvestmentPlan> ITC_TRAVEL_INVESTMENT_PLANs;
 
     static {
+        final String link = "https://itc-travel.biz/investor/investment-offer/?id=688";
         ITC_TRAVEL_INVESTMENT_PLANs = new ArrayList<>();
-        ITC_TRAVEL_INVESTMENT_PLANs.add(new ItcTravelInvestmentPlan("PREMIER", 9., 0, false, 10.));
-        ITC_TRAVEL_INVESTMENT_PLANs.add(new ItcTravelInvestmentPlan("GRAND", 12., 30, true, 50.));
-        ITC_TRAVEL_INVESTMENT_PLANs.add(new ItcTravelInvestmentPlan("DELUXE", 15., 90, true, 100.));
-        ITC_TRAVEL_INVESTMENT_PLANs.add(new ItcTravelInvestmentPlan("PREMIUM", 18., 180, true, 200.));
-        ITC_TRAVEL_INVESTMENT_PLANs.add(new ItcTravelInvestmentPlan("PRESIDENT", 21., 360, true, 500.));
+        ITC_TRAVEL_INVESTMENT_PLANs.add(new ItcTravelInvestmentPlan("PREMIER", 9., 0, false, 10., link));
+        ITC_TRAVEL_INVESTMENT_PLANs.add(new ItcTravelInvestmentPlan("GRAND", 12., 30, true, 50., link));
+        ITC_TRAVEL_INVESTMENT_PLANs.add(new ItcTravelInvestmentPlan("DELUXE", 15., 90, true, 100., link));
+        ITC_TRAVEL_INVESTMENT_PLANs.add(new ItcTravelInvestmentPlan("PREMIUM", 18., 180, true, 200., link));
+        ITC_TRAVEL_INVESTMENT_PLANs.add(new ItcTravelInvestmentPlan("PRESIDENT", 21., 360, true, 500., link));
 
     }
 
@@ -52,11 +51,8 @@ public class ItcTravelLoader extends InvestmentTargetLoader<ItcTravel> {
         for (ItcTravelInvestmentPlan itcTravelInvestmentPlan : ITC_TRAVEL_INVESTMENT_PLANs) {
             //add offer in usd
 
-            Double avgPercentage = (Math.pow((1 + itcTravelInvestmentPlan.getPercentsPerMonth() / 100), 1. / 30) - 1) * 100;
 
-            ItcTravel itcTravel = new ItcTravel(new ItcTravelRisk(), new HyipProfit());
-            itcTravel.setAvgChange(avgPercentage);
-            itcTravel.setCurrency(Currency.USD);
+            ItcTravel itcTravel = new ItcTravel();
 
             OfferItcTravel offerItcTravel = new OfferItcTravel(itcTravelInvestmentPlan);
             itcTravel.addOffer(offerItcTravel);

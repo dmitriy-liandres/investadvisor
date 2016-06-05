@@ -1,10 +1,7 @@
 package com.investadvisor.pamm.alfaForex;
 
 import com.investadvisor.Currency;
-import com.investadvisor.model.pamm.Pamm;
-import com.investadvisor.model.pamm.PammBroker;
-import com.investadvisor.model.pamm.InvestmentTargetOffer;
-import com.investadvisor.model.pamm.PammLoader;
+import com.investadvisor.model.pamm.*;
 import com.investadvisor.pamm.alfaForex.model.AlfaForexPamm;
 import com.investadvisor.pamm.alfaForex.model.PammAlfaForexManagerMoney;
 import com.investadvisor.pamm.alfaForex.model.PammAlfaForexManagerMoneyResultItem;
@@ -116,10 +113,8 @@ public class AlfaForexLoader extends PammLoader {
                 Pamm pamm = new AlfaForexPamm();
                 pamm.setPammBroker(PammBroker.ALFA_FOREX);
                 pamm.setId(id);
-                pamm.setName(name);
                 pamm.setAgeInDays(ageInDays);
                 pamm.setTotalMoney(totalMoney);
-                pamm.setCurrency(currency);
 
                 if (!isCsrfTokenLoad) {
                     //we have to load csrf token and cookie to load json data in next requests
@@ -178,7 +173,7 @@ public class AlfaForexLoader extends PammLoader {
                     totalIncreaseInPercents = resultItem.getValue();
                 }
 
-                addChangesToPamm(changes, totalIncreaseInPercents, pamm);
+                Double avgChange = addChangesToPamm(changes, totalIncreaseInPercents, pamm);
 
                 //load commissions
                 Document doc = Jsoup.connect("https://my.alfa-forex.ru/public/pamm/view/" + id + "#offer").timeout(30000).get();
@@ -187,7 +182,8 @@ public class AlfaForexLoader extends PammLoader {
                 Double minInvestment = Double.valueOf(cells.get(2).text().split("/")[0]);
                 Integer minPeriod = Integer.valueOf(cells.get(3).text());
 
-                pamm.addOffer(new InvestmentTargetOffer(minInvestment, minPeriod, percentage));
+                pamm.addOffer(new InvestmentTargetOffer(name, minInvestment, null, minPeriod, percentage, "https://my.alfa-forex.ru/public/pamm/view/" + pamm.getId() + "?partner_id=719755",
+                        currency, avgChange, new PammOfferRisk(), new PammOfferProfit()));
 
                 pamms.add(pamm);
 

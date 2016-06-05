@@ -8,14 +8,14 @@ import java.io.IOException;
  * Author Dmitriy Liandres
  * Date 29.05.2016
  */
-public abstract class InvestmentTargetRisk {
+public abstract class InvestmentTargetOfferRisk {
 
     private Double totalRisk;
+
     /**
-     *
      * @return total rist
      */
-    public Double getTotalRisk(){
+    public Double getTotalRisk() {
         return totalRisk;
     }
 

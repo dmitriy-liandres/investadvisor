@@ -2,8 +2,6 @@ package com.investadvisor.hyip.yabankir.model;
 
 import com.investadvisor.Currency;
 import com.investadvisor.exchangerates.YahooExchangeRates;
-import com.investadvisor.model.InvestmentTargetProfit;
-import com.investadvisor.model.InvestmentTargetRisk;
 import com.investadvisor.model.hyip.Hyip;
 
 import java.io.IOException;
@@ -13,14 +11,8 @@ import java.io.IOException;
  * Date 29.05.2016
  */
 public class YaBankir extends Hyip {
-    public YaBankir(InvestmentTargetRisk investmentTargetRisk,
-                    InvestmentTargetProfit investmentTargetProfit) {
-        super(investmentTargetRisk, investmentTargetProfit);
-    }
-
-    @Override
-    public String generateLink() {
-        return "https://yabankir.com/?aid=dima-amid";
+    public YaBankir() {
+        super("yabankir");
     }
 
     @Override

@@ -1,28 +1,28 @@
-package com.investadvisor.pamm.alfaForex.model;
+package com.investadvisor.startups.insolt.model;
 
 import com.investadvisor.Currency;
-import com.investadvisor.model.pamm.Pamm;
+import com.investadvisor.model.startup.Startup;
+import com.investadvisor.model.startup.StartupBroker;
 
 import java.io.IOException;
 
 /**
  * Author Dmitriy Liandres
- * Date 29.05.2016
+ * Date 05.06.2016
  */
-public class AlfaForexPamm extends Pamm {
-
-    public AlfaForexPamm() {
-        super("alfa-forex");
+public class InsoltStartup extends Startup {
+    public InsoltStartup() {
+        super("Insolt", StartupBroker.INSOLT);
     }
 
     @Override
     public Double getCommissionEnterPercentage() {
-        return 2.;
+        return 2.24;
     }
 
     @Override
     public Double getCommissionWithdrawPercentage() {
-        return 0.;
+        return 2.;
     }
 
     @Override
