@@ -24,7 +24,7 @@ public class PammOfferFxOpen extends InvestmentTargetOffer {
 
     public PammOfferFxOpen(String name,
                            Double minInvestment,
-                           Integer minPeriodInDays,
+                           Double minPeriodInDays,
                            Double commissionFromProfit,
                            Double annualMasterCommission,
                            Double minimumPerformanceConstant,
@@ -32,7 +32,7 @@ public class PammOfferFxOpen extends InvestmentTargetOffer {
                            Currency currency,
                            Double avgChange,
                            String link) {
-        super(name, minInvestment, null, minPeriodInDays, commissionFromProfit, link, currency, avgChange, new PammOfferRisk(), new FxOpenPammOfferProfit());
+        super(name, minInvestment, null, minPeriodInDays, null, commissionFromProfit, link, currency, avgChange, new PammOfferRisk(), new FxOpenPammOfferProfit());
         this.annualMasterCommission = annualMasterCommission;
         this.minimumPerformanceConstant = minimumPerformanceConstant;
         this.assignmentCommissions = assignmentCommissions;

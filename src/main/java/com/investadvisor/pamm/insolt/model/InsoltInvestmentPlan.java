@@ -6,14 +6,14 @@ package com.investadvisor.pamm.insolt.model;
  */
 public class InsoltInvestmentPlan {
     private String name;
-    private Integer days;
+    private Double days;
     private Double managerCommission;
     private Integer insoltId;
     private Double minimalInvestment;
     private String startDate;
     private String link;
 
-    public InsoltInvestmentPlan(String name, Integer days, Double managerCommission, Integer insoltId, Double minimalInvestment, String startDate, String link) {
+    public InsoltInvestmentPlan(String name, Double days, Double managerCommission, Integer insoltId, Double minimalInvestment, String startDate, String link) {
         this.name = name;
         this.days = days;
         this.managerCommission = managerCommission;
@@ -35,11 +35,11 @@ public class InsoltInvestmentPlan {
         this.name = name;
     }
 
-    public Integer getDays() {
+    public Double getDays() {
         return days;
     }
 
-    public void setDays(Integer days) {
+    public void setDays(Double days) {
         this.days = days;
     }
 

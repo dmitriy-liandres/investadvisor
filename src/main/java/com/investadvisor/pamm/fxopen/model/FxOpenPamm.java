@@ -28,11 +28,11 @@ public class FxOpenPamm extends Pamm {
 
     @Override
     public Double getCommissionEnterFixed(Currency currency) throws IOException {
-        return YahooExchangeRates.convertToUSD(0.22, Currency.USD, currency);
+        return YahooExchangeRates.convert(0.22, Currency.USD, currency);
     }
 
     @Override
     public Double getCommissionWithdrawFixed(Currency currency) throws IOException {
-        return YahooExchangeRates.convertToUSD(50., Currency.RUB, currency);
+        return YahooExchangeRates.convert(50., Currency.RUB, currency);
     }
 }

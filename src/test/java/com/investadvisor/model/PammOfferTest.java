@@ -24,13 +24,13 @@ public class PammOfferTest {
     public void testGeneralCase() {
         Double minBalance = 100.;
         Double managerCommission = 20.;
-        Integer minPeriodInDays = 0;
+        Double minPeriodInDays = 0.;
         Double avgChange = 0.1;
         Pamm pamm = generatePamm();
 
 
         ProvidedParams providedParams = generateProvidedParams();
-        InvestmentTargetOffer investmentTargetOffer = new InvestmentTargetOffer("name", minBalance, null, minPeriodInDays, managerCommission, "link", Currency.USD, avgChange, new PammOfferRisk(), new PammOfferProfit());
+        InvestmentTargetOffer investmentTargetOffer = new InvestmentTargetOffer("name", minBalance, null, minPeriodInDays, null, managerCommission, "link", Currency.USD, avgChange, new PammOfferRisk(), new PammOfferProfit());
 
         Double calculateProfitAfterMangerCommission = new PammOfferProfit().calculateProfitAfterMangerCommission(pamm, investmentTargetOffer, providedParams);
 
@@ -51,7 +51,7 @@ public class PammOfferTest {
         Double minimumPerformanceConstant = 10.;
         Double assignmentCommissions = 10.;
         Double avgChange = annualMasterCommission / 365 + 0.0001;
-        Integer minPeriodInDays = 0;
+        Double minPeriodInDays = 0.;
 
         Pamm pamm = generatePamm();
         ProvidedParams providedParams = generateProvidedParams();
@@ -75,7 +75,7 @@ public class PammOfferTest {
         Double minimumPerformanceConstant = 10.;
         Double assignmentCommissions = 10.;
         Double avgChange = annualMasterCommission / 365 + 0.0005;
-        Integer minPeriodInDays = 0;
+        Double minPeriodInDays = 0.;
 
         Pamm pamm = generatePamm();
         ProvidedParams providedParams = generateProvidedParams();
@@ -100,7 +100,7 @@ public class PammOfferTest {
         Double minimumPerformanceConstant = 10.;
         Double assignmentCommissions = 10.;
         Double avgChange = annualMasterCommission / 365 + 0.1;
-        Integer minPeriodInDays = 0;
+        Double minPeriodInDays = 0.;
 
         Pamm pamm = generatePamm();
         ProvidedParams providedParams = generateProvidedParams();

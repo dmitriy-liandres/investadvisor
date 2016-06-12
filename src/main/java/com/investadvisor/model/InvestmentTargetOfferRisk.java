@@ -8,7 +8,7 @@ import java.io.IOException;
  * Author Dmitriy Liandres
  * Date 29.05.2016
  */
-public abstract class InvestmentTargetOfferRisk {
+public abstract class InvestmentTargetOfferRisk<IT extends InvestmentTarget, ITOP extends InvestmentTargetOfferProfit> {
 
     private Double totalRisk;
 
@@ -23,7 +23,7 @@ public abstract class InvestmentTargetOfferRisk {
         this.totalRisk = totalRisk;
     }
 
-    public abstract Double calculateAndSetRisk(InvestmentTarget investmentTarget, ProvidedParams providedParams) throws IOException;
+    public abstract Double calculateAndSetRisk(IT investmentTarget, ProvidedParams providedParams, ITOP investmentTargetOfferProfit) throws IOException;
 
     @Override
     public String toString() {

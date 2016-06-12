@@ -144,16 +144,16 @@ public class FxOpenLoader extends PammLoader {
             for (FxOpenOffersResultData fxOpenOffersResultData : fxOpenOffersResult.getData()) {
                 if (fxOpenOffersResultData.getOfferTypeStr().equals("Active")) {
 
-                    Integer minPeriodInDays = null;
+                    Double minPeriodInDays = null;
                     switch (fxOpenOffersResultData.getInterval()) {
                         case 3:
-                            minPeriodInDays = 122;
+                            minPeriodInDays = 122.;
                             break;
                         case 2:
-                            minPeriodInDays = 30;
+                            minPeriodInDays = 30.;
                             break;
                         case 1:
-                            minPeriodInDays = 7;
+                            minPeriodInDays = 7.;
                             break;
                         default:
                             throw new RuntimeException("Incorrect interval id = " + fxOpenOffersResultData.getInterval());

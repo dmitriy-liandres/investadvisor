@@ -43,13 +43,13 @@ public class YaBankirLoader extends InvestmentTargetLoader<YaBankir> {
         HyipOfferProfit hyipProfit = new HyipOfferProfit();
         YaBankir yaBankirUsd = new YaBankir();
 
-        InvestmentTargetOffer investmentTargetOfferUsd = new InvestmentTargetOffer("yabankir", 10., null, 365, 0., "https://yabankir.com/?aid=dima-amid", Currency.USD, avgPercentage, yaBankirRisk, hyipProfit);
+        InvestmentTargetOffer investmentTargetOfferUsd = new InvestmentTargetOffer("yabankir", 10., null, 365., null, 0., "https://yabankir.com/?aid=dima-amid", Currency.USD, avgPercentage, yaBankirRisk, hyipProfit);
         yaBankirUsd.addOffer(investmentTargetOfferUsd);
         hyips.add(yaBankirUsd);
 
         //add offer in RUB
         YaBankir yaBankirRub = new YaBankir();
-        InvestmentTargetOffer investmentTargetOfferRub = new InvestmentTargetOffer("yabankir", 500., null, 365, 0., "https://yabankir.com/?aid=dima-amid", Currency.RUB, avgPercentage, yaBankirRisk, hyipProfit);
+        InvestmentTargetOffer investmentTargetOfferRub = new InvestmentTargetOffer("yabankir", 500., null, 365., null, 0., "https://yabankir.com/?aid=dima-amid", Currency.RUB, avgPercentage, yaBankirRisk, hyipProfit);
         yaBankirRub.addOffer(investmentTargetOfferRub);
         hyips.add(yaBankirRub);
         logger.info("Finish download all yabankir.com offers");

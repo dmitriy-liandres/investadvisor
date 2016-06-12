@@ -134,7 +134,7 @@ public class AlpariLoader extends PammLoader {
             for (int i = 1; i < minBalances.size(); i++) {
                 Double minBalance = Double.valueOf(minBalances.get(i).text().replace(spaceCharStr, "").trim());
                 Double commission = Double.valueOf(commissions.get(i).text().replace("%", "").trim());
-                InvestmentTargetOffer investmentTargetOffer = new InvestmentTargetOffer(namePerPamm.get(pamm.getId()), minBalance, null, 1, commission, "http://www.alpari.ru/ru/investor/pamm/" + pamm.getId() + "/?partner_id=1231285", currencyPerPamm.get(pamm.getId()), avgChange, new PammOfferRisk(), new PammOfferProfit());
+                InvestmentTargetOffer investmentTargetOffer = new InvestmentTargetOffer(namePerPamm.get(pamm.getId()), minBalance, null, 1., null, commission, "http://www.alpari.ru/ru/investor/pamm/" + pamm.getId() + "/?partner_id=1231285", currencyPerPamm.get(pamm.getId()), avgChange, new PammOfferRisk(), new PammOfferProfit());
                 pamm.addOffer(investmentTargetOffer);
             }
 

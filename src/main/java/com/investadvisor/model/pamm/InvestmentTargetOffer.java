@@ -12,7 +12,8 @@ public class InvestmentTargetOffer {
 
     private Double minInvestment;
     private Double maxInvestment;
-    private Integer minPeriodInDays;
+    private Double minPeriodInDays;
+    private Double maxPeriodInDays;
     private Double commissionFromProfit;
     private String link;
     private Currency currency;
@@ -25,7 +26,8 @@ public class InvestmentTargetOffer {
     public InvestmentTargetOffer(String name,
                                  Double minInvestment,
                                  Double maxInvestment,
-                                 Integer minPeriodInDays,
+                                 Double minPeriodInDays,
+                                 Double maxPeriodInDays,
                                  Double commissionFromProfit,
                                  String link,
                                  Currency currency,
@@ -36,6 +38,7 @@ public class InvestmentTargetOffer {
         this.minInvestment = minInvestment;
         this.maxInvestment = maxInvestment;
         this.minPeriodInDays = minPeriodInDays;
+        this.maxPeriodInDays = maxPeriodInDays;
         this.commissionFromProfit = commissionFromProfit;
         this.link = link;
         this.currency = currency;
@@ -60,8 +63,12 @@ public class InvestmentTargetOffer {
         return link;
     }
 
-    public Integer getMinPeriodInDays() {
+    public Double getMinPeriodInDays() {
         return minPeriodInDays;
+    }
+
+    public Double getMaxPeriodInDays() {
+        return maxPeriodInDays;
     }
 
     public Double getMinInvestment() {
@@ -90,6 +97,7 @@ public class InvestmentTargetOffer {
                 "minInvestment=" + minInvestment +
                 ", maxInvestment=" + maxInvestment +
                 ", minPeriodInDays=" + minPeriodInDays +
+                ", maxPeriodInDays=" + maxPeriodInDays +
                 ", commissionFromProfit=" + commissionFromProfit +
                 ", link='" + link + '\'' +
                 ", currency=" + currency +

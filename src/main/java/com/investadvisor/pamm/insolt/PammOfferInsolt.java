@@ -12,7 +12,7 @@ import com.investadvisor.pamm.insolt.model.InsoltPammOfferProfit;
  */
 public class PammOfferInsolt extends InvestmentTargetOffer {
     public PammOfferInsolt(InsoltInvestmentPlan insoltInvestmentPlan, Double avgChange) {
-        super(insoltInvestmentPlan.getName(), insoltInvestmentPlan.getMinimalInvestment(), null, insoltInvestmentPlan.getDays(), insoltInvestmentPlan.getManagerCommission(), insoltInvestmentPlan.getLink(), Currency.USD, avgChange, new PammOfferRisk(), new InsoltPammOfferProfit(insoltInvestmentPlan));
+        super(insoltInvestmentPlan.getName(), insoltInvestmentPlan.getMinimalInvestment(), null, insoltInvestmentPlan.getDays(), null, insoltInvestmentPlan.getManagerCommission(), insoltInvestmentPlan.getLink(), Currency.USD, avgChange, new PammOfferRisk(), new InsoltPammOfferProfit(insoltInvestmentPlan));
     }
 
     @Override

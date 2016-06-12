@@ -33,6 +33,6 @@ public class AlpariPamm extends Pamm {
 
     @Override
     public Double getCommissionWithdrawFixed(Currency currency) throws IOException {
-        return YahooExchangeRates.convertToUSD(30., Currency.RUB, currency);
+        return YahooExchangeRates.convert(30., Currency.RUB, currency);
     }
 }

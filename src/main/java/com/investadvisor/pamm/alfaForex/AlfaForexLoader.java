@@ -180,9 +180,9 @@ public class AlfaForexLoader extends PammLoader {
                 Elements cells = doc.getElementById("w11-container").getElementsByTag("td");
                 Double percentage = Double.valueOf(cells.get(1).text().replace("%", ""));
                 Double minInvestment = Double.valueOf(cells.get(2).text().split("/")[0]);
-                Integer minPeriod = Integer.valueOf(cells.get(3).text());
+                Double minPeriod = Double.valueOf(cells.get(3).text());
 
-                pamm.addOffer(new InvestmentTargetOffer(name, minInvestment, null, minPeriod, percentage, "https://my.alfa-forex.ru/public/pamm/view/" + pamm.getId() + "?partner_id=719755",
+                pamm.addOffer(new InvestmentTargetOffer(name, minInvestment, null, minPeriod, null, percentage, "https://my.alfa-forex.ru/public/pamm/view/" + pamm.getId() + "?partner_id=719755",
                         currency, avgChange, new PammOfferRisk(), new PammOfferProfit()));
 
                 pamms.add(pamm);

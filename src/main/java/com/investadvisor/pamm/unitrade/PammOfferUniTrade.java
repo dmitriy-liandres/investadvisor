@@ -14,7 +14,7 @@ public class PammOfferUniTrade extends InvestmentTargetOffer {
     private UnitradeInvestmentPlan unitradeInvestmentPlan;
 
     public PammOfferUniTrade(UnitradeInvestmentPlan unitradeInvestmentPlan) {
-        super(unitradeInvestmentPlan.getName(), unitradeInvestmentPlan.getMinimalInvestment(), null, unitradeInvestmentPlan.getDays(), 0., unitradeInvestmentPlan.getLink(), Currency.USD, null, new PammOfferRisk(), new UnitradePammOfferProfit(unitradeInvestmentPlan));
+        super(unitradeInvestmentPlan.getName(), unitradeInvestmentPlan.getMinimalInvestment(), null, unitradeInvestmentPlan.getDays(), null, 0., unitradeInvestmentPlan.getLink(), Currency.USD, null, new PammOfferRisk(), new UnitradePammOfferProfit(unitradeInvestmentPlan));
         this.unitradeInvestmentPlan = unitradeInvestmentPlan;
     }
 

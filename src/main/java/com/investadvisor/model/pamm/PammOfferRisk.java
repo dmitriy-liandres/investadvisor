@@ -3,7 +3,6 @@ package com.investadvisor.model.pamm;
 import com.investadvisor.Currency;
 import com.investadvisor.ProvidedParams;
 import com.investadvisor.exchangerates.YahooExchangeRates;
-import com.investadvisor.model.InvestmentTarget;
 import com.investadvisor.model.InvestmentTargetOfferRisk;
 
 import java.io.IOException;
@@ -13,7 +12,7 @@ import java.io.IOException;
  * Author Dmitriy Liandres
  * Date 25.05.2016
  */
-public class PammOfferRisk extends InvestmentTargetOfferRisk {
+public class PammOfferRisk extends InvestmentTargetOfferRisk<Pamm, PammOfferProfit> {
 
     private Double brokerCoefficient;
     private Double pammAgeCoefficient;
@@ -24,8 +23,8 @@ public class PammOfferRisk extends InvestmentTargetOfferRisk {
     private Double mainRiskCoefficient;
 
 
-    public Double calculateAndSetRisk(InvestmentTarget investmentTarget, ProvidedParams providedParams) throws IOException {
-        Pamm pamm = (Pamm) investmentTarget;
+    @Override
+    public Double calculateAndSetRisk(Pamm pamm, ProvidedParams providedParams, PammOfferProfit pammOfferProfit) throws IOException {
         brokerCoefficient = 0.;
         switch (pamm.getPammBroker()) {
             case ALFA_FOREX:
@@ -49,9 +48,9 @@ public class PammOfferRisk extends InvestmentTargetOfferRisk {
         //get currency
         InvestmentTargetOffer offer = pamm.getInvestmentTargetOffers().get(0);
 
-        Double managerMoneyInUsd = YahooExchangeRates.convertToUSD(pamm.getManagerMoney(), offer.getCurrency(), Currency.USD);
-        Double totalMoneyInUsd = YahooExchangeRates.convertToUSD(pamm.getTotalMoney(), offer.getCurrency(), Currency.USD);
-        Double providedMoneyInUsd = YahooExchangeRates.convertToUSD(providedParams.getSumm(), providedParams.getCurrency(), Currency.USD);
+        Double managerMoneyInUsd = YahooExchangeRates.convert(pamm.getManagerMoney(), offer.getCurrency(), Currency.USD);
+        Double totalMoneyInUsd = YahooExchangeRates.convert(pamm.getTotalMoney(), offer.getCurrency(), Currency.USD);
+        Double providedMoneyInUsd = YahooExchangeRates.convert(providedParams.getSumm(), providedParams.getCurrency(), Currency.USD);
 
         pammAgeCoefficient = pamm.getAgeInDays() < 90 ? 3 : pamm.getAgeInDays() < 180 ? 2 : pamm.getAgeInDays() < 365 ? 1.5 : 1;
         investmentAgeCoefficient = providedParams.getPeriodInDays() > pamm.getAgeInDays() ? 3 : providedParams.getPeriodInDays() > pamm.getAgeInDays() / 2 ? 2 : providedParams.getPeriodInDays() > pamm.getAgeInDays() / 3 ? 1.5 : 1;

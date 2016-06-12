@@ -42,17 +42,17 @@ public class InsoltLoader extends PammLoader {
 
     static {
         String link = "https://personal.insolt.com/register/?p=12588";
-        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Хавьер Перез (CFD)/ОФЕРТА 1", 91, 40., 10, 100., "01.08.2015", link));
-        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Хавьер Перез (CFD)/ОФЕРТА 2", 182, 30., 10, 100., "01.08.2015", link));
-        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Хавьер Перез (CFD)/ОФЕРТА 3", 357, 20., 10, 100., "01.08.2015", link));
+        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Хавьер Перез (CFD)/ОФЕРТА 1", 91., 40., 10, 100., "01.08.2015", link));
+        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Хавьер Перез (CFD)/ОФЕРТА 2", 182., 30., 10, 100., "01.08.2015", link));
+        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Хавьер Перез (CFD)/ОФЕРТА 3", 357., 20., 10, 100., "01.08.2015", link));
 
-        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Ли Хевсон (CFD)/ОФЕРТА 1", 28, 35., 20, 200., "01.08.2015", link));
-        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Ли Хевсон (CFD)/ОФЕРТА 2", 91, 30., 20, 200., "01.08.2015", link));
-        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Ли Хевсон (CFD)/ОФЕРТА 3", 182, 25., 20, 200., "01.08.2015", link));
+        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Ли Хевсон (CFD)/ОФЕРТА 1", 28., 35., 20, 200., "01.08.2015", link));
+        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Ли Хевсон (CFD)/ОФЕРТА 2", 91., 30., 20, 200., "01.08.2015", link));
+        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Ли Хевсон (CFD)/ОФЕРТА 3", 182., 25., 20, 200., "01.08.2015", link));
 
-        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Хавьер Перез (Фондовый рынок)/ОФЕРТА 1", 91, 30., 30, 500., "19.09.2015", link));
-        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Хавьер Перез (Фондовый рынок)/ОФЕРТА 2", 182, 25., 30, 500., "19.09.2015", link));
-        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Хавьер Перез (Фондовый рынок)/ОФЕРТА 3", 357, 20., 30, 500., "19.09.2015", link));
+        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Хавьер Перез (Фондовый рынок)/ОФЕРТА 1", 91., 30., 30, 500., "19.09.2015", link));
+        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Хавьер Перез (Фондовый рынок)/ОФЕРТА 2", 182., 25., 30, 500., "19.09.2015", link));
+        INSOLT_INVESTMENT_PLANS.add(new InsoltInvestmentPlan("Хавьер Перез (Фондовый рынок)/ОФЕРТА 3", 357., 20., 30, 500., "19.09.2015", link));
     }
 
     private static InsoltLoader instance = new InsoltLoader();

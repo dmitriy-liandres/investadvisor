@@ -5,5 +5,5 @@ package com.investadvisor.model;
  * Date 05.06.2016
  */
 public enum InvestmentType {
-    PAMM, HYIP, STARTUP
+    PAMM, HYIP, STARTUP, BANK
 }

@@ -1,6 +1,5 @@
 package com.investadvisor.hyip.itcTravel;
 
-import com.investadvisor.Currency;
 import com.investadvisor.hyip.itcTravel.model.ItcTravel;
 import com.investadvisor.hyip.itcTravel.model.ItcTravelInvestmentPlan;
 import com.investadvisor.hyip.itcTravel.model.OfferItcTravel;
@@ -26,11 +25,11 @@ public class ItcTravelLoader extends InvestmentTargetLoader<ItcTravel> {
     static {
         final String link = "https://itc-travel.biz/investor/investment-offer/?id=688";
         ITC_TRAVEL_INVESTMENT_PLANs = new ArrayList<>();
-        ITC_TRAVEL_INVESTMENT_PLANs.add(new ItcTravelInvestmentPlan("PREMIER", 9., 0, false, 10., link));
-        ITC_TRAVEL_INVESTMENT_PLANs.add(new ItcTravelInvestmentPlan("GRAND", 12., 30, true, 50., link));
-        ITC_TRAVEL_INVESTMENT_PLANs.add(new ItcTravelInvestmentPlan("DELUXE", 15., 90, true, 100., link));
-        ITC_TRAVEL_INVESTMENT_PLANs.add(new ItcTravelInvestmentPlan("PREMIUM", 18., 180, true, 200., link));
-        ITC_TRAVEL_INVESTMENT_PLANs.add(new ItcTravelInvestmentPlan("PRESIDENT", 21., 360, true, 500., link));
+        ITC_TRAVEL_INVESTMENT_PLANs.add(new ItcTravelInvestmentPlan("PREMIER", 9., 0., false, 10., link));
+        ITC_TRAVEL_INVESTMENT_PLANs.add(new ItcTravelInvestmentPlan("GRAND", 12., 30., true, 50., link));
+        ITC_TRAVEL_INVESTMENT_PLANs.add(new ItcTravelInvestmentPlan("DELUXE", 15., 90., true, 100., link));
+        ITC_TRAVEL_INVESTMENT_PLANs.add(new ItcTravelInvestmentPlan("PREMIUM", 18., 180., true, 200., link));
+        ITC_TRAVEL_INVESTMENT_PLANs.add(new ItcTravelInvestmentPlan("PRESIDENT", 21., 360., true, 500., link));
 
     }
 

@@ -8,7 +8,7 @@ public class ItcTravelInvestmentPlan {
 
     private String name;
     private Double percentsPerMonth;
-    private Integer minDays;
+    private Double minDays;
     /**
      * If true, than after particular period deposit is closed and user have to reopen again. Otherwise deposit works forever
      */
@@ -17,7 +17,7 @@ public class ItcTravelInvestmentPlan {
 
     private String link;
 
-    public ItcTravelInvestmentPlan(String name, Double percentsPerMonth, Integer minDays, Boolean isDepositClosable, Double minInvestment, String link) {
+    public ItcTravelInvestmentPlan(String name, Double percentsPerMonth, Double minDays, Boolean isDepositClosable, Double minInvestment, String link) {
         this.name = name;
         this.percentsPerMonth = percentsPerMonth;
         this.minDays = minDays;
@@ -42,7 +42,7 @@ public class ItcTravelInvestmentPlan {
         return (Math.pow((1 + getPercentsPerMonth() / 100), 1. / 30) - 1) * 100;
     }
 
-    public Integer getMinDays() {
+    public Double getMinDays() {
         return minDays;
     }
 

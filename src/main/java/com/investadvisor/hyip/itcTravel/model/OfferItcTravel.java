@@ -11,7 +11,7 @@ public class OfferItcTravel extends InvestmentTargetOffer {
     private ItcTravelInvestmentPlan itcTravelInvestmentPlan;
 
     public OfferItcTravel(ItcTravelInvestmentPlan itcTravelInvestmentPlan) {
-        super(itcTravelInvestmentPlan.getName(), itcTravelInvestmentPlan.getMinInvestment(), null, itcTravelInvestmentPlan.getMinDays(), 0., itcTravelInvestmentPlan.getLink(), Currency.USD, itcTravelInvestmentPlan.getAvgPercentage(), new ItcTravelOfferRisk(), new ItcTravelProfit(itcTravelInvestmentPlan));
+        super(itcTravelInvestmentPlan.getName(), itcTravelInvestmentPlan.getMinInvestment(), null, itcTravelInvestmentPlan.getMinDays(), null, 0., itcTravelInvestmentPlan.getLink(), Currency.USD, itcTravelInvestmentPlan.getAvgPercentage(), new ItcTravelOfferRisk(), new ItcTravelProfit(itcTravelInvestmentPlan));
         this.itcTravelInvestmentPlan = itcTravelInvestmentPlan;
     }
 

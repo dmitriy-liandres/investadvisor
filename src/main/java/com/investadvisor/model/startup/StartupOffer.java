@@ -19,7 +19,7 @@ public class StartupOffer extends InvestmentTargetOffer {
                         String link,
                         InvestmentTargetOfferRisk investmentTargetOfferRisk,
                         InvestmentTargetOfferProfit investmentTargetOfferProfit) {
-        super(name, minInvestment, maxInvestment, 30, 0., link, Currency.USD, null, investmentTargetOfferRisk, investmentTargetOfferProfit);
+        super(name, minInvestment, maxInvestment, 30., null, 0., link, Currency.USD, null, investmentTargetOfferRisk, investmentTargetOfferProfit);
 
         this.percentagePerMonth = percentagePerMonth;
     }

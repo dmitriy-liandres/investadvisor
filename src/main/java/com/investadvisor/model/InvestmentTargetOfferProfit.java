@@ -54,7 +54,11 @@ public abstract class InvestmentTargetOfferProfit {
         Double resultMoney = null;
         //select the best offer
         for (InvestmentTargetOffer investmentTargetOffer : investmentTarget.getInvestmentTargetOffers()) {
-            if (investmentTargetOffer.getMinInvestment() > investedMoney || investmentTargetOffer.getMinPeriodInDays() > providedParams.getPeriodInDays()) {
+            if (investmentTargetOffer.getMinInvestment() > investedMoney
+                    || (investmentTargetOffer.getMaxInvestment() != null && investmentTargetOffer.getMaxInvestment() < investedMoney)
+                    || investmentTargetOffer.getMinPeriodInDays() > providedParams.getPeriodInDays()
+                    || (investmentTargetOffer.getMaxPeriodInDays() != null && investmentTargetOffer.getMaxPeriodInDays() < providedParams.getPeriodInDays())
+                    || investmentTargetOffer.getCurrency() != providedParams.getCurrency()) {
                 continue;
             }
 
@@ -62,7 +66,7 @@ public abstract class InvestmentTargetOfferProfit {
 
             Double profitMoneyForSpecifiedCommission = investedMoney * (calculatedFinalResultAfterMangerCommission - 1);
 
-            //let's tale into consideration that user loses money when he withdraws money
+            //let's take into consideration that user loses money when he withdraws money
             profitMoneyForSpecifiedCommission = profitMoneyForSpecifiedCommission * (1 - commissionWithdrawPercentage / 100) - commissionWithdrawFixed;
             if (resultMoney == null || resultMoney < profitMoneyForSpecifiedCommission) {
                 resultMoney = profitMoneyForSpecifiedCommission;

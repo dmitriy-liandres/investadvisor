@@ -29,10 +29,10 @@ public class UniTradeLoader extends PammLoader {
 
     static {
         String link = "https://uni-trade.net/registration?par=dima";
-        UNITRADE_INVESTMENT_PLANS.add(new UnitradeInvestmentPlan("Start", 30, 9.5, 1, 25., link));
-        UNITRADE_INVESTMENT_PLANS.add(new UnitradeInvestmentPlan("Index", 91, 12., 3, 100., link));
-        UNITRADE_INVESTMENT_PLANS.add(new UnitradeInvestmentPlan("Gold", 182, 14., 6, 500., link));
-        UNITRADE_INVESTMENT_PLANS.add(new UnitradeInvestmentPlan("Top1", 365, 16.5, 12, 1000., link));
+        UNITRADE_INVESTMENT_PLANS.add(new UnitradeInvestmentPlan("Start", 30., 9.5, 1, 25., link));
+        UNITRADE_INVESTMENT_PLANS.add(new UnitradeInvestmentPlan("Index", 91., 12., 3, 100., link));
+        UNITRADE_INVESTMENT_PLANS.add(new UnitradeInvestmentPlan("Gold", 182., 14., 6, 500., link));
+        UNITRADE_INVESTMENT_PLANS.add(new UnitradeInvestmentPlan("Top1", 365., 16.5, 12, 1000., link));
     }
 
     private static UniTradeLoader instance = new UniTradeLoader();

@@ -1,7 +1,7 @@
 package com.investadvisor.model.startup;
 
 import com.investadvisor.ProvidedParams;
-import com.investadvisor.model.InvestmentTarget;
+import com.investadvisor.model.InvestmentTargetOfferProfit;
 import com.investadvisor.model.InvestmentTargetOfferRisk;
 
 import java.io.IOException;
@@ -10,7 +10,7 @@ import java.io.IOException;
  * Author Dmitriy Liandres
  * Date 05.06.2016
  */
-public class StartupOfferRisk extends InvestmentTargetOfferRisk {
+public class StartupOfferRisk extends InvestmentTargetOfferRisk<Startup, InvestmentTargetOfferProfit> {
     private Boolean attractedRequiredSum;
     private Double avgPercentagePerMonth;
 
@@ -29,8 +29,7 @@ public class StartupOfferRisk extends InvestmentTargetOfferRisk {
     }
 
     @Override
-    public Double calculateAndSetRisk(InvestmentTarget investmentTarget, ProvidedParams providedParams) throws IOException {
-        Startup startup = (Startup) investmentTarget;
+    public Double calculateAndSetRisk(Startup startup, ProvidedParams providedParams, InvestmentTargetOfferProfit investmentTargetOfferProfit) throws IOException {
         Double baseCommission;
         switch (startup.getStartupBroker()) {
 

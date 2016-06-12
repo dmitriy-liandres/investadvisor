@@ -6,13 +6,13 @@ package com.investadvisor.pamm.unitrade.model;
  */
 public class UnitradeInvestmentPlan {
     private String name;
-    private Integer days;
+    private Double days;
     private Integer monthsNumber;
     private Double percentagePerMonth;
     private Double minimalInvestment;
     private String link;
 
-    public UnitradeInvestmentPlan(String name, Integer days, Double percentagePerMonth, Integer monthsNumber, Double minimalInvestment, String link) {
+    public UnitradeInvestmentPlan(String name, Double days, Double percentagePerMonth, Integer monthsNumber, Double minimalInvestment, String link) {
         this.name = name;
         this.days = days;
         this.monthsNumber = monthsNumber;
@@ -45,11 +45,11 @@ public class UnitradeInvestmentPlan {
         this.name = name;
     }
 
-    public Integer getDays() {
+    public Double getDays() {
         return days;
     }
 
-    public void setDays(Integer days) {
+    public void setDays(Double days) {
         this.days = days;
     }
 

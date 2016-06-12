@@ -36,7 +36,7 @@ public class YahooExchangeRates {
         objectMapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
     }
 
-    public static Double convertToUSD(Double value, Currency fromCurrency, Currency toCurrency) throws IOException {
+    public static Double convert(Double value, Currency fromCurrency, Currency toCurrency) throws IOException {
         return loadRates().get(fromCurrency).get(toCurrency) * value;
     }
 

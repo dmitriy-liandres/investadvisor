@@ -2,6 +2,7 @@ package com.investadvisor.hyip.yabankir.model;
 
 import com.investadvisor.ProvidedParams;
 import com.investadvisor.model.InvestmentTarget;
+import com.investadvisor.model.InvestmentTargetOfferProfit;
 import com.investadvisor.model.InvestmentTargetOfferRisk;
 
 import java.io.IOException;
@@ -10,7 +11,7 @@ import java.io.IOException;
  * Author Dmitriy Liandres
  * Date 29.05.2016
  */
-public class YaBankirOfferRisk extends InvestmentTargetOfferRisk {
+public class YaBankirOfferRisk extends InvestmentTargetOfferRisk<InvestmentTarget, InvestmentTargetOfferProfit> {
     /**
      * Risk fo all hypes = 100*percentage per month
      *
@@ -18,7 +19,7 @@ public class YaBankirOfferRisk extends InvestmentTargetOfferRisk {
      */
 
     @Override
-    public Double calculateAndSetRisk(InvestmentTarget investmentTarget, ProvidedParams providedParams) throws IOException {
+    public Double calculateAndSetRisk(InvestmentTarget investmentTarget, ProvidedParams providedParams, InvestmentTargetOfferProfit investmentTargetOfferProfit) throws IOException {
         setTotalRisk(100. * 265 / 12);
         return getTotalRisk();
     }
