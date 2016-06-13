@@ -1,13 +1,10 @@
 package com.investadvisor;
 
 import com.investadvisor.bank.sberbank.SberbankLoader;
-import com.investadvisor.hyip.itcTravel.ItcTravelLoader;
 import com.investadvisor.model.InvestmentTarget;
 import com.investadvisor.model.InvestmentTargetOfferProfit;
 import com.investadvisor.model.pamm.InvestmentTargetOffer;
 import com.investadvisor.model.pamm.Pamm;
-import com.investadvisor.startups.insolt.InsoltStartupLoader;
-import com.investadvisor.startups.shareinstock.ShareInStockLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,7 +42,7 @@ public class Main {
 
        // investmentTargets.addAll( ShareInStockLoader.getInstance().load());
        // investmentTargets.addAll( InsoltStartupLoader.getInstance().load());
-        investmentTargets.addAll( SberbankLoader.getInstance().load());
+        //investmentTargets.addAll( SberbankLoader.getInstance().load());
 
 
         pammLoadersFutureTasks.forEach(pammLoadersFutureTask -> {

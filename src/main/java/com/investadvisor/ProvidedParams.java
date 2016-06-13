@@ -10,6 +10,9 @@ public class ProvidedParams {
     private Currency currency;
     private Integer maxAllowedRisk;
 
+    public ProvidedParams() {
+    }
+
     public ProvidedParams(Double summ, Double periodInDays, Currency currency, Integer maxAllowedRisk) {
         this.summ = summ;
         this.periodInDays = periodInDays;

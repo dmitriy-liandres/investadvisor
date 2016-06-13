@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.investadvisor.Currency;
 import com.investadvisor.exchangerates.model.YahooExchangeRateResponse;
-import com.investadvisor.pamm.fxopen.FxOpenLoader;
+import com.investadvisor.investarget.pamm.fxopen.FxOpenLoader;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

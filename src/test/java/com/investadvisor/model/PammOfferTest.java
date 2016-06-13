@@ -6,8 +6,8 @@ import com.investadvisor.model.pamm.InvestmentTargetOffer;
 import com.investadvisor.model.pamm.Pamm;
 import com.investadvisor.model.pamm.PammOfferProfit;
 import com.investadvisor.model.pamm.PammOfferRisk;
-import com.investadvisor.pamm.fxopen.model.FxOpenPammOfferProfit;
-import com.investadvisor.pamm.fxopen.model.PammOfferFxOpen;
+import com.investadvisor.investarget.pamm.fxopen.model.FxOpenPammOfferProfit;
+import com.investadvisor.investarget.pamm.fxopen.model.PammOfferFxOpen;
 import org.junit.Test;
 
 import java.io.IOException;

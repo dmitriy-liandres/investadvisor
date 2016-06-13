@@ -1,11 +1,11 @@
 git add -A src/main/*
+git add -A *.xml
+git add -A *.bat
+git add -A example.yml
+
 git add -A src/test/*
-git add pom.xml
-git add investadvisor.iml
-git add .idea/workspace.xml
-git add .gitignore
-git add gitAdd.bat
-git add gitCommit.bat
-git add gitPush.bat
+
+git add -A .idea/*
+
 
 git status 

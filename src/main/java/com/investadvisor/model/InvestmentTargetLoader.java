@@ -33,7 +33,9 @@ public abstract class InvestmentTargetLoader<T extends InvestmentTarget> {
      * @return list of investment targets
      * @throws IOException
      */
-    protected abstract List<T> load() throws IOException;
+    public abstract List<T> load() throws IOException;
+
+    public abstract InvestmentTypeName getInvestmentTypeName();
 
     /**
      * Gets match values using provided patterns and text
