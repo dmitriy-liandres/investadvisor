@@ -52,7 +52,7 @@ public class FxOpenLoader extends PammLoader {
             Pamm pamm = new FxOpenPamm();
             pamm.setPammBroker(PammBroker.FXOPEN);
             pamm.setAgeInDays(manager.getDays());
-            pamm.setManagerMoney(manager.getMasterCapital());
+            pamm.setManagerMoney(manager.getMastercapital());
             pamm.setTotalMoney(manager.getBalance());
             pamm.setId(manager.getId());
 

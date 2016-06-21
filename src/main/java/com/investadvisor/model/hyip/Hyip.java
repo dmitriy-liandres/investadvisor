@@ -10,7 +10,7 @@ import com.investadvisor.model.InvestmentType;
 public abstract class Hyip extends InvestmentTarget {
 
     public Hyip(String name) {
-        super(InvestmentType.HYIP, name);
+        super(InvestmentType.HYIP, name, "/хайп/");
     }
 
 

@@ -1,6 +1,7 @@
 package com.investadvisor;
 
 import com.hubspot.dropwizard.guice.GuiceBundle;
+import com.investadvisor.filters.CORSResponseFilter;
 import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
@@ -46,15 +47,17 @@ public class InvestAdvisorApplication extends Application<InvestAdvisorConfigura
         DefaultReaderConfig readerConfig = new DefaultReaderConfig();
         readerConfig.setScanAllResources(true);
 
+        //configure swagger
         BeanConfig beanConfig = new BeanConfig();
         beanConfig.setSchemes(new String[]{"http"});
-        beanConfig.setHost("localhost:8080");
+        beanConfig.setHost("localhost:8083");
         beanConfig.setBasePath("/");
         beanConfig.setResourcePackage("com.investadvisor.resources");
         beanConfig.setScan(true);
         environment.jersey().register(io.swagger.jaxrs.listing.ApiListingResource.class);
         environment.jersey().register(io.swagger.jaxrs.listing.SwaggerSerializers.class);
-        System.out.println("ok");
+
+        environment.jersey().register(CORSResponseFilter.class);
 
     }
 

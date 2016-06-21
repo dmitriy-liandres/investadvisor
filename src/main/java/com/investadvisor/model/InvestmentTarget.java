@@ -15,10 +15,14 @@ public abstract class InvestmentTarget {
 
     private String name;
     private InvestmentType investmentType;
+    private String investmentTypeLink;
 
-    public InvestmentTarget(InvestmentType investmentType, String name) {
+    public InvestmentTarget(InvestmentType investmentType,
+                            String name,
+                            String investmentTypeLink) {
         this.investmentType = investmentType;
         this.name = name;
+        this.investmentTypeLink = investmentTypeLink;
     }
 
     private List<InvestmentTargetOffer> investmentTargetOffers;
@@ -55,6 +59,9 @@ public abstract class InvestmentTarget {
         return name;
     }
 
+    public String getInvestmentTypeLink() {
+        return investmentTypeLink;
+    }
 
     @Override
     public String toString() {

@@ -7,6 +7,7 @@ import com.investadvisor.model.InvestmentTarget;
 import com.investadvisor.model.InvestmentTargetLoader;
 import com.investadvisor.model.InvestmentTypeName;
 import io.dropwizard.servlets.tasks.Task;
+import org.apache.commons.collections.CollectionUtils;
 import org.reflections.Reflections;
 import org.reflections.util.ConfigurationBuilder;
 import org.slf4j.Logger;
@@ -46,14 +47,18 @@ public class ReloadProvidersTask extends Task {
 
     @Override
     public void execute(ImmutableMultimap parameters, PrintWriter output) throws Exception {
-        List<InvestmentTarget> investmentTargetsLocal = new ArrayList<>();
 
+        Collection investmentTargetsToUpdate = parameters.get("investmentTarget");
+
+        List<InvestmentTarget> investmentTargetsLocal = new ArrayList<>();
         List<InvestmentTypeLoaderFuture> loadersFutureTasks = new ArrayList<>();
         for (InvestmentTargetLoader investmentTargetLoader : loaderPerInstanceMap.values()) {
-            InvestmentTypeLoaderFuture investmentTypeLoaderFuture = new InvestmentTypeLoaderFuture(investmentTargetLoader);
-            Thread t = new Thread(investmentTypeLoaderFuture);
-            t.start();
-            loadersFutureTasks.add(investmentTypeLoaderFuture);
+            if(CollectionUtils.isEmpty(investmentTargetsToUpdate) || investmentTargetsToUpdate.contains(investmentTargetLoader.getInvestmentTypeName().name())) {
+                InvestmentTypeLoaderFuture investmentTypeLoaderFuture = new InvestmentTypeLoaderFuture(investmentTargetLoader);
+                Thread t = new Thread(investmentTypeLoaderFuture);
+                t.start();
+                loadersFutureTasks.add(investmentTypeLoaderFuture);
+            }
         }
 
         loadersFutureTasks.forEach(pammLoadersFutureTask -> {

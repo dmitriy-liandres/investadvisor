@@ -24,7 +24,7 @@ public abstract class Pamm extends InvestmentTarget {
     private Double deviation;
 
     public Pamm(String name) {
-        super(InvestmentType.PAMM, name);
+        super(InvestmentType.PAMM, name, "/памм/");
     }
 
 

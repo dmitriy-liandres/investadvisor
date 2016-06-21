@@ -12,7 +12,7 @@ import java.io.IOException;
  */
 public class Bank extends InvestmentTarget {
     public Bank(String name) {
-        super(InvestmentType.BANK, name);
+        super(InvestmentType.BANK, name, "/банк/");
     }
 
     @Override

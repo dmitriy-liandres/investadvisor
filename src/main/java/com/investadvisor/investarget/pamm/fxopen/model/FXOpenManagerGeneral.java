@@ -17,7 +17,7 @@ public class FXOpenManagerGeneral {
     private Double balance;
 
     //manager capital
-    private Double masterCapital;
+    private Double mastercapital;
 
     private Currency currency;
 
@@ -53,12 +53,12 @@ public class FXOpenManagerGeneral {
         this.balance = balance;
     }
 
-    public Double getMasterCapital() {
-        return masterCapital;
+    public Double getMastercapital() {
+        return mastercapital;
     }
 
-    public void setMasterCapital(Double masterCapital) {
-        this.masterCapital = masterCapital;
+    public void setMastercapital(Double mastercapital) {
+        this.mastercapital = mastercapital;
     }
 
     public Currency getCurrency() {

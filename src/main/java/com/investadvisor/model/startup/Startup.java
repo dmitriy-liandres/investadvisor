@@ -12,7 +12,7 @@ public abstract class Startup extends InvestmentTarget {
 
 
     public Startup(String name, StartupBroker startupBroker) {
-        super(InvestmentType.STARTUP, name);
+        super(InvestmentType.STARTUP, name, "/стартап/");
         this.startupBroker = startupBroker;
     }
 
