@@ -11,8 +11,8 @@ public abstract class Startup extends InvestmentTarget {
     private StartupBroker startupBroker;
 
 
-    public Startup(String name, StartupBroker startupBroker) {
-        super(InvestmentType.STARTUP, name, "/стартап/");
+    public Startup(String name, StartupBroker startupBroker, String investmentPartnerLink) {
+        super(InvestmentType.STARTUP, name, "/стартап/", investmentPartnerLink);
         this.startupBroker = startupBroker;
     }
 

@@ -23,8 +23,8 @@ public abstract class Pamm extends InvestmentTarget {
     private Double averageDailyLoss;
     private Double deviation;
 
-    public Pamm(String name) {
-        super(InvestmentType.PAMM, name, "/памм/");
+    public Pamm(String name, String investmentPartnerLink) {
+        super(InvestmentType.PAMM, name, "/памм/", investmentPartnerLink);
     }
 
 

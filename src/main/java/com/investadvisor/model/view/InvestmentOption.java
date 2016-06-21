@@ -7,14 +7,22 @@ import com.investadvisor.model.InvestmentType;
  * Date 21.06.2016
  */
 public class InvestmentOption {
-    private InvestmentType investmentType;
+    private String investmentTypeName;
     private String investmentTypeLink;
     private String investmentPartnerName;
+    private String investmentPartnerLink;
     private String investmentOptionName;
     private Double profitPercentage;
-    private Double profitMoney;
     private Double totalRisk;
     private String detailsLink;
+
+    public String getInvestmentPartnerLink() {
+        return investmentPartnerLink;
+    }
+
+    public void setInvestmentPartnerLink(String investmentPartnerLink) {
+        this.investmentPartnerLink = investmentPartnerLink;
+    }
 
     public String getDetailsLink() {
         return detailsLink;
@@ -24,12 +32,12 @@ public class InvestmentOption {
         this.detailsLink = detailsLink;
     }
 
-    public InvestmentType getInvestmentType() {
-        return investmentType;
+    public String getInvestmentTypeName() {
+        return investmentTypeName;
     }
 
-    public void setInvestmentType(InvestmentType investmentType) {
-        this.investmentType = investmentType;
+    public void setInvestmentTypeName(String investmentTypeName) {
+        this.investmentTypeName = investmentTypeName;
     }
 
     public String getInvestmentTypeLink() {
@@ -64,14 +72,6 @@ public class InvestmentOption {
         this.profitPercentage = profitPercentage;
     }
 
-    public Double getProfitMoney() {
-        return profitMoney;
-    }
-
-    public void setProfitMoney(Double profitMoney) {
-        this.profitMoney = profitMoney;
-    }
-
     public Double getTotalRisk() {
         return totalRisk;
     }
@@ -83,14 +83,14 @@ public class InvestmentOption {
     @Override
     public String toString() {
         return "InvestmentOption{" +
-                "investmentType=" + investmentType +
-                ", investmentTypeLink='" + investmentTypeLink +
-                ", investmentPartnerName='" + investmentPartnerName +
-                ", investmentOptionName='" + investmentOptionName +
+                "investmentTypeName=" + investmentTypeName +
+                ", investmentTypeLink='" + investmentTypeLink + '\'' +
+                ", investmentPartnerName='" + investmentPartnerName + '\'' +
+                ", investmentPartnerLink='" + investmentPartnerLink + '\'' +
+                ", investmentOptionName='" + investmentOptionName + '\'' +
                 ", profitPercentage=" + profitPercentage +
-                ", profitMoney=" + profitMoney +
                 ", totalRisk=" + totalRisk +
-                ", detailsLink=" + detailsLink +
+                ", detailsLink='" + detailsLink + '\'' +
                 '}';
     }
 }

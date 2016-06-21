@@ -50,7 +50,6 @@ public class InvestAdvisorApplication extends Application<InvestAdvisorConfigura
         //configure swagger
         BeanConfig beanConfig = new BeanConfig();
         beanConfig.setSchemes(new String[]{"http"});
-        beanConfig.setHost("localhost:8083");
         beanConfig.setBasePath("/");
         beanConfig.setResourcePackage("com.investadvisor.resources");
         beanConfig.setScan(true);

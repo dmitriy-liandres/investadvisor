@@ -31,7 +31,7 @@ public class Vtb24loader extends InvestmentTargetLoader<Bank> {
         List<Bank> banks = new ArrayList<>();
         //add offer in usd
 
-        Bank sperbank = new Bank("ВТБ");
+        Bank sperbank = new Bank("ВТБ", "/втб");
 
         //RUB
         sperbank.addOffer(new InvestmentTargetOffer("Комфортный (Интернет)", 100_000., 699_999., 181., 394., 0., "http://www.vtb24.ru/personal/savings/deposits-calc/comfort/Pages/default.aspx#", Currency.RUB, null, new BankOfferRisk(0.15), new BankOfferProfit(true, 4.5)));

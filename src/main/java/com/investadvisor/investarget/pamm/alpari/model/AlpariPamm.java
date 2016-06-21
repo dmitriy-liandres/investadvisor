@@ -13,7 +13,7 @@ import java.io.IOException;
 public class AlpariPamm extends Pamm {
 
     public AlpariPamm() {
-        super("Alpari");
+        super("Alpari", "/alpari");
     }
 
     @Override

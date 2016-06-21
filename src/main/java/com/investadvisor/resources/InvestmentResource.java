@@ -58,12 +58,12 @@ public class InvestmentResource {
 
                     offer.getInvestmentTargetOfferRisk().calculateAndSetRisk(investmentTarget, providedParams, investmentTargetOfferProfit);
                     InvestmentOption investmentOption = new InvestmentOption();
-                    investmentOption.setInvestmentType(investmentTarget.getInvestmentType());
+                    investmentOption.setInvestmentTypeName(investmentTarget.getInvestmentType().getName());
                     investmentOption.setInvestmentTypeLink(investmentTarget.getInvestmentTypeLink());
                     investmentOption.setInvestmentPartnerName(investmentTarget.getName());
+                    investmentOption.setInvestmentPartnerLink(investmentTarget.getInvestmentPartnerLink());
                     investmentOption.setInvestmentOptionName(offer.getName());
                     investmentOption.setProfitPercentage(offer.getInvestmentTargetOfferProfit().getProfitPercentage());
-                    investmentOption.setProfitMoney(offer.getInvestmentTargetOfferProfit().getProfitMoney());
                     investmentOption.setTotalRisk(offer.getInvestmentTargetOfferRisk().getTotalRisk());
                     investmentOption.setDetailsLink(offer.getLink());
                     result.add(investmentOption);

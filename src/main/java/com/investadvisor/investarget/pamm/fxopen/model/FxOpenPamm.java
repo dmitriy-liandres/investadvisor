@@ -13,7 +13,7 @@ import java.io.IOException;
 public class FxOpenPamm extends Pamm {
 
     public FxOpenPamm() {
-        super("fxopen");
+        super("fxopen", "/fxopen");
     }
 
     @Override

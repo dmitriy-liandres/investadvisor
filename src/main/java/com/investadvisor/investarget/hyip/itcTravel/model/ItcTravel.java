@@ -11,7 +11,7 @@ import java.io.IOException;
  */
 public class ItcTravel extends Hyip {
     public ItcTravel() {
-        super("itc-travel");
+        super("itc-travel", "/itc-travel");
     }
 
     @Override

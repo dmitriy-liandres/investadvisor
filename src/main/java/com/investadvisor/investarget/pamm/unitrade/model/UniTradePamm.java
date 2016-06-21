@@ -1,6 +1,7 @@
 package com.investadvisor.investarget.pamm.unitrade.model;
 
 import com.investadvisor.Currency;
+import com.investadvisor.model.InvestmentType;
 import com.investadvisor.model.pamm.Pamm;
 
 import java.io.IOException;
@@ -12,7 +13,9 @@ import java.io.IOException;
 public class UniTradePamm extends Pamm {
 
     public UniTradePamm() {
-        super("uni-trade");
+        super("uni-trade", "/uni-trade");
+        setInvestmentTypeLink("/доверительное-управление");
+        setInvestmentType(InvestmentType.TRUST_MANAGEMENT);
     }
 
     @Override

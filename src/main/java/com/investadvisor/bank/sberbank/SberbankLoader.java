@@ -32,7 +32,7 @@ public class SberbankLoader extends InvestmentTargetLoader<Bank> {
         List<Bank> banks = new ArrayList<>();
         //add offer in usd
 
-        Bank sperbank = new Bank("Sberbank");
+        Bank sperbank = new Bank("Sberbank", "/сбербанк");
 
         //RUB
         sperbank.addOffer(new InvestmentTargetOffer("Сохраняй", 1000., 100000., Constants.DAYS_PER_MONTH, Constants.DAYS_PER_MONTH * 2, 0., "http://sberbank.ru/ru/person/contributions/deposits/save", Currency.RUB, null, new BankOfferRisk(0.1), new BankOfferProfit(true, 5.5)));

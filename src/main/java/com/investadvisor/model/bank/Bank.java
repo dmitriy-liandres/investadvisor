@@ -11,8 +11,8 @@ import java.io.IOException;
  * Date 06.06.2016
  */
 public class Bank extends InvestmentTarget {
-    public Bank(String name) {
-        super(InvestmentType.BANK, name, "/банк/");
+    public Bank(String name, String investmentPartnerLink) {
+        super(InvestmentType.BANK, name, "/банк/", investmentPartnerLink);
     }
 
     @Override

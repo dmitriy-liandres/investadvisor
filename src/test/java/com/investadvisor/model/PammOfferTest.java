@@ -124,7 +124,7 @@ public class PammOfferTest {
     }
 
     private Pamm generatePamm() {
-        return new Pamm("name") {
+        return new Pamm("name", "investmentPartnerLink") {
 
             @Override
             public Double getCommissionEnterPercentage() {
