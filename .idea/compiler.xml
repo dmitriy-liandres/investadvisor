@@ -31,10 +31,18 @@
         <processorPath useClasspath="true" />
         <module name="investadvisor" />
       </profile>
+      <profile default="false" name="Annotation profile for toolformoney" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="toolformoney" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="autobiography" target="1.8" />
       <module name="investadvisor" target="1.8" />
+      <module name="toolformoney" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

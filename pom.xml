@@ -6,7 +6,7 @@
         <maven>3.0.0</maven>
     </prerequisites>
 
-    <groupId>com.investadvisor</groupId>
+    <groupId>com.toolformoney</groupId>
     <artifactId>service</artifactId>
     <name>Invest Advisor Application</name>
     <version>0.0.1-SNAPSHOT</version>
@@ -48,6 +48,12 @@
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-core</artifactId>
             <version>${dropwizard.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>io.dropwizard</groupId>
@@ -305,8 +311,21 @@
                     <groupId>org.javassist</groupId>
                     <artifactId>javassist</artifactId>
                 </exclusion>
+
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.6.4</version>
+        </dependency>
+
 
     </dependencies>
 
@@ -394,7 +413,7 @@
                                         implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.investadvisor.InvestAdvisorApplication</mainClass>
+                                    <mainClass>com.toolformoney.ToolForMoneyApplication</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
