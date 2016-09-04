@@ -55,7 +55,7 @@ public class ItcTravelLoader extends InvestmentTargetLoader<ItcTravel> {
 
     @Override
     public InvestmentTypeName getInvestmentTypeName() {
-        return InvestmentTypeName.ITC_TRAVEL;
+        return null;
     }
 }
 

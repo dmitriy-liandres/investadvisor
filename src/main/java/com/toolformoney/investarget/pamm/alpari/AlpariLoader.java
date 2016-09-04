@@ -20,10 +20,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Loads Pamms for alpari.ru
@@ -126,12 +123,22 @@ public class AlpariLoader extends PammLoader {
                 Elements commissions = linesWithCommission.get(1).children();
                 char[] spaceChar = {160};
                 String spaceCharStr = new String(spaceChar);
+
+                List<Map.Entry<Double, Double>> minBalanceCommissionPairs = new ArrayList<>();
+
                 for (int i = 1; i < minBalances.size(); i++) {
                     Double minBalance = Double.valueOf(minBalances.get(i).text().replace(spaceCharStr, "").trim());
                     Double commission = Double.valueOf(commissions.get(i).text().replace("%", "").trim());
-                    InvestmentTargetOffer investmentTargetOffer = new InvestmentTargetOffer(namePerPamm.get(pamm.getId()), minBalance, null, 1., null, commission, "http://www.alpari.ru/ru/investor/pamm/" + pamm.getId() + "/?partner_id=1231285", currencyPerPamm.get(pamm.getId()), avgChange, new PammOfferRisk(), new PammOfferProfit());
+                    minBalanceCommissionPairs.add(new AbstractMap.SimpleEntry<>(minBalance, commission));
+                }
+                for(int i=0;i<minBalanceCommissionPairs.size();i++) {
+                    Double minBalance = minBalanceCommissionPairs.get(i).getKey();
+                    Double commission = minBalanceCommissionPairs.get(i).getValue();
+                    Double maxBalance = i == minBalanceCommissionPairs.size() - 1 ? null : minBalanceCommissionPairs.get(i + 1).getKey();
+                    InvestmentTargetOffer investmentTargetOffer = new InvestmentTargetOffer(namePerPamm.get(pamm.getId()), minBalance, maxBalance, 1., null, commission, "http://www.alpari.ru/ru/investor/pamm/" + pamm.getId() + "/?partner_id=1231285", currencyPerPamm.get(pamm.getId()), avgChange, new PammOfferRisk(), new PammOfferProfit());
                     pamm.addOffer(investmentTargetOffer);
                 }
+
 
                 logger.info("Finish overwork pamm {}", pamm);
                 filledPamms.add(pamm);

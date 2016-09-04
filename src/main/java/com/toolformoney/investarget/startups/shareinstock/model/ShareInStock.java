@@ -12,7 +12,7 @@ import java.io.IOException;
  */
 public class ShareInStock extends Startup {
     public ShareInStock() {
-        super("shareinstock" , StartupBroker.SHARE_IN_STOCK, "/vklady-investitsii/startap/shareinstock/");
+        super("shareinstock" , StartupBroker.SHARE_IN_STOCK, "/vklady-investitsii/startup/shareinstock/");
     }
 
     @Override

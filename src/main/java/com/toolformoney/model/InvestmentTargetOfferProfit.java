@@ -39,7 +39,7 @@ public abstract class InvestmentTargetOfferProfit {
      * @return true if investmentTarget suits user, false otherwise
      * @throws Exception
      */
-    public Boolean calculateProfit(InvestmentTarget investmentTarget, ProvidedParams providedParams) throws Exception {
+    public Boolean calculateProfit(InvestmentTarget investmentTarget, InvestmentTargetOffer investmentTargetOffer, ProvidedParams providedParams) throws Exception {
 
         //calculate commission
         Double commissionEnterPercentage = investmentTarget.getCommissionEnterPercentage();
@@ -52,32 +52,24 @@ public abstract class InvestmentTargetOfferProfit {
         Double investedMoney = providedParams.getSumm() * (1 - commissionEnterPercentage / 100) - commissionEnterFixed;
 
         Double resultMoney = null;
-        //select the best offer
-        for (InvestmentTargetOffer investmentTargetOffer : investmentTarget.getInvestmentTargetOffers()) {
-            if (investmentTargetOffer.getMinInvestment() > investedMoney
-                    || (investmentTargetOffer.getMaxInvestment() != null && investmentTargetOffer.getMaxInvestment() < investedMoney)
-                    || investmentTargetOffer.getMinPeriodInDays() > providedParams.getPeriodInDays()
-                    || (investmentTargetOffer.getMaxPeriodInDays() != null && investmentTargetOffer.getMaxPeriodInDays() < providedParams.getPeriodInDays())
-                    || investmentTargetOffer.getCurrency() != providedParams.getCurrency()) {
-                continue;
-            }
+        //check whether offer fits
 
-            Double calculatedFinalResultAfterMangerCommission = calculateProfitAfterMangerCommission(investmentTarget, investmentTargetOffer, providedParams);
-
-            Double profitMoneyForSpecifiedCommission = investedMoney * (calculatedFinalResultAfterMangerCommission - 1);
-
-            //let's take into consideration that user loses money when he withdraws money
-            profitMoneyForSpecifiedCommission = profitMoneyForSpecifiedCommission * (1 - commissionWithdrawPercentage / 100) - commissionWithdrawFixed;
-            if (resultMoney == null || resultMoney < profitMoneyForSpecifiedCommission) {
-                resultMoney = profitMoneyForSpecifiedCommission;
-            }
-
-
-        }
-        if (resultMoney == null) {
-            //no suitable commission
+        if (investmentTargetOffer.getMinInvestment() > investedMoney
+                || (investmentTargetOffer.getMaxInvestment() != null && investmentTargetOffer.getMaxInvestment() < investedMoney)
+                || investmentTargetOffer.getMinPeriodInDays() > providedParams.getPeriodInDays()
+                || (investmentTargetOffer.getMaxPeriodInDays() != null && investmentTargetOffer.getMaxPeriodInDays() < providedParams.getPeriodInDays())
+                || investmentTargetOffer.getCurrency() != providedParams.getCurrency()) {
             return false;
         }
+
+        Double calculatedFinalResultAfterMangerCommission = calculateProfitAfterMangerCommission(investmentTarget, investmentTargetOffer, providedParams);
+
+        Double profitMoneyForSpecifiedCommission = investedMoney * (calculatedFinalResultAfterMangerCommission - 1);
+
+        //let's take into consideration that user loses money when he withdraws money
+        profitMoneyForSpecifiedCommission = profitMoneyForSpecifiedCommission * (1 - commissionWithdrawPercentage / 100) - commissionWithdrawFixed;
+
+        resultMoney = profitMoneyForSpecifiedCommission;
 
         setProfitMoney(resultMoney);
         //we decrease on 100 to get net profit

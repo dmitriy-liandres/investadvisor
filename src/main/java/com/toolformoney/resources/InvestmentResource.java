@@ -52,7 +52,7 @@ public class InvestmentResource {
             for (InvestmentTargetOffer offer : investmentTarget.getInvestmentTargetOffers()) {
 
                 InvestmentTargetOfferProfit investmentTargetOfferProfit = offer.getInvestmentTargetOfferProfit();
-                Boolean isSuitsUser = investmentTargetOfferProfit.calculateProfit(investmentTarget, providedParams);
+                Boolean isSuitsUser = investmentTargetOfferProfit.calculateProfit(investmentTarget, offer, providedParams);
                 if (isSuitsUser) {
                     logger.info("investmentTarget = {}, offer = {} ", investmentTarget, offer);
 

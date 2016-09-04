@@ -10,10 +10,10 @@ public enum InvestmentTypeName {
     //BANKS
     BANK_MOSKVY, SBERBANK, VTB_24,
     //HYIP
-    ITC_TRAVEL,
+
     //STARTUPS
     SHARE_IN_STOCK, INSOLT_STARTUP
 
 
-    //NOTE, YA_BANKIR - died
+    //NOTE, YA_BANKIR - died, ITC_TRAVEL - died
 }
