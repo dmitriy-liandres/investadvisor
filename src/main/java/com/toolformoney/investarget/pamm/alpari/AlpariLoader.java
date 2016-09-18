@@ -2,10 +2,12 @@ package com.toolformoney.investarget.pamm.alpari;
 
 import com.google.inject.Singleton;
 import com.toolformoney.Currency;
+import com.toolformoney.investarget.pamm.DailyChange;
 import com.toolformoney.investarget.pamm.alpari.model.AlpariPamm;
 import com.toolformoney.investarget.pamm.alpari.model.PAMMAlpariGeneral;
 import com.toolformoney.model.InvestmentTypeName;
 import com.toolformoney.model.pamm.*;
+import com.toolformoney.utils.Constants;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.jsoup.Jsoup;
@@ -21,6 +23,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Loads Pamms for alpari.ru
@@ -78,7 +81,7 @@ public class AlpariLoader extends PammLoader {
 
         logger.info("Finish download all Alpari pamm managers");
         LocalDate now = LocalDate.now();
-        String nowFormatted = now.format(dateFormatter);
+        LocalDate nowMinusYear = now.minusDays(Constants.DAYS_PER_YEAR.longValue());
         //load data per each pamm
         for (Pamm pamm : pamms) {
             try {
@@ -91,15 +94,12 @@ public class AlpariLoader extends PammLoader {
                 Iterable<CSVRecord> records = CSVFormat.EXCEL.withDelimiter(';').parse(in);
 
                 //only work days are returned
-                List<Double> changes = new ArrayList<>();
+                List<DailyChange> changes = new ArrayList<>();
 
-                Double totalIncreaseInPercents = 0.;
                 for (CSVRecord record : records) {
                     String date = record.get(0);
-                    if (date.equals(nowFormatted)) {
-                        break;
+                    LocalDate localDate = LocalDate.parse(date, dateFormatter);
 
-                    }
                     Double open = Double.valueOf(record.get(1));
                     Double close = Double.valueOf(record.get(4));
                     Double depositLoad = Double.valueOf(record.get(6));
@@ -111,10 +111,9 @@ public class AlpariLoader extends PammLoader {
                     //if open == -100, it means, that account was closed, but let's calculate next way
                     Double change = open == -100 ? -100 : (close - open) * 100 / (open + 100);
 
-                    changes.add(change);
-                    totalIncreaseInPercents = close;
+                    changes.add(new DailyChange(localDate, change));
                 }
-                Double avgChange = addChangesToPamm(changes, totalIncreaseInPercents, pamm);
+                Double avgChange = addChangesToPamm(changes, pamm);
 
                 //let's load commissions
                 Document doc = Jsoup.connect("http://www.alpari.ru/ru/investor/pamm/" + pamm.getId()).timeout(30000).get();

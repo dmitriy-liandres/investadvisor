@@ -2,6 +2,7 @@ package com.toolformoney.investarget.pamm.alfaForex;
 
 import com.google.inject.Singleton;
 import com.toolformoney.Currency;
+import com.toolformoney.investarget.pamm.DailyChange;
 import com.toolformoney.investarget.pamm.alfaForex.model.AlfaForexPamm;
 import com.toolformoney.investarget.pamm.alfaForex.model.PammAlfaForexManagerMoney;
 import com.toolformoney.investarget.pamm.alfaForex.model.PammAlfaForexManagerMoneyResultItem;
@@ -39,6 +40,7 @@ import java.util.regex.Pattern;
  * Date 24.05.2016
  */
 @Singleton
+//todo not loaded
 public class AlfaForexLoader extends PammLoader {
     private static final Logger logger = LoggerFactory.getLogger(AlfaForexLoader.class);
 
@@ -154,10 +156,8 @@ public class AlfaForexLoader extends PammLoader {
                 Map<String, Double> depositLoadPerDate = new HashMap<>();
                 pammAlfaForexdeDepositLoad.getResult().forEach(depositLoad -> depositLoadPerDate.put(depositLoad.getDate(), depositLoad.getValue()));
 
-                List<Double> changes = new ArrayList<>();
+                List<DailyChange> changes = new ArrayList<>();
                 final Double[] previousValue = {0.};
-
-                Double totalIncreaseInPercents = 0.;
 
                 for (PammAlfaForexManagerMoneyResultItem resultItem : pammAlfaForexManagerMoney.getResult()) {
                     if (depositLoadPerDate.get(resultItem.getDate()) == 0.) {
@@ -166,12 +166,13 @@ public class AlfaForexLoader extends PammLoader {
                     }
                     //if resultItem.getValue() == -100, it means, that account was closed, but let's calculate next way
                     Double change = resultItem.getValue() == -100 ? -100 : (resultItem.getValue() - previousValue[0]) * 100 / (previousValue[0] + 100);
-                    changes.add(change);
+                    LocalDate localDate = LocalDate.parse(resultItem.getDate(), dateFormatter);
+
+                    changes.add(new DailyChange(localDate, change));
                     previousValue[0] = resultItem.getValue();
-                    totalIncreaseInPercents = resultItem.getValue();
                 }
 
-                Double avgChange = addChangesToPamm(changes, totalIncreaseInPercents, pamm);
+                Double avgChange = addChangesToPamm(changes, pamm);
 
                 //load commissions
                 Document doc = Jsoup.connect("https://my.alfa-forex.ru/public/pamm/view/" + id + "#offer").timeout(30000).get();

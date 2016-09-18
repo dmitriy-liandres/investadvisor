@@ -1,10 +1,14 @@
 package com.toolformoney.model.pamm;
 
+import com.toolformoney.investarget.pamm.DailyChange;
 import com.toolformoney.model.InvestmentTargetLoader;
+import com.toolformoney.utils.Constants;
 import org.apache.commons.collections4.CollectionUtils;
 
+import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Base class for all Pamm loaders
@@ -16,32 +20,42 @@ public abstract class PammLoader extends InvestmentTargetLoader<Pamm> {
     /**
      * Calculate all required params and set values to Pamm
      *
-     * @param changes                 list with changes
-     * @param totalIncreaseInPercents total change for all work time. 13 means that at the end manager had start value * 1.13
-     * @param pamm                    pamm to which we should set values
+     * @param changes list with changes
+     * @param pamm    pamm to which we should set values
      * @return avgChange
      */
-    protected Double addChangesToPamm(List<Double> changes, Double totalIncreaseInPercents, Pamm pamm) {
+    protected Double addChangesToPamm(List<DailyChange> changes, Pamm pamm) {
+        Double resultedRelativeValue = 1.;
+        LocalDate now = LocalDate.now();
+        LocalDate nowMinusYear = now.minusDays(Constants.DAYS_PER_YEAR.longValue());
+        //filter changes: we don't want to take into consideration today's result as day is not finished and we don't take into consideration results which were more than a year ago
+        changes = changes.stream().filter(change->!change.getDate().isEqual(now) && !change.getDate().isBefore(nowMinusYear)).collect(Collectors.toList());
+
+        for (DailyChange change : changes) {
+            resultedRelativeValue = resultedRelativeValue * (1 + change.getChange() / 100);
+        }
+
         Double lossDaysNumber = 0.;
         Double maxDailyLoss = 0.;
         Double sumDailyLoss = 0.;
         Double deviation;
 
-        for (Double change : changes) {
-            if (change < 0) {
+        for (DailyChange change : changes) {
+            if (change.getChange() < 0) {
                 lossDaysNumber++;
-                if (maxDailyLoss > change) {
-                    maxDailyLoss = change;
+                if (maxDailyLoss > change.getChange()) {
+                    maxDailyLoss = change.getChange();
                 }
-                sumDailyLoss += change;
+                sumDailyLoss += change.getChange();
             }
         }
 
         //calc deviation
+        Integer ageInDays = Math.min(Constants.DAYS_PER_YEAR.intValue(), pamm.getAgeInDays());
 
-        Double avgChangePerAllDays = (Math.pow(totalIncreaseInPercents / 100 + 1, 1. / pamm.getAgeInDays()) - 1) * 100;
-        Double avgChangePerWorkDays = (Math.pow(totalIncreaseInPercents / 100 + 1, 1. / changes.size()) - 1) - 1;
-        Double changeSquaresSum = changes.stream().mapToDouble(value -> (value - avgChangePerWorkDays) * (value - avgChangePerWorkDays)).sum();
+        Double avgChangePerAllDays = (Math.pow(resultedRelativeValue, 1. / ageInDays) - 1) * 100;
+        Double avgChangePerWorkDays = (Math.pow(resultedRelativeValue, 1. / changes.size()) - 1) - 1;
+        Double changeSquaresSum = changes.stream().mapToDouble(value -> (value.getChange() - avgChangePerWorkDays) * (value.getChange() - avgChangePerWorkDays)).sum();
         deviation = Math.sqrt(changeSquaresSum / changes.size());
 
         //if values can't be calculates, let's use 2%

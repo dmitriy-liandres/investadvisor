@@ -2,6 +2,7 @@ package com.toolformoney.investarget.pamm.insolt;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.inject.Singleton;
+import com.toolformoney.investarget.pamm.DailyChange;
 import com.toolformoney.model.InvestmentTypeName;
 import com.toolformoney.model.pamm.Pamm;
 import com.toolformoney.model.pamm.PammBroker;
@@ -38,6 +39,7 @@ public class InsoltLoader extends PammLoader {
 
     private static final Logger logger = LoggerFactory.getLogger(InsoltLoader.class);
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    DateTimeFormatter dateFormatterLocal = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static final List<InsoltInvestmentPlan> INSOLT_INVESTMENT_PLANS = new ArrayList<>();
 
     //fetches income
@@ -113,23 +115,22 @@ public class InsoltLoader extends PammLoader {
             LocalDate now = LocalDate.now();
 
             String startDateStr = insoltInvestmentPlan.getStartDate();
-            LocalDate localDate = LocalDate.parse(startDateStr, dateFormatter);
-            pamm.setAgeInDays((int) ChronoUnit.DAYS.between(localDate, now));
+            LocalDate localDateStart = LocalDate.parse(startDateStr, dateFormatter);
+            pamm.setAgeInDays((int) ChronoUnit.DAYS.between(localDateStart, now));
             pamm.setTotalMoney(Double.valueOf(totalMoneyText));
             pamm.setManagerMoney(pamm.getTotalMoney() / 10);  //we can't get more accurate data
             pamm.setId(String.valueOf(pamms.size() + 1));
 
-            List<Double> changes = new ArrayList<>();
+            List<DailyChange> changes = new ArrayList<>();
             Double previousValue = 0.;
-            Double totalIncreaseInPercents = 0.;
             for (InsoltGraphData insoltGraphDataOneWeek : insoltGraphData) {
                 Double change = (insoltGraphDataOneWeek.getValue() - previousValue) * 100 / (previousValue + 100);
-                changes.add(change);
+                LocalDate localDate = LocalDate.parse(insoltGraphDataOneWeek.getDate(), dateFormatterLocal);
+                changes.add(new DailyChange(localDate, change));
                 previousValue = insoltGraphDataOneWeek.getValue();
-                totalIncreaseInPercents = insoltGraphDataOneWeek.getValue();
 
             }
-            Double avgChange = addChangesToPamm(changes, totalIncreaseInPercents, pamm);
+            Double avgChange = addChangesToPamm(changes, pamm);
 
             PammOfferInsolt pammOffer = new PammOfferInsolt(insoltInvestmentPlan, avgChange);
             pamm.addOffer(pammOffer);

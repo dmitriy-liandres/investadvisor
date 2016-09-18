@@ -72,7 +72,11 @@ public class InvestmentResource {
         }
         //filter by max allowed risk
         result = result.stream().filter(investmentOption -> investmentOption.getTotalRisk() <= providedParams.getMaxAllowedRisk()).collect(Collectors.toList());
-        result.sort((investmentOption1, investmentOption2) -> investmentOption1.getTotalRisk().compareTo(investmentOption2.getTotalRisk()));
+        //filter by profit >=0
+        result = result.stream().filter(investmentOption -> investmentOption.getProfitPercentage() >= 0).collect(Collectors.toList());
+        result.sort((investmentOption1, investmentOption2) -> -investmentOption1.getProfitPercentage().compareTo(investmentOption2.getProfitPercentage()));
+
+
         return result;
 
     }
