@@ -5,6 +5,7 @@ import com.toolformoney.InvestmentTargets;
 import com.toolformoney.ProvidedParams;
 import com.toolformoney.model.InvestmentTarget;
 import com.toolformoney.model.InvestmentTargetOfferProfit;
+import com.toolformoney.model.InvestmentType;
 import com.toolformoney.model.pamm.InvestmentTargetOffer;
 import com.toolformoney.model.view.InvestmentOption;
 import io.swagger.annotations.Api;
@@ -49,6 +50,7 @@ public class InvestmentResource {
         List<InvestmentOption> result = new ArrayList<>();
         //broker coefficient
         for (InvestmentTarget investmentTarget : investmentTargets) {
+            List<InvestmentOption> investmentOptionsPerTarget = new ArrayList<>();
             for (InvestmentTargetOffer offer : investmentTarget.getInvestmentTargetOffers()) {
 
                 InvestmentTargetOfferProfit investmentTargetOfferProfit = offer.getInvestmentTargetOfferProfit();
@@ -66,8 +68,15 @@ public class InvestmentResource {
                     investmentOption.setProfitPercentage(offer.getInvestmentTargetOfferProfit().getProfitPercentage());
                     investmentOption.setTotalRisk(offer.getInvestmentTargetOfferRisk().getTotalRisk());
                     investmentOption.setDetailsLink(offer.getLink());
-                    result.add(investmentOption);
+                    investmentOptionsPerTarget.add(investmentOption);
                 }
+            }
+            //For Pamm we need not more than 1 offer per target
+            if (investmentTarget.getInvestmentType() == InvestmentType.PAMM && investmentOptionsPerTarget.size() > 0) {
+                //get only one offer per target
+                result.add(investmentOptionsPerTarget.stream().max((io1, io2) -> io1.getProfitPercentage().compareTo(io2.getProfitPercentage())).get());
+            } else {
+                result.addAll(investmentOptionsPerTarget);
             }
         }
         //filter by max allowed risk

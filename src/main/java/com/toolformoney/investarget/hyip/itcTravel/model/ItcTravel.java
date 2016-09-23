@@ -6,6 +6,7 @@ import com.toolformoney.model.hyip.Hyip;
 import java.io.IOException;
 
 /**
+ * PAY ATTENTION: COMISSION IS NOT CORRECT
  * Author Dmitriy Liandres
  * Date 29.05.2016
  */
@@ -21,7 +22,7 @@ public class ItcTravel extends Hyip {
 
     @Override
     public Double getCommissionWithdrawPercentage() {
-        return 0.;//todo no defined yet
+        return 0.;
     }
 
     @Override

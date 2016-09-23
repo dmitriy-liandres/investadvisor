@@ -16,14 +16,9 @@ import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -40,7 +35,6 @@ import java.util.regex.Pattern;
  * Date 24.05.2016
  */
 @Singleton
-//todo not loaded
 public class AlfaForexLoader extends PammLoader {
     private static final Logger logger = LoggerFactory.getLogger(AlfaForexLoader.class);
 
@@ -62,6 +56,7 @@ public class AlfaForexLoader extends PammLoader {
     Pattern CURRENCY_PATTERN = Pattern.compile("th_currency_tbody\">(.*?)</td>");
 
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    DateTimeFormatter dateFormatterPamm = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public List<Pamm> load() throws IOException {
         logger.info("Download all Alfa forex managers");
@@ -99,106 +94,108 @@ public class AlfaForexLoader extends PammLoader {
 
             //let's overwork manages one by one
             while (managersMather.find()) {
-                String managerBlock = managersMather.group(1).replaceAll("RUR", "RUB");
+                try {
+                    String managerBlock = managersMather.group(1).replaceAll("RUR", "RUB");
 
-                String id = getMatchValue(ID_PATTERN, managerBlock);
+                    String id = getMatchValue(ID_PATTERN, managerBlock);
 
-                logger.info("Start load AlfaForex manager details, pammId = {}", id);
+                    logger.info("Start load AlfaForex manager details, pammId = {}", id);
 
-                String name = getMatchValue(NAME_PATTERN, managerBlock);
-                Integer ageInDays = Integer.valueOf(getMatchValue(AGE_PATTERN, managerBlock));
-                Double totalMoney = Double.valueOf(getMatchValue(TOTAL_MONEY_PATTERN, managerBlock));
-                Currency currency = Currency.valueOf(getMatchValue(CURRENCY_PATTERN, managerBlock));
+                    String name = getMatchValue(NAME_PATTERN, managerBlock);
+                    Integer ageInDays = Integer.valueOf(getMatchValue(AGE_PATTERN, managerBlock));
+                    Double totalMoney = Double.valueOf(getMatchValue(TOTAL_MONEY_PATTERN, managerBlock));
+                    Currency currency = Currency.valueOf(getMatchValue(CURRENCY_PATTERN, managerBlock));
 
-                Pamm pamm = new AlfaForexPamm();
-                pamm.setPammBroker(PammBroker.ALFA_FOREX);
-                pamm.setId(id);
-                pamm.setAgeInDays(ageInDays);
-                pamm.setTotalMoney(totalMoney);
+                    Pamm pamm = new AlfaForexPamm();
+                    pamm.setPammBroker(PammBroker.ALFA_FOREX);
+                    pamm.setId(id);
+                    pamm.setAgeInDays(ageInDays);
+                    pamm.setTotalMoney(totalMoney);
 
-                if (!isCsrfTokenLoad) {
-                    //we have to load csrf token and cookie to load json data in next requests
-                    logger.info("Load cookies and csrf");
-                    URL urlBase = new URL("https://my.alfa-forex.ru/public/pamm/view/" + id);
-                    HttpURLConnection conBase = (HttpURLConnection) urlBase.openConnection();
-                    conBase.setRequestMethod("GET");
-                    cookies = conBase.getHeaderField("Set-Cookie");
-                    String responseBase = IOUtils.toString(conBase.getInputStream(), "UTF-8");
-                    csrfToken = getMatchValue(CSRF_TOKEN_PATTERN, responseBase);
-                    logger.info("Cookies and csrf loaded: cookies = {}, csrfToken={}", cookies, csrfToken);
-                    isCsrfTokenLoad = true;
-                }
-
-
-                logger.info("load manager money, pammId = {}", pamm.getId());
-
-                LocalDate now = LocalDate.now();
-                LocalDate yesterday = now.minusDays(1);
-                LocalDate dayBeforeYesterday = now.minusDays(2);
-                LocalDate firstWorkDate = now.minusDays(pamm.getAgeInDays());
-
-                String yesterdayText = yesterday.format(dateFormatter);
-                String dayBeforeYesterdayText = dayBeforeYesterday.format(dateFormatter);
-                String firstWorkDateText = firstWorkDate.format(dateFormatter);
-
-                //to get investor money we have to send separate request
-                PammAlfaForexManagerMoney pammAlfaForexManagerMoney = createHttpURLConnectionForSecuredPost
-                        ("https://my.alfa-forex.ru/pamm/account-public/chart-data?id=" + id + "&type=capitalChart", "dateFrom=" + dayBeforeYesterdayText + "&dateTo=" + yesterdayText, cookies, csrfToken, PammAlfaForexManagerMoney.class);
-                pamm.setManagerMoney(pammAlfaForexManagerMoney.getResult().get(0).getValue());
-
-                //let's load changes
-                pammAlfaForexManagerMoney = createHttpURLConnectionForSecuredPost
-                        ("https://my.alfa-forex.ru/pamm/account-public/chart-data?id=" + id + "&type=profitChart", "dateFrom=" + firstWorkDateText + "&dateTo=" + yesterdayText, cookies, csrfToken, PammAlfaForexManagerMoney.class);
-
-                //let's load deposit load
-                PammAlfaForexManagerMoney pammAlfaForexdeDepositLoad = createHttpURLConnectionForSecuredPost
-                        ("https://my.alfa-forex.ru/pamm/account-public/chart-data?id=" + id + "&type=loadingChart", "dateFrom=" + firstWorkDateText + "&dateTo=" + yesterdayText, cookies, csrfToken, PammAlfaForexManagerMoney.class);
-                Map<String, Double> depositLoadPerDate = new HashMap<>();
-                pammAlfaForexdeDepositLoad.getResult().forEach(depositLoad -> depositLoadPerDate.put(depositLoad.getDate(), depositLoad.getValue()));
-
-                List<DailyChange> changes = new ArrayList<>();
-                final Double[] previousValue = {0.};
-
-                for (PammAlfaForexManagerMoneyResultItem resultItem : pammAlfaForexManagerMoney.getResult()) {
-                    if (depositLoadPerDate.get(resultItem.getDate()) == 0.) {
-                        //no deposit load, no need to calculate
-                        continue;
+                    if (!isCsrfTokenLoad) {
+                        //we have to load csrf token and cookie to load json data in next requests
+                        logger.info("Load cookies and csrf");
+                        URL urlBase = new URL("https://my.alfa-forex.ru/public/pamm/view/" + id);
+                        HttpURLConnection conBase = (HttpURLConnection) urlBase.openConnection();
+                        conBase.setRequestMethod("GET");
+                        cookies = conBase.getHeaderField("Set-Cookie");
+                        String responseBase = IOUtils.toString(conBase.getInputStream(), "UTF-8");
+                        csrfToken = getMatchValue(CSRF_TOKEN_PATTERN, responseBase);
+                        logger.info("Cookies and csrf loaded: cookies = {}, csrfToken={}", cookies, csrfToken);
+                        isCsrfTokenLoad = true;
                     }
-                    //if resultItem.getValue() == -100, it means, that account was closed, but let's calculate next way
-                    Double change = resultItem.getValue() == -100 ? -100 : (resultItem.getValue() - previousValue[0]) * 100 / (previousValue[0] + 100);
-                    LocalDate localDate = LocalDate.parse(resultItem.getDate(), dateFormatter);
 
-                    changes.add(new DailyChange(localDate, change));
-                    previousValue[0] = resultItem.getValue();
+
+                    logger.info("load manager money, pammId = {}", pamm.getId());
+
+                    LocalDate now = LocalDate.now();
+                    LocalDate yesterday = now.minusDays(1);
+                    LocalDate dayBeforeYesterday = now.minusDays(2);
+                    LocalDate firstWorkDate = now.minusDays(pamm.getAgeInDays());
+
+                    String yesterdayText = yesterday.format(dateFormatter);
+                    String dayBeforeYesterdayText = dayBeforeYesterday.format(dateFormatter);
+                    String firstWorkDateText = firstWorkDate.format(dateFormatter);
+
+                    //to get investor money we have to send separate request
+                    PammAlfaForexManagerMoney pammAlfaForexManagerMoney = createHttpURLConnectionForSecuredPost
+                            ("https://my.alfa-forex.ru/pamm/account-public/chart-data?id=" + id + "&type=capitalChart", "dateFrom=" + dayBeforeYesterdayText + "&dateTo=" + yesterdayText, cookies, csrfToken, PammAlfaForexManagerMoney.class);
+                    pamm.setManagerMoney(pammAlfaForexManagerMoney.getResult().get(0).getValue());
+
+                    //let's load changes
+                    pammAlfaForexManagerMoney = createHttpURLConnectionForSecuredPost
+                            ("https://my.alfa-forex.ru/pamm/account-public/chart-data?id=" + id + "&type=profitChart", "dateFrom=" + firstWorkDateText + "&dateTo=" + yesterdayText, cookies, csrfToken, PammAlfaForexManagerMoney.class);
+
+                    //let's load deposit load
+                    PammAlfaForexManagerMoney pammAlfaForexdeDepositLoad = createHttpURLConnectionForSecuredPost
+                            ("https://my.alfa-forex.ru/pamm/account-public/chart-data?id=" + id + "&type=loadingChart", "dateFrom=" + firstWorkDateText + "&dateTo=" + yesterdayText, cookies, csrfToken, PammAlfaForexManagerMoney.class);
+                    Map<String, Double> depositLoadPerDate = new HashMap<>();
+                    pammAlfaForexdeDepositLoad.getResult().forEach(depositLoad -> depositLoadPerDate.put(depositLoad.getDate(), depositLoad.getValue()));
+
+                    List<DailyChange> changes = new ArrayList<>();
+                    final Double[] previousValue = {0.};
+
+                    for (PammAlfaForexManagerMoneyResultItem resultItem : pammAlfaForexManagerMoney.getResult()) {
+                        if (depositLoadPerDate.get(resultItem.getDate()) == 0.) {
+                            //no deposit load, no need to calculate
+                            continue;
+                        }
+                        //if resultItem.getValue() == -100, it means, that account was closed, but let's calculate next way
+                        Double change = resultItem.getValue() == -100 ? -100 : (resultItem.getValue() - previousValue[0]) * 100 / (previousValue[0] + 100);
+                        LocalDate localDate = LocalDate.parse(resultItem.getDate(), dateFormatterPamm);
+
+                        changes.add(new DailyChange(localDate, change));
+                        previousValue[0] = resultItem.getValue();
+                    }
+
+                    Double avgChange = addChangesToPamm(changes, pamm);
+
+                    //load commissions
+                    Document doc = Jsoup.connect("https://my.alfa-forex.ru/public/pamm/view/" + id + "#offer").timeout(30000).get();
+                    Elements cells = doc.getElementById("w11-container").getElementsByTag("td");
+                    Double percentage = Double.valueOf(cells.get(1).text().replace("%", ""));
+                    Double minInvestment = Double.valueOf(cells.get(2).text().split("/")[0]);
+                    Double minPeriod = Double.valueOf(cells.get(3).text());
+
+                    pamm.addOffer(new InvestmentTargetOffer(name, minInvestment, null, minPeriod, null, percentage, "https://my.alfa-forex.ru/public/pamm/view/" + pamm.getId() + "?partner_id=719755",
+                            currency, avgChange, new PammOfferRisk(), new PammOfferProfit()));
+
+                    pamms.add(pamm);
+
+                    logger.info("Finish load AlfaForex manager details, pammId = {}", id);
+                } catch (Exception e) {
+                    logger.error("Impossible to load AlfaForexPamm", e);
                 }
-
-                Double avgChange = addChangesToPamm(changes, pamm);
-
-                //load commissions
-                Document doc = Jsoup.connect("https://my.alfa-forex.ru/public/pamm/view/" + id + "#offer").timeout(30000).get();
-                Elements cells = doc.getElementById("w11-container").getElementsByTag("td");
-                Double percentage = Double.valueOf(cells.get(1).text().replace("%", ""));
-                Double minInvestment = Double.valueOf(cells.get(2).text().split("/")[0]);
-                Double minPeriod = Double.valueOf(cells.get(3).text());
-
-                pamm.addOffer(new InvestmentTargetOffer(name, minInvestment, null, minPeriod, null, percentage, "https://my.alfa-forex.ru/public/pamm/view/" + pamm.getId() + "?partner_id=719755",
-                        currency, avgChange, new PammOfferRisk(), new PammOfferProfit()));
-
-                pamms.add(pamm);
-
-                logger.info("Finish load AlfaForex manager details, pammId = {}", id);
-
 
             }
-
             page++;
             urlAll = new URL("https://www.alfa-forex.ru/ru/terms/pamm.html?&page=" + page + "&per_page=" + resultsPerPage + "&sortBy=position&sortType=desc");
             con = (HttpURLConnection) urlAll.openConnection();
             con.setRequestProperty("X-Requested-With", "XMLHttpRequest");
             response = IOUtils.toString(con.getInputStream(), "UTF-8");
         }
-
         filterUselessPamms(pamms);
+        logger.info("Download all Alfa forex managers Done");
         return pamms;
     }
 

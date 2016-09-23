@@ -29,6 +29,8 @@ import java.util.zip.GZIPInputStream;
 
 /**
  * Loads Pamms for fxopen.ru
+ * https://pamm.fxopen.com/ru/HowItWorks/Slave/BecomeSlave
+ * https://pamm.fxopen.com/HowItWorks/General#OfferParameters
  * Author Dmitriy Liandres
  * Date 25.05.2016
  */

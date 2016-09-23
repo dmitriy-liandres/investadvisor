@@ -13,7 +13,7 @@ import java.io.IOException;
 public class AlpariPamm extends Pamm {
 
     public AlpariPamm() {
-        super("Alpari", "/alpari");
+        super("Alpari", "vklady-investitsii/pamm/alpari/");
     }
 
     @Override
