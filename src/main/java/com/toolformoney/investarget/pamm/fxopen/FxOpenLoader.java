@@ -115,7 +115,6 @@ public class FxOpenLoader extends PammLoader {
                     }
                     //all days are returned
                     avgChange = addChangesToPamm(changes, pamm);
-                    pamms.add(pamm);
                 }
 
 
@@ -165,6 +164,7 @@ public class FxOpenLoader extends PammLoader {
                                 fxOpenOffersResultData.getMinimumPerformanceConstraint(), fxOpenOffersResultData.getDepositCommision(),
                                 manager.getCurrency(), avgChange, "https://pamm.fxopen.ru/Pamm/" + manager.getName() + "?agent=691142");
                         pamm.addOffer(pammOfferFxOpen);
+                        pamms.add(pamm);
                     }
                 }
                 if (CollectionUtils.isEmpty(pamm.getInvestmentTargetOffers())) {

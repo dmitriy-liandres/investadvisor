@@ -1,4 +1,4 @@
-package com.toolformoney.bank.vtb24;
+package com.toolformoney.investarget.bank.vtb24;
 
 import com.google.inject.Singleton;
 import com.toolformoney.Currency;

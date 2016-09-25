@@ -7,7 +7,6 @@ import com.toolformoney.investarget.pamm.alpari.model.AlpariPamm;
 import com.toolformoney.investarget.pamm.alpari.model.PAMMAlpariGeneral;
 import com.toolformoney.model.InvestmentTypeName;
 import com.toolformoney.model.pamm.*;
-import com.toolformoney.utils.Constants;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.jsoup.Jsoup;
@@ -23,7 +22,6 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Loads Pamms for alpari.ru
@@ -128,7 +126,7 @@ public class AlpariLoader extends PammLoader {
                     Double commission = Double.valueOf(commissions.get(i).text().replace("%", "").trim());
                     minBalanceCommissionPairs.add(new AbstractMap.SimpleEntry<>(minBalance, commission));
                 }
-                for(int i=0;i<minBalanceCommissionPairs.size();i++) {
+                for (int i = 0; i < minBalanceCommissionPairs.size(); i++) {
                     Double minBalance = minBalanceCommissionPairs.get(i).getKey();
                     Double commission = minBalanceCommissionPairs.get(i).getValue();
                     Double maxBalance = i == minBalanceCommissionPairs.size() - 1 ? null : minBalanceCommissionPairs.get(i + 1).getKey();

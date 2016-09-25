@@ -1,4 +1,4 @@
-package com.toolformoney.bank.gazprombank;
+package com.toolformoney.investarget.bank.gazprombank;
 
 import com.toolformoney.Currency;
 import com.toolformoney.model.InvestmentTargetLoader;

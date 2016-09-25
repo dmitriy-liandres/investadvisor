@@ -1,4 +1,4 @@
-package com.toolformoney.bank.sberbank;
+package com.toolformoney.investarget.bank.sberbank;
 
 import com.google.inject.Singleton;
 import com.toolformoney.Currency;

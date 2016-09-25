@@ -9,6 +9,7 @@ import com.toolformoney.model.InvestmentType;
 import com.toolformoney.model.pamm.InvestmentTargetOffer;
 import com.toolformoney.model.view.InvestmentOption;
 import io.swagger.annotations.Api;
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,32 +52,34 @@ public class InvestmentResource {
         //broker coefficient
         for (InvestmentTarget investmentTarget : investmentTargets) {
             List<InvestmentOption> investmentOptionsPerTarget = new ArrayList<>();
-            for (InvestmentTargetOffer offer : investmentTarget.getInvestmentTargetOffers()) {
+            if (CollectionUtils.isNotEmpty(investmentTarget.getInvestmentTargetOffers())) {
+                for (InvestmentTargetOffer offer : investmentTarget.getInvestmentTargetOffers()) {
 
-                InvestmentTargetOfferProfit investmentTargetOfferProfit = offer.getInvestmentTargetOfferProfit();
-                Boolean isSuitsUser = investmentTargetOfferProfit.calculateProfit(investmentTarget, offer, providedParams);
-                if (isSuitsUser) {
-                    logger.info("investmentTarget = {}, offer = {} ", investmentTarget, offer);
+                    InvestmentTargetOfferProfit investmentTargetOfferProfit = offer.getInvestmentTargetOfferProfit();
+                    Boolean isSuitsUser = investmentTargetOfferProfit.calculateProfit(investmentTarget, offer, providedParams);
+                    if (isSuitsUser) {
+                        logger.info("investmentTarget = {}, offer = {} ", investmentTarget, offer);
 
-                    offer.getInvestmentTargetOfferRisk().calculateAndSetRisk(investmentTarget, providedParams, investmentTargetOfferProfit);
-                    InvestmentOption investmentOption = new InvestmentOption();
-                    investmentOption.setInvestmentTypeName(investmentTarget.getInvestmentType().getName());
-                    investmentOption.setInvestmentTypeLink(investmentTarget.getInvestmentTypeLink());
-                    investmentOption.setInvestmentPartnerName(investmentTarget.getName());
-                    investmentOption.setInvestmentPartnerLink(investmentTarget.getInvestmentPartnerLink());
-                    investmentOption.setInvestmentOptionName(offer.getName());
-                    investmentOption.setProfitPercentage(offer.getInvestmentTargetOfferProfit().getProfitPercentage());
-                    investmentOption.setTotalRisk(offer.getInvestmentTargetOfferRisk().getTotalRisk());
-                    investmentOption.setDetailsLink(offer.getLink());
-                    investmentOptionsPerTarget.add(investmentOption);
+                        offer.getInvestmentTargetOfferRisk().calculateAndSetRisk(investmentTarget, providedParams, investmentTargetOfferProfit);
+                        InvestmentOption investmentOption = new InvestmentOption();
+                        investmentOption.setInvestmentTypeName(investmentTarget.getInvestmentType().getName());
+                        investmentOption.setInvestmentTypeLink(investmentTarget.getInvestmentTypeLink());
+                        investmentOption.setInvestmentPartnerName(investmentTarget.getName());
+                        investmentOption.setInvestmentPartnerLink(investmentTarget.getInvestmentPartnerLink());
+                        investmentOption.setInvestmentOptionName(offer.getName());
+                        investmentOption.setProfitPercentage(offer.getInvestmentTargetOfferProfit().getProfitPercentage());
+                        investmentOption.setTotalRisk(offer.getInvestmentTargetOfferRisk().getTotalRisk());
+                        investmentOption.setDetailsLink(offer.getLink());
+                        investmentOptionsPerTarget.add(investmentOption);
+                    }
                 }
-            }
-            //For Pamm we need not more than 1 offer per target
-            if (investmentTarget.getInvestmentType() == InvestmentType.PAMM && investmentOptionsPerTarget.size() > 0) {
-                //get only one offer per target
-                result.add(investmentOptionsPerTarget.stream().max((io1, io2) -> io1.getProfitPercentage().compareTo(io2.getProfitPercentage())).get());
-            } else {
-                result.addAll(investmentOptionsPerTarget);
+                //For Pamm we need not more than 1 offer per target
+                if (investmentTarget.getInvestmentType() == InvestmentType.PAMM && investmentOptionsPerTarget.size() > 0) {
+                    //get only one offer per target
+                    result.add(investmentOptionsPerTarget.stream().max((io1, io2) -> io1.getProfitPercentage().compareTo(io2.getProfitPercentage())).get());
+                } else {
+                    result.addAll(investmentOptionsPerTarget);
+                }
             }
         }
         //filter by max allowed risk

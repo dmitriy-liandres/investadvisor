@@ -1,13 +1,9 @@
-package com.toolformoney.bank.bankmoskvy;
+package com.toolformoney.investarget.bank.bankmoskvy;
 
 import com.google.inject.Singleton;
-import com.toolformoney.Currency;
 import com.toolformoney.model.InvestmentTargetLoader;
 import com.toolformoney.model.InvestmentTypeName;
 import com.toolformoney.model.bank.Bank;
-import com.toolformoney.model.bank.BankOfferProfit;
-import com.toolformoney.model.bank.BankOfferRisk;
-import com.toolformoney.model.pamm.InvestmentTargetOffer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
