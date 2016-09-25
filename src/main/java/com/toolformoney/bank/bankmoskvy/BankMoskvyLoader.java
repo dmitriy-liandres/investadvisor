@@ -34,7 +34,7 @@ public class BankMoskvyLoader extends InvestmentTargetLoader<Bank> {
         Bank sperbank = new Bank("Банк Москвы", "/втб-банк-москвы");
 
         //RUB
-        sperbank.addOffer(new InvestmentTargetOffer("Правильный ответ", 100_000., null, 380., null, 0., "http://www.bm.ru/ru/personal/vklady/srochnye-vklady/pravilnyy-otvet/", Currency.RUB, null, new BankOfferRisk(0.15), new BankOfferProfit(false, 9.32)));
+       // sperbank.addOffer(new InvestmentTargetOffer("Правильный ответ", 100_000., null, 380., null, 0., "http://www.bm.ru/ru/personal/vklady/srochnye-vklady/pravilnyy-otvet/", Currency.RUB, null, new BankOfferRisk(0.15), new BankOfferProfit(false, 9.32)));
         banks.add(sperbank);
 
         logger.info("Finish download all http://www.bm.ru/ (VTB) offers");
