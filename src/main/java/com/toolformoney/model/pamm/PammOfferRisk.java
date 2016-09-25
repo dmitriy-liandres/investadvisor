@@ -42,6 +42,9 @@ public class PammOfferRisk extends InvestmentTargetOfferRisk<Pamm, PammOfferProf
             case INSOLT:
                 brokerCoefficient = 1.;
                 break;
+            case WELTRADE:
+                brokerCoefficient = 1.;
+                break;
             default:
                 throw new RuntimeException("No broker coefficient specified");
         }
@@ -53,11 +56,11 @@ public class PammOfferRisk extends InvestmentTargetOfferRisk<Pamm, PammOfferProf
         Double providedMoneyInUsd = YahooExchangeRates.convert(providedParams.getSumm(), providedParams.getCurrency(), Currency.USD);
         Double providedPeriodInDays = providedParams.getPeriodInDays();
 
-        pammAgeCoefficient = pamm.getAgeInDays() < 90 ? 5 : pamm.getAgeInDays() < 180 ? 2.5 : pamm.getAgeInDays() < 365 ? 1.5 : 1;
-        investmentAgeCoefficient = providedPeriodInDays > pamm.getAgeInDays() ? 10 : providedPeriodInDays > pamm.getAgeInDays() / 2 ? 7 : providedPeriodInDays > pamm.getAgeInDays() / 4 ? 5. : providedPeriodInDays >pamm.getAgeInDays() / 10 ? 3. : providedPeriodInDays > pamm.getAgeInDays() / 20 ? 2. : 1;
+        pammAgeCoefficient = pamm.getAgeInDays() < 90 ? 3 : pamm.getAgeInDays() < 180 ? 1.5 : pamm.getAgeInDays() < 365 ? 1.25 : 1;
+        investmentAgeCoefficient = providedPeriodInDays > pamm.getAgeInDays() ? 10 : providedPeriodInDays > pamm.getAgeInDays() / 2 ? 5 : providedPeriodInDays > pamm.getAgeInDays() / 4 ? 3. : providedPeriodInDays >pamm.getAgeInDays() / 8 ? 1.5 : 1;
         pammManagerMoneyCoefficient = managerMoneyInUsd < 1000 ? 3 : managerMoneyInUsd < 3000 ? 2 : managerMoneyInUsd < 10000 ? 1.5 : 1;
-        pammManagerTotalMoneyCoefficient = totalMoneyInUsd < 10000 ? 3 : totalMoneyInUsd < 30000 ? 2 : totalMoneyInUsd < 100000 ? 1.5 : 1;
-        investmentSummCoefficient = providedMoneyInUsd > totalMoneyInUsd ? 10 : providedMoneyInUsd > totalMoneyInUsd / 2 ? 7 : providedMoneyInUsd > totalMoneyInUsd / 4 ? 5. : providedMoneyInUsd > totalMoneyInUsd / 10 ? 3. : providedMoneyInUsd > totalMoneyInUsd / 20 ? 2. : 1;
+        pammManagerTotalMoneyCoefficient = totalMoneyInUsd < 10000 ? 3 : totalMoneyInUsd < 25000 ? 2 : totalMoneyInUsd < 50000 ? 1.5 : 1;
+        investmentSummCoefficient = providedMoneyInUsd > totalMoneyInUsd ? 10 : providedMoneyInUsd > totalMoneyInUsd / 2 ? 5 : providedMoneyInUsd > totalMoneyInUsd / 4 ? 3. : providedMoneyInUsd > totalMoneyInUsd / 8 ? 1.5 : 1;
         mainRiskCoefficient = Math.pow(Math.abs(pamm.getLossDaysPercentage() * pamm.getMaxDailyLoss() * pamm.getAverageDailyLoss() * pamm.getDeviation()), 0.25);
 
         //todo maybe we have to add deposit load to this coefficient in future

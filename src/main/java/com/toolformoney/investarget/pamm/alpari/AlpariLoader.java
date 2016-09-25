@@ -80,8 +80,6 @@ public class AlpariLoader extends PammLoader {
         });
 
         logger.info("Finish download all Alpari pamm managers");
-        LocalDate now = LocalDate.now();
-        LocalDate nowMinusYear = now.minusDays(Constants.DAYS_PER_YEAR.longValue());
         //load data per each pamm
         for (Pamm pamm : pamms) {
             try {
@@ -146,8 +144,8 @@ public class AlpariLoader extends PammLoader {
             }
         }
         logger.info("Finish download all Alpari pamm managers");
-        filterUselessPamms(pamms);
-        return pamms;
+        filterUselessPamms(filledPamms);
+        return filledPamms;
     }
 
     @Override

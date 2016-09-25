@@ -18,6 +18,7 @@ public abstract class Pamm extends InvestmentTarget {
     private String id;
 
 
+    //next values are calculated
     private Double lossDaysPercentage;
     private Double maxDailyLoss;
     private Double averageDailyLoss;

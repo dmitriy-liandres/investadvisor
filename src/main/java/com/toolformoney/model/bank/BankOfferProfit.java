@@ -16,9 +16,9 @@ public class BankOfferProfit extends InvestmentTargetOfferProfit {
     private boolean isCapitalization;
     private Double yearChange;
 
-    public BankOfferProfit(boolean isCapitalization, Double monthChange) {
+    public BankOfferProfit(boolean isCapitalization, Double yearChange) {
         this.isCapitalization = isCapitalization;
-        this.yearChange = monthChange;
+        this.yearChange = yearChange;
     }
 
     @Override

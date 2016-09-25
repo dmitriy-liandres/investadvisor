@@ -8,6 +8,7 @@ import java.time.LocalDate;
  */
 public class DailyChange {
     private LocalDate date;
+    //in percents
     private Double change;
 
     public DailyChange(LocalDate date, Double change) {

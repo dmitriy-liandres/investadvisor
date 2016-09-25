@@ -1,5 +1,6 @@
 package com.toolformoney;
 
+import com.toolformoney.investarget.pamm.weltrade.WeltradeLoader;
 import com.toolformoney.model.InvestmentTarget;
 import com.toolformoney.model.InvestmentTargetOfferProfit;
 import com.toolformoney.model.pamm.InvestmentTargetOffer;
@@ -35,6 +36,7 @@ public class Main {
         //pammLoadersFutureTasks.add(createAndStartFutureTask(() -> AlpariLoader.getInstance().load()));
         //pammLoadersFutureTasks.add(createAndStartFutureTask(() -> AlfaForexLoader.getInstance().load()));
         //pammLoadersFutureTasks.add(createAndStartFutureTask(() -> FxOpenLoader.getInstance().load()));
+        pammLoadersFutureTasks.add(createAndStartFutureTask(() -> new WeltradeLoader().load()));
 
         //investmentTargets.addAll(YaBankirLoader.getInstance().load());
         //investmentTargets.addAll(ItcTravelLoader.getInstance().load());
