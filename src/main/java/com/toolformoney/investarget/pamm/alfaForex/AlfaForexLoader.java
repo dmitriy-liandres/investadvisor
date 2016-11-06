@@ -201,7 +201,7 @@ public class AlfaForexLoader extends PammLoader {
 
     @Override
     public InvestmentTypeName getInvestmentTypeName() {
-        return InvestmentTypeName.ALFA_FOREX;
+        return null;//InvestmentTypeName.ALFA_FOREX;
     }
 
     /**

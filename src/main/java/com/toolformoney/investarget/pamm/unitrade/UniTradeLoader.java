@@ -16,7 +16,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
+/**      ]
+ * SCAM
  * https://uni-trade.net/ is not a pamm, but we can calculate risk as for PUMM
  * Author Dmitriy Liandres
  * Date 27.05.2016
@@ -59,12 +60,12 @@ public class UniTradeLoader extends PammLoader {
             pamm.setDeviation(10.);   //we can't get more accurate data
             pamms.add(pamm);
         }
-        logger.info("Finish download all offers for Insolt, pamms = {}", pamms);
+        logger.info("Finish download all offers for Unitrade, pamms = {}", pamms);
         return pamms;
     }
 
     @Override
     public InvestmentTypeName getInvestmentTypeName() {
-        return InvestmentTypeName.UNI_TRADE;
+        return null;//InvestmentTypeName.UNI_TRADE;
     }
 }

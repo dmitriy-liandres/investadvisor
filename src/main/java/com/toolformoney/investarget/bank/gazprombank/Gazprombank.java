@@ -29,7 +29,7 @@ public class Gazprombank extends InvestmentTargetLoader<Bank> {
         List<Bank> banks = new ArrayList<>();
         //add offer in usd
 
-        Bank gazprombank = new Bank("Gazprombank", "/vklady-investitsii/banki/gazprombank/");
+        Bank gazprombank = new Bank("Газпромбанк", "/vklady-investitsii/banki/gazprombank/");
         //RUB
         gazprombank.addOffer(new InvestmentTargetOffer("Газпромбанк - Перспективный", 15000., 299999.99, Constants.DAYS_PER_MONTH * 3, Constants.DAYS_PER_MONTH * 3, 0., "http://www.gazprombank.ru/personal/invest_savings/deposits/379092/", Currency.RUB, null, new BankOfferRisk(0.1), new BankOfferProfit(false, 6.8)));
         gazprombank.addOffer(new InvestmentTargetOffer("Газпромбанк - Перспективный", 15000., 299999.99, Constants.DAYS_PER_MONTH * 6, Constants.DAYS_PER_MONTH * 6, 0., "http://www.gazprombank.ru/personal/invest_savings/deposits/379092/", Currency.RUB, null, new BankOfferRisk(0.1), new BankOfferProfit(false, 7.8)));

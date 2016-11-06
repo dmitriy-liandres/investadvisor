@@ -96,7 +96,7 @@ public class FxOpenLoader extends PammLoader {
                 if (dailyGains.size() > 0) {
                     //get deposit load
                     URL urlDepositLoad = new URL("https://datastore5.soft-fx.com/Chart/AccountDepositLoad?BrokerId=D5CBE825-CC28-4DF8-A52A-12F20165C794&id=" + manager.getId() + "&from=" + theFirstWorkingDateStr + "&to=" + nowFormatted);
-                    InputStreamReader readerDepositLoad = new InputStreamReader(new GZIPInputStream(urlDepositLoad.openStream()));
+                    InputStreamReader readerDepositLoad = new InputStreamReader(urlDepositLoad.openStream());
                     List<FXOpenDepositLoad> allDepositLoads = objectMapper.readValue(readerDepositLoad, new TypeReference<List<FXOpenDepositLoad>>() {
                     });
 

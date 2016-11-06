@@ -6,7 +6,8 @@ package com.toolformoney.model;
  */
 public enum InvestmentTypeName {
     //PAMM
-    ALFA_FOREX, ALPARI, FX_OPEN, INSOLT_PAMM, UNI_TRADE, WEL_TRADE,
+   // ALFA_FOREX,
+    ALPARI, FX_OPEN, INSOLT_PAMM, WEL_TRADE,
     //BANKS
     BANK_MOSKVY, SBERBANK, VTB_24, GAZPROMBANK,
     //HYIP
@@ -15,5 +16,5 @@ public enum InvestmentTypeName {
     SHARE_IN_STOCK, INSOLT_STARTUP
 
 
-    //NOTE, YA_BANKIR - died, ITC_TRAVEL - died
+    //NOTE, YA_BANKIR, UNI_TRADE, ITC_TRAVEL - died
 }
