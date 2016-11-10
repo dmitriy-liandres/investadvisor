@@ -51,6 +51,6 @@ public class InsoltStartupLoader extends InvestmentTargetLoader<Startup> {
 
     @Override
     public InvestmentTypeName getInvestmentTypeName() {
-        return InvestmentTypeName.INSOLT_STARTUP;
+        return null;//InvestmentTypeName.INSOLT_STARTUP;
     }
 }

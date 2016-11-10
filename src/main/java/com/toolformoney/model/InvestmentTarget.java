@@ -15,14 +15,17 @@ public abstract class InvestmentTarget {
 
     private String name;
     private InvestmentType investmentType;
+    private InvestmentTypeName investmentTypeName;
     private String investmentTypeLink;
     private String investmentPartnerLink;
 
     public InvestmentTarget(InvestmentType investmentType,
+                            InvestmentTypeName investmentTypeName,
                             String name,
                             String investmentTypeLink,
                             String investmentPartnerLink) {
         this.investmentType = investmentType;
+        this.investmentTypeName = investmentTypeName;
         this.name = name;
         this.investmentTypeLink = investmentTypeLink;
         this.investmentPartnerLink = investmentPartnerLink;
@@ -78,11 +81,16 @@ public abstract class InvestmentTarget {
         this.investmentTypeLink = investmentTypeLink;
     }
 
+    public InvestmentTypeName getInvestmentTypeName() {
+        return investmentTypeName;
+    }
+
     @Override
     public String toString() {
         return "InvestmentTarget{" +
                 "name='" + name + '\'' +
                 ", investmentType=" + investmentType +
+                ", investmentTypeName=" + investmentTypeName +
                 ", investmentTypeLink='" + investmentTypeLink + '\'' +
                 ", investmentPartnerLink='" + investmentPartnerLink + '\'' +
                 ", investmentTargetOffers=" + investmentTargetOffers +

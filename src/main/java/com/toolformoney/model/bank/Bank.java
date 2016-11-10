@@ -3,6 +3,7 @@ package com.toolformoney.model.bank;
 import com.toolformoney.Currency;
 import com.toolformoney.model.InvestmentTarget;
 import com.toolformoney.model.InvestmentType;
+import com.toolformoney.model.InvestmentTypeName;
 
 import java.io.IOException;
 
@@ -11,8 +12,8 @@ import java.io.IOException;
  * Date 06.06.2016
  */
 public class Bank extends InvestmentTarget {
-    public Bank(String name, String investmentPartnerLink) {
-        super(InvestmentType.BANK, name, "/vklady-investitsii/banki/", investmentPartnerLink);
+    public Bank(InvestmentTypeName investmentTypeName, String name, String investmentPartnerLink) {
+        super(InvestmentType.BANK, investmentTypeName, name, "/vklady-investitsii/banki/", investmentPartnerLink);
     }
 
     @Override

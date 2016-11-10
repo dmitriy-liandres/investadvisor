@@ -2,6 +2,7 @@ package com.toolformoney.model.startup;
 
 import com.toolformoney.model.InvestmentTarget;
 import com.toolformoney.model.InvestmentType;
+import com.toolformoney.model.InvestmentTypeName;
 
 /**
  * Author Dmitriy Liandres
@@ -11,8 +12,8 @@ public abstract class Startup extends InvestmentTarget {
     private StartupBroker startupBroker;
 
 
-    public Startup(String name, StartupBroker startupBroker, String investmentPartnerLink) {
-        super(InvestmentType.STARTUP, name, "/vklady-investitsii/startup/", investmentPartnerLink);
+    public Startup(InvestmentTypeName investmentTypeName, String name, StartupBroker startupBroker, String investmentPartnerLink) {
+        super(InvestmentType.STARTUP, investmentTypeName, name, "/vklady-investitsii/startup/", investmentPartnerLink);
         this.startupBroker = startupBroker;
     }
 

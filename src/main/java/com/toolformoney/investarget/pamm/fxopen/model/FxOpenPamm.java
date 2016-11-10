@@ -2,6 +2,7 @@ package com.toolformoney.investarget.pamm.fxopen.model;
 
 import com.toolformoney.Currency;
 import com.toolformoney.exchangerates.YahooExchangeRates;
+import com.toolformoney.model.InvestmentTypeName;
 import com.toolformoney.model.pamm.Pamm;
 
 import java.io.IOException;
@@ -13,7 +14,7 @@ import java.io.IOException;
 public class FxOpenPamm extends Pamm {
 
     public FxOpenPamm() {
-        super("fxopen", "vklady-investitsii/pamm/fxopen");
+        super(InvestmentTypeName.FX_OPEN, "fxopen", "vklady-investitsii/pamm/fxopen");
     }
 
     @Override

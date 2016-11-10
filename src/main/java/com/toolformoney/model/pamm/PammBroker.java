@@ -7,5 +7,5 @@ package com.toolformoney.model.pamm;
  */
 public enum PammBroker {
     ALPARI, ALFA_FOREX, FXOPEN, WELTRADE,
-    UNI_TRADE, INSOLT
+    UNI_TRADE, INSOLT, PRIVATE_FX
 }

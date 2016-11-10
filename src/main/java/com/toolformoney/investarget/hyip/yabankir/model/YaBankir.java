@@ -12,7 +12,7 @@ import java.io.IOException;
  */
 public class YaBankir extends Hyip {
     public YaBankir() {
-        super("yabankir", "ЯБанкир");
+        super(null, "yabankir", "ЯБанкир");
     }
 
     @Override

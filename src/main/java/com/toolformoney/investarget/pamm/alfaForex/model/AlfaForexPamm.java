@@ -1,6 +1,7 @@
 package com.toolformoney.investarget.pamm.alfaForex.model;
 
 import com.toolformoney.Currency;
+import com.toolformoney.model.InvestmentTypeName;
 import com.toolformoney.model.pamm.Pamm;
 
 import java.io.IOException;
@@ -12,7 +13,7 @@ import java.io.IOException;
 public class AlfaForexPamm extends Pamm {
 
     public AlfaForexPamm() {
-        super("alfa-forex", "vklady-investitsii/pamm/alfa-forex");
+        super(InvestmentTypeName.ALFA_FOREX, "alfa-forex", "vklady-investitsii/pamm/alfa-forex");
     }
 
     @Override

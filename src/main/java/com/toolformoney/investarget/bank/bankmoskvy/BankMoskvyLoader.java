@@ -27,7 +27,7 @@ public class BankMoskvyLoader extends InvestmentTargetLoader<Bank> {
         List<Bank> banks = new ArrayList<>();
         //add offer in usd
 
-        Bank sperbank = new Bank("Банк Москвы", "/втб-банк-москвы");
+        Bank sperbank = new Bank(InvestmentTypeName.BANK_MOSKVY, "Банк Москвы", "/втб-банк-москвы");
 
         //RUB
        // sperbank.addOffer(new InvestmentTargetOffer("Правильный ответ", 100_000., null, 380., null, 0., "http://www.bm.ru/ru/personal/vklady/srochnye-vklady/pravilnyy-otvet/", Currency.RUB, null, new BankOfferRisk(0.15), new BankOfferProfit(false, 9.32)));

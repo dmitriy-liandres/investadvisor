@@ -2,6 +2,7 @@ package com.toolformoney.model.pamm;
 
 import com.toolformoney.model.InvestmentTarget;
 import com.toolformoney.model.InvestmentType;
+import com.toolformoney.model.InvestmentTypeName;
 
 /**
  * Base Bean for all PAMMS and PAMM based companies
@@ -24,8 +25,8 @@ public abstract class Pamm extends InvestmentTarget {
     private Double averageDailyLoss;
     private Double deviation;
 
-    public Pamm(String name, String investmentPartnerLink) {
-        super(InvestmentType.PAMM, name, "/vklady-investitsii/pamm/", investmentPartnerLink);
+    public Pamm(InvestmentTypeName investmentTypeName, String name, String investmentPartnerLink) {
+        super(InvestmentType.PAMM, investmentTypeName, name, "/vklady-investitsii/pamm/", investmentPartnerLink);
     }
 
 

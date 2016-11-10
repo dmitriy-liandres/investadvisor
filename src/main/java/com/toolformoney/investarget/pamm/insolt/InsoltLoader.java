@@ -143,6 +143,6 @@ public class InsoltLoader extends PammLoader {
 
     @Override
     public InvestmentTypeName getInvestmentTypeName() {
-        return InvestmentTypeName.INSOLT_PAMM;
+        return null;//InvestmentTypeName.INSOLT_PAMM;
     }
 }

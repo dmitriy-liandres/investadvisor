@@ -2,6 +2,7 @@ package com.toolformoney.model.hyip;
 
 import com.toolformoney.model.InvestmentTarget;
 import com.toolformoney.model.InvestmentType;
+import com.toolformoney.model.InvestmentTypeName;
 
 /**
  * Author Dmitriy Liandres
@@ -9,8 +10,8 @@ import com.toolformoney.model.InvestmentType;
  */
 public abstract class Hyip extends InvestmentTarget {
 
-    public Hyip(String name, String investmentPartnerLink) {
-        super(InvestmentType.HYIP, name, "/vklady-investitsii/hyip/", investmentPartnerLink);
+    public Hyip(InvestmentTypeName investmentTypeName, String name, String investmentPartnerLink) {
+        super(InvestmentType.HYIP, investmentTypeName, name, "/vklady-investitsii/hyip/", investmentPartnerLink);
     }
 
 

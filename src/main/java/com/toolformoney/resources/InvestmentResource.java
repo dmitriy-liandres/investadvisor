@@ -6,6 +6,7 @@ import com.toolformoney.ProvidedParams;
 import com.toolformoney.model.InvestmentTarget;
 import com.toolformoney.model.InvestmentTargetOfferProfit;
 import com.toolformoney.model.InvestmentType;
+import com.toolformoney.model.InvestmentTypeName;
 import com.toolformoney.model.pamm.InvestmentTargetOffer;
 import com.toolformoney.model.view.InvestmentOption;
 import io.swagger.annotations.Api;
@@ -16,8 +17,7 @@ import org.slf4j.LoggerFactory;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -33,10 +33,28 @@ public class InvestmentResource {
     private static final Logger logger = LoggerFactory.getLogger(InvestmentResource.class);
     private List<InvestmentTarget> investmentTargets;
 
+    private static final Set<InvestmentTypeName> allowedInvestmentTypeNames = new HashSet<>(Arrays.asList(InvestmentTypeName.values()));
+
+
     @Inject
     public InvestmentResource(@InvestmentTargets List<InvestmentTarget> investmentTargets) {
         this.investmentTargets = investmentTargets;
     }
+
+    @GET
+    @Path("allowed-investment-type-names")
+    public Set<InvestmentTypeName> getAllowedInvestmentTypeNames() throws InvocationTargetException, IllegalAccessException {
+        return allowedInvestmentTypeNames;
+    }
+
+    @PUT
+    @Path("allowed-investment-type-names")
+    public void getAllowedInvestmentTypeNames(Set<InvestmentTypeName> allowedInvestmentTypeNames) throws InvocationTargetException, IllegalAccessException {
+        InvestmentResource.allowedInvestmentTypeNames.clear();
+        InvestmentResource.allowedInvestmentTypeNames.addAll(allowedInvestmentTypeNames);
+
+    }
+
 
     @GET
     @Path("investment-targets")
@@ -51,6 +69,9 @@ public class InvestmentResource {
         List<InvestmentOption> result = new ArrayList<>();
         //broker coefficient
         for (InvestmentTarget investmentTarget : investmentTargets) {
+            if (investmentTarget.getInvestmentTypeName() == null || !allowedInvestmentTypeNames.contains(investmentTarget.getInvestmentTypeName())) {
+                continue;
+            }
             List<InvestmentOption> investmentOptionsPerTarget = new ArrayList<>();
             if (CollectionUtils.isNotEmpty(investmentTarget.getInvestmentTargetOffers())) {
                 for (InvestmentTargetOffer offer : investmentTarget.getInvestmentTargetOffers()) {

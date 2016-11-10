@@ -12,7 +12,7 @@ server:
 #  hardNofileLimit: 1000
   applicationConnectors:
     - type: http
-      port: 8083
+      port: 8085
 # this requires the alpn-boot library on the JVM's boot classpath
 #    - type: spdy3
 #      port: 8445
@@ -21,7 +21,7 @@ server:
 #      validateCerts: false
   adminConnectors:
     - type: http
-      port: 8084
+      port: 8086
 
 
 # Logging settings.

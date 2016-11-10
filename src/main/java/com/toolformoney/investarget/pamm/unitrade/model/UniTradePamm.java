@@ -13,7 +13,7 @@ import java.io.IOException;
 public class UniTradePamm extends Pamm {
 
     public UniTradePamm() {
-        super("uni-trade", "/uni-trade");
+        super(null, "uni-trade", "/uni-trade");
         setInvestmentTypeLink("/vklady-investitsii/doveritelnoe-upravlenie/");
         setInvestmentType(InvestmentType.TRUST_MANAGEMENT);
     }

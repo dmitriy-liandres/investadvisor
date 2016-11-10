@@ -12,7 +12,7 @@ import java.io.IOException;
  */
 public class InsoltStartup extends Startup {
     public InsoltStartup() {
-        super("Insolt", StartupBroker.INSOLT, "/vklady-investitsii/startup/insolt-startup/");
+        super(null, "Insolt", StartupBroker.INSOLT, "/vklady-investitsii/startup/insolt-startup/");
     }
 
     @Override

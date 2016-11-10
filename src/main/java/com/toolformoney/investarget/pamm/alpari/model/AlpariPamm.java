@@ -2,6 +2,7 @@ package com.toolformoney.investarget.pamm.alpari.model;
 
 import com.toolformoney.Currency;
 import com.toolformoney.exchangerates.YahooExchangeRates;
+import com.toolformoney.model.InvestmentTypeName;
 import com.toolformoney.model.pamm.Pamm;
 
 import java.io.IOException;
@@ -13,7 +14,7 @@ import java.io.IOException;
 public class AlpariPamm extends Pamm {
 
     public AlpariPamm() {
-        super("Alpari", "vklady-investitsii/pamm/alpari/");
+        super(InvestmentTypeName.ALPARI, "Alpari", "vklady-investitsii/pamm/alpari/");
     }
 
     @Override

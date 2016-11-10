@@ -2,6 +2,7 @@ package com.toolformoney.investarget.pamm.weltrade.model;
 
 import com.toolformoney.Currency;
 import com.toolformoney.exchangerates.YahooExchangeRates;
+import com.toolformoney.model.InvestmentTypeName;
 import com.toolformoney.model.pamm.Pamm;
 
 import java.io.IOException;
@@ -13,7 +14,7 @@ import java.io.IOException;
 public class WelTradePamm extends Pamm {
 
     public WelTradePamm() {
-        super("Weltrade", "vklady-investitsii/pamm/weltrade/");
+        super(InvestmentTypeName.WEL_TRADE, "Weltrade", "vklady-investitsii/pamm/weltrade/");
     }
 
     @Override
