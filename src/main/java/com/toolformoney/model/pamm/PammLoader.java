@@ -24,7 +24,7 @@ public abstract class PammLoader extends InvestmentTargetLoader<Pamm> {
      * @param pamm    pamm to which we should set values
      * @return avgChange
      */
-    protected Double addChangesToPamm(List<DailyChange> changes, Pamm pamm) {
+    public Double addChangesToPamm(List<DailyChange> changes, Pamm pamm) {
         Double resultedRelativeValue = 1.;
         LocalDate now = LocalDate.now();
         LocalDate nowMinusYear = now.minusDays(Constants.DAYS_PER_YEAR.longValue());

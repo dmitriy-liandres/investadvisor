@@ -18,7 +18,7 @@ import static junit.framework.Assert.assertEquals;
  * Author Dmitriy Liandres
  * Date 27.05.2016
  */
-public class PammOfferTest {
+public class PammOfferTest extends TestBase{
 
     @Test
     public void testGeneralCase() {
@@ -123,28 +123,5 @@ public class PammOfferTest {
         return new ProvidedParams(summ, periodInDays, currency, maxAllowedRisk);
     }
 
-    private Pamm generatePamm() {
-        return new Pamm(null, "name", "investmentPartnerLink") {
 
-            @Override
-            public Double getCommissionEnterPercentage() {
-                return null;
-            }
-
-            @Override
-            public Double getCommissionWithdrawPercentage() {
-                return null;
-            }
-
-            @Override
-            public Double getCommissionEnterFixed(Currency currency) throws IOException {
-                return null;
-            }
-
-            @Override
-            public Double getCommissionWithdrawFixed(Currency currency) throws IOException {
-                return null;
-            }
-        };
-    }
 }

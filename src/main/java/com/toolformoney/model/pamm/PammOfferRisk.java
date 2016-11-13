@@ -48,6 +48,9 @@ public class PammOfferRisk extends InvestmentTargetOfferRisk<Pamm, PammOfferProf
             case PRIVATE_FX:
                 brokerCoefficient = 1.;
                 break;
+            case AMARKETS:
+                brokerCoefficient = 1.;
+                break;
             default:
                 throw new RuntimeException("No broker coefficient specified");
         }

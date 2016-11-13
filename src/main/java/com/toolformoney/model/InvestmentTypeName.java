@@ -7,7 +7,7 @@ package com.toolformoney.model;
 public enum InvestmentTypeName {
     //PAMM
     ALFA_FOREX,
-    ALPARI, FX_OPEN, PRIVATE_FX,
+    ALPARI, FX_OPEN, PRIVATE_FX, AMARKETS,
 //    INSOLT_PAMM,
     WEL_TRADE,
     //BANKS
