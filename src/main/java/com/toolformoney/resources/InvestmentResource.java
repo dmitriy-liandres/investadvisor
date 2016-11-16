@@ -108,6 +108,12 @@ public class InvestmentResource {
         //filter by profit >=0
         result = result.stream().filter(investmentOption -> investmentOption.getProfitPercentage() >= 0).collect(Collectors.toList());
         result.sort((investmentOption1, investmentOption2) -> -investmentOption1.getProfitPercentage().compareTo(investmentOption2.getProfitPercentage()));
+        //set risk to 1 if it is 0
+        result.forEach(investmentOption -> {
+            if (investmentOption.getTotalRisk() < 1) {
+                investmentOption.setTotalRisk(1.);
+            }
+        });
 
 
         return result;

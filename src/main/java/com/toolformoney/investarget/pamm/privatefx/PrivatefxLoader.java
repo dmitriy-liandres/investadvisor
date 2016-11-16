@@ -57,6 +57,8 @@ public class PrivateFXLoader extends PammLoader {
 
                     String name = pammCell.getElementsByTag("h3").text();
                     String id = pammCell.getElementsByTag("a").get(0).text();
+                    //todo
+                    if(!"7910".equals(id)){continue;} isLoadedAllPamms = true;
                     try {
                         logger.info("load Privatefx manager " + name + " (" + id + ")");
                         if (StringUtils.isEmpty(name) || StringUtils.isEmpty(id)) {
@@ -119,7 +121,7 @@ public class PrivateFXLoader extends PammLoader {
                                     }
                                     String profitStr = details.get(2).text();
                                     Double profit = Double.valueOf(profitStr.replace("%", "").replace(",", ".").replaceAll(" ", ""));
-                                    Double profitPerDate = Math.pow(Math.abs(profit), 0.2) * Math.signum(profit);
+                                    Double profitPerDate = (Math.pow(Math.abs(1 + profit / 100), 0.2) - 1) * 100;
 
                                     String startWeekDateStr = details.get(3).text();
                                     if (!startWeekDateStrs.add(startWeekDateStr)) {
@@ -128,7 +130,7 @@ public class PrivateFXLoader extends PammLoader {
                                     }
                                     LocalDate startWeekDate = LocalDate.parse(startWeekDateStr, dateFormatter);
                                     for (int i = 0; i < 5; i++) {
-                                        changes.add(new DailyChange(startWeekDate.plusDays(1), profitPerDate));
+                                        changes.add(new DailyChange(startWeekDate.plusDays(i), profitPerDate));
                                     }
                                 }
                             } else {

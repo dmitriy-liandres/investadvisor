@@ -60,7 +60,7 @@ public class AlpariLoader extends PammLoader {
             pamm.setPammBroker(PammBroker.ALPARI);
             pamm.setId(String.valueOf(onePammElements.get(0)));
             String name = String.valueOf(onePammElements.get(1));
-            pamm.setAgeInDays(Integer.valueOf(String.valueOf(onePammElements.get(27))));
+            pamm.setAgeInDays(Integer.valueOf(String.valueOf(onePammElements.get(29))));
             pamm.setManagerMoney(Double.valueOf(String.valueOf(onePammElements.get(12))));
             pamm.setTotalMoney(Double.valueOf(String.valueOf(onePammElements.get(10))));
 

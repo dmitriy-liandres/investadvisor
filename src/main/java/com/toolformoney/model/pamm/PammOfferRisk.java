@@ -46,7 +46,7 @@ public class PammOfferRisk extends InvestmentTargetOfferRisk<Pamm, PammOfferProf
                 brokerCoefficient = 1.;
                 break;
             case PRIVATE_FX:
-                brokerCoefficient = 1.;
+                brokerCoefficient = 1.1;
                 break;
             case AMARKETS:
                 brokerCoefficient = 1.;
@@ -62,7 +62,7 @@ public class PammOfferRisk extends InvestmentTargetOfferRisk<Pamm, PammOfferProf
         Double providedMoneyInUsd = YahooExchangeRates.convert(providedParams.getSumm(), providedParams.getCurrency(), Currency.USD);
         Double providedPeriodInDays = providedParams.getPeriodInDays();
 
-        pammAgeCoefficient = pamm.getAgeInDays() < 90 ? 3. : pamm.getAgeInDays() < 180 ? 1.5 : pamm.getAgeInDays() < 365 ? 1.25 : 1.;
+        pammAgeCoefficient = pamm.getAgeInDays() < 90 ? 3. : pamm.getAgeInDays() < 180 ? 2 : pamm.getAgeInDays() < 365 ? 1.5 : 1.;
         investmentAgeCoefficient = providedPeriodInDays > pamm.getAgeInDays() ? 5. : providedPeriodInDays > pamm.getAgeInDays() / 2 ? 3. : providedPeriodInDays > pamm.getAgeInDays() / 4 ? 2. : providedPeriodInDays > pamm.getAgeInDays() / 8 ? 1.25 : 1.;
         pammManagerMoneyCoefficient = managerMoneyInUsd < 1000 ? 3. : managerMoneyInUsd < 3000 ? 2. : managerMoneyInUsd < 10000 ? 1.25 : 1.;
         pammManagerTotalMoneyCoefficient = totalMoneyInUsd < 10000 ? 3. : totalMoneyInUsd < 25000 ? 2. : totalMoneyInUsd < 50000 ? 1.5 : 1.;
