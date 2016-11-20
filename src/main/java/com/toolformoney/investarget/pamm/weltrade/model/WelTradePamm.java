@@ -14,7 +14,7 @@ import java.io.IOException;
 public class WelTradePamm extends Pamm {
 
     public WelTradePamm() {
-        super(InvestmentTypeName.WEL_TRADE, "Weltrade", "vklady-investitsii/pamm/weltrade/");
+        super(InvestmentTypeName.WEL_TRADE, "Weltrade", "/vklady-investitsii/pamm/weltrade/");
     }
 
     @Override

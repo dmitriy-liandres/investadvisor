@@ -13,7 +13,7 @@ import java.io.IOException;
  */
 public class AmarketsPamm extends Pamm {
     public AmarketsPamm() {
-        super(InvestmentTypeName.AMARKETS, "Amarkets", "vklady-investitsii/pamm/amarkets");
+        super(InvestmentTypeName.AMARKETS, "Amarkets", "/vklady-investitsii/pamm/amarkets");
     }
 
     @Override

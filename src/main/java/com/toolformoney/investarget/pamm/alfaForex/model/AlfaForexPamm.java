@@ -13,7 +13,7 @@ import java.io.IOException;
 public class AlfaForexPamm extends Pamm {
 
     public AlfaForexPamm() {
-        super(InvestmentTypeName.ALFA_FOREX, "alfa-forex", "vklady-investitsii/pamm/alfa-forex");
+        super(InvestmentTypeName.ALFA_FOREX, "alfa-forex", "/vklady-investitsii/pamm/alfa-forex");
     }
 
     @Override

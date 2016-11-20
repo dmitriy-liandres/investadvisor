@@ -14,7 +14,7 @@ import java.io.IOException;
 public class FxOpenPamm extends Pamm {
 
     public FxOpenPamm() {
-        super(InvestmentTypeName.FX_OPEN, "fxopen", "vklady-investitsii/pamm/fxopen");
+        super(InvestmentTypeName.FX_OPEN, "fxopen", "/vklady-investitsii/pamm/fxopen");
     }
 
     @Override
