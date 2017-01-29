@@ -3,17 +3,17 @@ package com.toolformoney.investarget.pamm.insolt.model;
 import com.toolformoney.ProvidedParams;
 import com.toolformoney.model.InvestmentTarget;
 import com.toolformoney.model.pamm.InvestmentTargetOffer;
-import com.toolformoney.model.pamm.PammOfferProfit;
+import com.toolformoney.model.forex.ForexOfferProfit;
 
 /**
  * Author Dmitriy Liandres
  * Date 05.06.2016
  */
-public class InsoltPammOfferProfit extends PammOfferProfit {
+public class InsoltForexOfferProfit extends ForexOfferProfit {
 
     private InsoltInvestmentPlan insoltInvestmentPlan;
 
-    public InsoltPammOfferProfit(InsoltInvestmentPlan insoltInvestmentPlan) {
+    public InsoltForexOfferProfit(InsoltInvestmentPlan insoltInvestmentPlan) {
         this.insoltInvestmentPlan = insoltInvestmentPlan;
     }
 

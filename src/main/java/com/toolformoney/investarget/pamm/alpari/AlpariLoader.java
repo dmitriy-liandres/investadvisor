@@ -6,7 +6,12 @@ import com.toolformoney.investarget.pamm.DailyChange;
 import com.toolformoney.investarget.pamm.alpari.model.AlpariPamm;
 import com.toolformoney.investarget.pamm.alpari.model.PAMMAlpariGeneral;
 import com.toolformoney.model.InvestmentTypeName;
-import com.toolformoney.model.pamm.*;
+import com.toolformoney.model.forex.ForexLoader;
+import com.toolformoney.model.forex.ForexOfferProfit;
+import com.toolformoney.model.pamm.InvestmentTargetOffer;
+import com.toolformoney.model.pamm.Pamm;
+import com.toolformoney.model.pamm.PammBroker;
+import com.toolformoney.model.pamm.PammOfferRisk;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.jsoup.Jsoup;
@@ -29,7 +34,7 @@ import java.util.*;
  * Date 24.05.2016
  */
 @Singleton
-public class AlpariLoader extends PammLoader {
+public class AlpariLoader extends ForexLoader {
     private static final Logger logger = LoggerFactory.getLogger(AlpariLoader.class);
 
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -109,11 +114,15 @@ public class AlpariLoader extends PammLoader {
 
                     changes.add(new DailyChange(localDate, change));
                 }
-                Double avgChange = addChangesToPamm(changes, pamm);
+                Double avgChange = addChangesToForexTrades(changes, pamm);
 
                 //let's load commissions
                 Document doc = Jsoup.connect("http://www.alpari.ru/ru/investor/pamm/" + pamm.getId()).timeout(30000).get();
                 Elements linesWithCommission = doc.select(".pamm-info_offer table tr");
+                if (linesWithCommission.size() == 0) {
+                    //pamm is not available
+                    continue;
+                }
                 Elements minBalances = linesWithCommission.get(0).children();
                 Elements commissions = linesWithCommission.get(1).children();
                 char[] spaceChar = {160};
@@ -130,7 +139,7 @@ public class AlpariLoader extends PammLoader {
                     Double minBalance = minBalanceCommissionPairs.get(i).getKey();
                     Double commission = minBalanceCommissionPairs.get(i).getValue();
                     Double maxBalance = i == minBalanceCommissionPairs.size() - 1 ? null : minBalanceCommissionPairs.get(i + 1).getKey();
-                    InvestmentTargetOffer investmentTargetOffer = new InvestmentTargetOffer(namePerPamm.get(pamm.getId()), minBalance, maxBalance, 1., null, commission, "http://www.alpari.ru/ru/investor/pamm/" + pamm.getId() + "/?partner_id=1231285", currencyPerPamm.get(pamm.getId()), avgChange, new PammOfferRisk(), new PammOfferProfit());
+                    InvestmentTargetOffer investmentTargetOffer = new InvestmentTargetOffer(namePerPamm.get(pamm.getId()), minBalance, maxBalance, 1., null, commission, "http://www.alpari.ru/ru/investor/pamm/" + pamm.getId() + "/?partner_id=1231285", currencyPerPamm.get(pamm.getId()), avgChange, new PammOfferRisk(), new ForexOfferProfit());
                     pamm.addOffer(investmentTargetOffer);
                 }
 
@@ -142,7 +151,7 @@ public class AlpariLoader extends PammLoader {
             }
         }
         logger.info("Finish download all Alpari pamm managers");
-        filterUselessPamms(filledPamms);
+        filterUselessForexAccounts(filledPamms);
         return filledPamms;
     }
 

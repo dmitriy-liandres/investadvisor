@@ -1,7 +1,7 @@
 package com.toolformoney.model.startup;
 
 import com.toolformoney.ProvidedParams;
-import com.toolformoney.model.InvestmentTargetOfferProfit;
+import com.toolformoney.model.InvestmentTargetOfferProfitCalculation;
 import com.toolformoney.model.InvestmentTargetOfferRisk;
 
 import java.io.IOException;
@@ -10,17 +10,16 @@ import java.io.IOException;
  * Author Dmitriy Liandres
  * Date 05.06.2016
  */
-public class StartupOfferRisk extends InvestmentTargetOfferRisk<Startup, InvestmentTargetOfferProfit> {
+public class StartupOfferRisk extends InvestmentTargetOfferRisk<Startup> {
     private Boolean attractedRequiredSum;
     private Double avgPercentagePerMonth;
 
     private Double qualityCoefficient;
 
     /**
-     *
-     * @param attractedRequiredSum   whether sum has been attracted at least once
-     * @param avgPercentagePerMonth  how much is payed per month
-     * @param qualityCoefficient     1 - the best. The more  - the worth
+     * @param attractedRequiredSum  whether sum has been attracted at least once
+     * @param avgPercentagePerMonth how much is payed per month
+     * @param qualityCoefficient    1 - the best. The more  - the worth
      */
     public StartupOfferRisk(Boolean attractedRequiredSum,
                             Double avgPercentagePerMonth,
@@ -35,7 +34,7 @@ public class StartupOfferRisk extends InvestmentTargetOfferRisk<Startup, Investm
     }
 
     @Override
-    public Double calculateAndSetRisk(Startup startup, ProvidedParams providedParams, InvestmentTargetOfferProfit investmentTargetOfferProfit) throws IOException {
+    public Double calculateAndSetRisk(Startup startup, ProvidedParams providedParams, InvestmentTargetOfferProfitCalculation investmentTargetOfferProfitCalculation) throws IOException {
         Double baseCommission;
         switch (startup.getStartupBroker()) {
 
@@ -45,6 +44,8 @@ public class StartupOfferRisk extends InvestmentTargetOfferRisk<Startup, Investm
                     //in a year shares can be sold by nominal, earlier - not
                     baseCommission *= 2;
                 }
+                //currently shareInStock under higher risk
+                baseCommission *= 3;
                 break;
             case INSOLT:
                 baseCommission = 6.25;   //check https://docs.google.com/spreadsheets/d/1BTF74xrrFseArIUS0YtvKYZ7Wkf0LBeQMaxnAx_BQuE/edit#gid=488837017 C11
@@ -66,9 +67,7 @@ public class StartupOfferRisk extends InvestmentTargetOfferRisk<Startup, Investm
             percentageCoefficient = 2.;
         }
 
-
         Double risk = baseCommission * attractedSharesCoefficient * percentageCoefficient * qualityCoefficient;
-        setTotalRisk(risk);
         return risk;
     }
 }

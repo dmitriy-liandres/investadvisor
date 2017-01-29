@@ -5,6 +5,9 @@ import com.toolformoney.Currency;
 import com.toolformoney.investarget.pamm.DailyChange;
 import com.toolformoney.investarget.pamm.privatefx.model.PrivateFXPamm;
 import com.toolformoney.model.InvestmentTypeName;
+import com.toolformoney.model.forex.ForexLoader;
+import com.toolformoney.model.forex.ForexOfferProfit;
+import com.toolformoney.model.forex.ForexOfferRisk;
 import com.toolformoney.model.pamm.*;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.IOUtils;
@@ -33,7 +36,7 @@ import java.util.Set;
  * Date 10.11.2016
  */
 @Singleton
-public class PrivateFXLoader extends PammLoader {
+public class PrivateFXLoader extends ForexLoader {
 
     private static final Logger logger = LoggerFactory.getLogger(PrivateFXLoader.class);
     //Feb 17, 2016, 12:49:12 AM
@@ -138,9 +141,9 @@ public class PrivateFXLoader extends PammLoader {
                             }
                             pammChangesPage++;
                         }
-                        Double avgChange = addChangesToPamm(changes, pamm);
+                        Double avgChange = addChangesToForexTrades(changes, pamm);
                         pamm.addOffer(new InvestmentTargetOffer(name, minInvestment, null, minPeriod, null, commission, "https://privatefx.com/pamm/" + pamm.getId() + "?ref=121768",
-                                Currency.USD, avgChange, new PammOfferRisk(), new PammOfferProfit()));
+                                Currency.USD, avgChange, new PammOfferRisk(), new ForexOfferProfit()));
 
                         pamms.add(pamm);
                     } catch (Exception e) {

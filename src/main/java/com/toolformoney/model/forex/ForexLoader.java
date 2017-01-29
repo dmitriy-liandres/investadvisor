@@ -1,7 +1,9 @@
-package com.toolformoney.model.pamm;
+package com.toolformoney.model.forex;
 
 import com.toolformoney.investarget.pamm.DailyChange;
+import com.toolformoney.model.ForexInvestmentTarget;
 import com.toolformoney.model.InvestmentTargetLoader;
+import com.toolformoney.model.pamm.InvestmentTargetOffer;
 import com.toolformoney.utils.Constants;
 import org.apache.commons.collections4.CollectionUtils;
 
@@ -15,21 +17,21 @@ import java.util.stream.Collectors;
  * Author Dmitriy Liandres
  * Date 24.05.2016
  */
-public abstract class PammLoader extends InvestmentTargetLoader<Pamm> {
+public abstract class ForexLoader<T extends ForexInvestmentTarget> extends InvestmentTargetLoader<T> {
 
     /**
      * Calculate all required params and set values to Pamm
      *
-     * @param changes list with changes
-     * @param pamm    pamm to which we should set values
+     * @param changes               list with changes
+     * @param forexInvestmentTarget forexInvestmentTarget to which we should set values
      * @return avgChange
      */
-    public Double addChangesToPamm(List<DailyChange> changes, Pamm pamm) {
+    public Double addChangesToForexTrades(List<DailyChange> changes, ForexInvestmentTarget forexInvestmentTarget) {
         Double resultedRelativeValue = 1.;
         LocalDate now = LocalDate.now();
         LocalDate nowMinusYear = now.minusDays(Constants.DAYS_PER_YEAR.longValue());
         //filter changes: we don't want to take into consideration today's result as day is not finished and we don't take into consideration results which were more than a year ago
-        changes = changes.stream().filter(change->!change.getDate().isEqual(now) && !change.getDate().isBefore(nowMinusYear)).collect(Collectors.toList());
+        changes = changes.stream().filter(change -> !change.getDate().isEqual(now) && !change.getDate().isBefore(nowMinusYear)).collect(Collectors.toList());
 
         for (DailyChange change : changes) {
             resultedRelativeValue = resultedRelativeValue * (1 + change.getChange() / 100);
@@ -51,18 +53,28 @@ public abstract class PammLoader extends InvestmentTargetLoader<Pamm> {
         }
 
         //calc deviation
-        Integer ageInDays = Math.min(Constants.DAYS_PER_YEAR.intValue(), pamm.getAgeInDays());
+        Integer ageInDays = Math.min(Constants.DAYS_PER_YEAR.intValue(), forexInvestmentTarget.getAgeInDays());
 
-        Double avgChangePerAllDays = (Math.pow(resultedRelativeValue, 1. / ageInDays) - 1) * 100;
-        Double avgChangePerWorkDays = (Math.pow(resultedRelativeValue, 1. / changes.size()) - 1) - 1;
+        changes.sort((o1, o2) -> o1.getDate().compareTo(o2.getDate()));
+
+        Double changesWithCoefficientsSum = 0.;
+        for (int i = 0; i < changes.size(); i++) {
+            changesWithCoefficientsSum += changes.get(i).getChange() * (i + 1);
+        }
+        //we need take into consideration not only work days but all days
+        Double coefficientsSum = (1. + ageInDays) / 2 * ageInDays;
+        Double avgChangePerAllDays = changesWithCoefficientsSum / coefficientsSum;//old way: (Math.pow(resultedRelativeValue, 1. / ageInDays) - 1) * 100;
+
+
+        Double avgChangePerWorkDays = (Math.pow(resultedRelativeValue, 1. / changes.size()) - 1) * 100;
         Double changeSquaresSum = changes.stream().mapToDouble(value -> (value.getChange() - avgChangePerWorkDays) * (value.getChange() - avgChangePerWorkDays)).sum();
         deviation = Math.sqrt(changeSquaresSum / changes.size());
 
         //if values can't be calculates, let's use 2%
-        pamm.setLossDaysPercentage(lossDaysNumber == 0 ? 2 : lossDaysNumber * 100 / changes.size());
-        pamm.setMaxDailyLoss(maxDailyLoss == 0. ? -2 : maxDailyLoss);
-        pamm.setAverageDailyLoss(sumDailyLoss == 0 ? 2 : sumDailyLoss / lossDaysNumber);
-        pamm.setDeviation(deviation);
+        forexInvestmentTarget.setLossDaysPercentage(lossDaysNumber == 0 ? 2 : lossDaysNumber * 100 / changes.size());
+        forexInvestmentTarget.setMaxDailyLoss(maxDailyLoss == 0. ? -2 : maxDailyLoss);
+        forexInvestmentTarget.setAverageDailyLoss(sumDailyLoss == 0 ? 2 : sumDailyLoss / lossDaysNumber);
+        forexInvestmentTarget.setDeviation(deviation);
         return avgChangePerAllDays;
     }
 
@@ -71,10 +83,10 @@ public abstract class PammLoader extends InvestmentTargetLoader<Pamm> {
      *
      * @param pamms original list of pamms
      */
-    protected void filterUselessPamms(List<Pamm> pamms) {
-        Iterator<Pamm> pammIterator = pamms.iterator();
+    protected void filterUselessForexAccounts(List<ForexInvestmentTarget> pamms) {
+        Iterator<ForexInvestmentTarget> pammIterator = pamms.iterator();
         while (pammIterator.hasNext()) {
-            Pamm pamm = pammIterator.next();
+            ForexInvestmentTarget pamm = pammIterator.next();
             //no offers
             if (CollectionUtils.isEmpty(pamm.getInvestmentTargetOffers())) {
                 pammIterator.remove();
@@ -84,7 +96,7 @@ public abstract class PammLoader extends InvestmentTargetLoader<Pamm> {
             Iterator<InvestmentTargetOffer> offersIt = pamm.getInvestmentTargetOffers().iterator();
             while (offersIt.hasNext()) {
                 InvestmentTargetOffer offer = offersIt.next();
-                if (offer.getAvgChange() <= 0) {
+                if (offer.getAvgChange() == null || offer.getAvgChange() <= 0) {
                     offersIt.remove();
                 }
             }

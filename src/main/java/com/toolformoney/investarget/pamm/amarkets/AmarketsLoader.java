@@ -8,6 +8,9 @@ import com.toolformoney.investarget.pamm.amarkets.model.AmarketsPamm;
 import com.toolformoney.investarget.pamm.amarkets.model.AmarketsPammGeneraLInfo;
 import com.toolformoney.investarget.pamm.amarkets.model.AmarketsPammInfo;
 import com.toolformoney.model.InvestmentTypeName;
+import com.toolformoney.model.forex.ForexLoader;
+import com.toolformoney.model.forex.ForexOfferProfit;
+import com.toolformoney.model.forex.ForexOfferRisk;
 import com.toolformoney.model.pamm.*;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
@@ -27,7 +30,7 @@ import java.util.List;
  * Date 11.11.2016
  */
 @Singleton
-public class AmarketsLoader extends PammLoader {
+public class AmarketsLoader extends ForexLoader {
 
     private static final Logger logger = LoggerFactory.getLogger(AmarketsLoader.class);
 
@@ -84,12 +87,12 @@ public class AmarketsLoader extends PammLoader {
                         Double profit = Double.valueOf(graphProfit.get(1));
                         previousChanges.add(profit);
                     }
-                    Double avgChange = addChangesToPamm(changes, pamm);
+                    Double avgChange = addChangesToForexTrades(changes, pamm);
                     oneValue.getPercent_rates().forEach(percentRate -> {
                         Double minInvestment = percentRate.get(0);
                         Double percentage = percentRate.get(1);
                         pamm.addOffer(new InvestmentTargetOffer(oneValue.getName(), minInvestment, null, oneValue.getPayment_period(), null, percentage, "http://www.amarkets.org/investment/pamm/reyting/" + pamm.getId() + "/g/4MCP6",
-                                Currency.USD, avgChange, new PammOfferRisk(), new PammOfferProfit()));
+                                Currency.USD, avgChange, new PammOfferRisk(), new ForexOfferProfit()));
                     });
 
 

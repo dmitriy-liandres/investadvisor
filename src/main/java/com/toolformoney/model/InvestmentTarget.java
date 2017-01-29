@@ -1,6 +1,6 @@
 package com.toolformoney.model;
 
-import com.toolformoney.Currency;
+import com.toolformoney.ProvidedParams;
 import com.toolformoney.model.pamm.InvestmentTargetOffer;
 
 import java.io.IOException;
@@ -53,13 +53,13 @@ public abstract class InvestmentTarget {
         return investmentType;
     }
 
-    public abstract Double getCommissionEnterPercentage();
+    public abstract Double getCommissionEnterPercentage(ProvidedParams providedParams);
 
-    public abstract Double getCommissionWithdrawPercentage();
+    public abstract Double getCommissionWithdrawPercentage(ProvidedParams providedParams);
 
-    public abstract Double getCommissionEnterFixed(Currency currency) throws IOException;
+    public abstract Double getCommissionEnterFixed(ProvidedParams providedParams) throws IOException;
 
-    public abstract Double getCommissionWithdrawFixed(Currency currency) throws IOException;
+    public abstract Double getCommissionWithdrawFixed(ProvidedParams providedParams) throws IOException;
 
     public String getName() {
         return name;

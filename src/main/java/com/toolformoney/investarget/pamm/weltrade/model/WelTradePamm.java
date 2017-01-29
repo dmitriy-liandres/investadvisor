@@ -1,6 +1,7 @@
 package com.toolformoney.investarget.pamm.weltrade.model;
 
 import com.toolformoney.Currency;
+import com.toolformoney.ProvidedParams;
 import com.toolformoney.exchangerates.YahooExchangeRates;
 import com.toolformoney.model.InvestmentTypeName;
 import com.toolformoney.model.pamm.Pamm;
@@ -14,26 +15,26 @@ import java.io.IOException;
 public class WelTradePamm extends Pamm {
 
     public WelTradePamm() {
-        super(InvestmentTypeName.WEL_TRADE, "Weltrade", "/vklady-investitsii/pamm/weltrade/");
+        super(/*InvestmentTypeName.WEL_TRADE*/null, "Weltrade", "/vklady-investitsii/pamm/weltrade/");
     }
 
     @Override
-    public Double getCommissionEnterPercentage() {
+    public Double getCommissionEnterPercentage(ProvidedParams providedParams) {
         return 0.;
     }
 
     @Override
-    public Double getCommissionWithdrawPercentage() {
+    public Double getCommissionWithdrawPercentage(ProvidedParams providedParams) {
         return 2.9;
     }
 
     @Override
-    public Double getCommissionEnterFixed(Currency currency) {
+    public Double getCommissionEnterFixed(ProvidedParams providedParams) {
         return 0.;
     }
 
     @Override
-    public Double getCommissionWithdrawFixed(Currency currency) throws IOException {
-        return YahooExchangeRates.convert(50., Currency.RUB, currency);
+    public Double getCommissionWithdrawFixed(ProvidedParams providedParams) throws IOException {
+        return YahooExchangeRates.convert(50., Currency.RUB, providedParams.getCurrency());
     }
 }

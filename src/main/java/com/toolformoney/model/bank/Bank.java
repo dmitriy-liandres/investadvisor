@@ -1,6 +1,6 @@
 package com.toolformoney.model.bank;
 
-import com.toolformoney.Currency;
+import com.toolformoney.ProvidedParams;
 import com.toolformoney.model.InvestmentTarget;
 import com.toolformoney.model.InvestmentType;
 import com.toolformoney.model.InvestmentTypeName;
@@ -17,22 +17,22 @@ public class Bank extends InvestmentTarget {
     }
 
     @Override
-    public Double getCommissionEnterPercentage() {
+    public Double getCommissionEnterPercentage(ProvidedParams providedParams) {
         return 0.;
     }
 
     @Override
-    public Double getCommissionWithdrawPercentage() {
+    public Double getCommissionWithdrawPercentage(ProvidedParams providedParams) {
         return 0.;
     }
 
     @Override
-    public Double getCommissionEnterFixed(Currency currency) throws IOException {
+    public Double getCommissionEnterFixed(ProvidedParams providedParams) throws IOException {
         return 0.;
     }
 
     @Override
-    public Double getCommissionWithdrawFixed(Currency currency) throws IOException {
+    public Double getCommissionWithdrawFixed(ProvidedParams providedParams) throws IOException {
         return 0.;
     }
 }

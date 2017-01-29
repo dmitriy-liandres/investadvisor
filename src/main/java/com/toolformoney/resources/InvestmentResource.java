@@ -3,10 +3,7 @@ package com.toolformoney.resources;
 import com.google.inject.Inject;
 import com.toolformoney.InvestmentTargets;
 import com.toolformoney.ProvidedParams;
-import com.toolformoney.model.InvestmentTarget;
-import com.toolformoney.model.InvestmentTargetOfferProfit;
-import com.toolformoney.model.InvestmentType;
-import com.toolformoney.model.InvestmentTypeName;
+import com.toolformoney.model.*;
 import com.toolformoney.model.pamm.InvestmentTargetOffer;
 import com.toolformoney.model.view.InvestmentOption;
 import io.swagger.annotations.Api;
@@ -75,29 +72,43 @@ public class InvestmentResource {
             List<InvestmentOption> investmentOptionsPerTarget = new ArrayList<>();
             if (CollectionUtils.isNotEmpty(investmentTarget.getInvestmentTargetOffers())) {
                 for (InvestmentTargetOffer offer : investmentTarget.getInvestmentTargetOffers()) {
+                    try {
+                        InvestmentTargetOfferProfit investmentTargetOfferProfit = offer.getInvestmentTargetOfferProfit();
+                        InvestmentTargetOfferProfitCalculation investmentTargetOfferProfitCalculation = investmentTargetOfferProfit.calculateProfit(investmentTarget, offer, providedParams);
+                        Boolean isSuitsUser = investmentTargetOfferProfitCalculation.getIsSuitsUser();
+                        if (isSuitsUser) {
+                            logger.info("investmentTarget = {}, offer = {} ", investmentTarget, offer);
 
-                    InvestmentTargetOfferProfit investmentTargetOfferProfit = offer.getInvestmentTargetOfferProfit();
-                    Boolean isSuitsUser = investmentTargetOfferProfit.calculateProfit(investmentTarget, offer, providedParams);
-                    if (isSuitsUser) {
-                        logger.info("investmentTarget = {}, offer = {} ", investmentTarget, offer);
-
-                        offer.getInvestmentTargetOfferRisk().calculateAndSetRisk(investmentTarget, providedParams, investmentTargetOfferProfit);
-                        InvestmentOption investmentOption = new InvestmentOption();
-                        investmentOption.setInvestmentTypeName(investmentTarget.getInvestmentType().getName());
-                        investmentOption.setInvestmentTypeLink(investmentTarget.getInvestmentTypeLink());
-                        investmentOption.setInvestmentPartnerName(investmentTarget.getName());
-                        investmentOption.setInvestmentPartnerLink(investmentTarget.getInvestmentPartnerLink());
-                        investmentOption.setInvestmentOptionName(offer.getName());
-                        investmentOption.setProfitPercentage(offer.getInvestmentTargetOfferProfit().getProfitPercentage());
-                        investmentOption.setTotalRisk(offer.getInvestmentTargetOfferRisk().getTotalRisk());
-                        investmentOption.setDetailsLink(offer.getLink());
-                        investmentOptionsPerTarget.add(investmentOption);
+                            Double totalRisk = offer.getInvestmentTargetOfferRisk().calculateAndSetRisk(investmentTarget, providedParams, investmentTargetOfferProfitCalculation);
+                            InvestmentOption investmentOption = new InvestmentOption();
+                            investmentOption.setInvestmentTypeName(investmentTarget.getInvestmentType().getName());
+                            investmentOption.setInvestmentTypeLink(investmentTarget.getInvestmentTypeLink());
+                            investmentOption.setInvestmentPartnerName(investmentTarget.getName());
+                            investmentOption.setInvestmentPartnerLink(investmentTarget.getInvestmentPartnerLink());
+                            investmentOption.setInvestmentOptionName(offer.getName());
+                            investmentOption.setProfitPercentage(investmentTargetOfferProfitCalculation.getProfitPercentage());
+                            investmentOption.setTotalRisk(totalRisk);
+                            investmentOption.setDetailsLink(offer.getLink());
+                            investmentOptionsPerTarget.add(investmentOption);
+                        }
+                    } catch (Exception e) {
+                        logger.error("Impossible to overwork offer {}", offer, e);
                     }
                 }
                 //For Pamm we need not more than 1 offer per target
                 if (investmentTarget.getInvestmentType() == InvestmentType.PAMM && investmentOptionsPerTarget.size() > 0) {
                     //get only one offer per target
                     result.add(investmentOptionsPerTarget.stream().max((io1, io2) -> io1.getProfitPercentage().compareTo(io2.getProfitPercentage())).get());
+                } else if (investmentTarget.getInvestmentType() == InvestmentType.BANK && investmentOptionsPerTarget.size() > 0) {
+                    //get only one offer per target
+                    investmentOptionsPerTarget.sort((o1, o2) -> -o1.getProfitPercentage().compareTo(o2.getProfitPercentage()));
+                    Set<String> returnedOffers = new HashSet<>();
+                    for (InvestmentOption offer : investmentOptionsPerTarget) {
+                        if (returnedOffers.add(offer.getInvestmentOptionName())) {
+                            result.add(offer);
+                        }
+                    }
+
                 } else {
                     result.addAll(investmentOptionsPerTarget);
                 }

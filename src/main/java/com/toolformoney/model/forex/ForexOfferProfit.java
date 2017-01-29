@@ -1,4 +1,4 @@
-package com.toolformoney.model.pamm;
+package com.toolformoney.model.forex;
 
 import com.toolformoney.model.InvestmentTargetOfferProfit;
 
@@ -7,7 +7,5 @@ import com.toolformoney.model.InvestmentTargetOfferProfit;
  * Date 25.05.2016
  */
 
-public class PammOfferProfit extends InvestmentTargetOfferProfit {
-
-
+public class ForexOfferProfit extends InvestmentTargetOfferProfit {
 }

@@ -2,15 +2,15 @@ package com.toolformoney.investarget.pamm.fxopen.model;
 
 import com.toolformoney.ProvidedParams;
 import com.toolformoney.model.InvestmentTarget;
+import com.toolformoney.model.InvestmentTargetOfferProfit;
 import com.toolformoney.model.pamm.InvestmentTargetOffer;
-import com.toolformoney.model.pamm.PammOfferProfit;
+import com.toolformoney.model.forex.ForexOfferProfit;
 
 /**
  * Author Dmitriy Liandres
  * Date 05.06.2016
  */
-public class FxOpenPammOfferProfit extends PammOfferProfit {
-
+public class FxOpenForexOfferProfit extends ForexOfferProfit {
 
     @Override
     public Double calculateProfitAfterMangerCommission(InvestmentTarget investmentTarget, InvestmentTargetOffer investmentTargetOffer, ProvidedParams providedParams) {

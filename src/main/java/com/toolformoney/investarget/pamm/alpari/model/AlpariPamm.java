@@ -1,6 +1,7 @@
 package com.toolformoney.investarget.pamm.alpari.model;
 
 import com.toolformoney.Currency;
+import com.toolformoney.ProvidedParams;
 import com.toolformoney.exchangerates.YahooExchangeRates;
 import com.toolformoney.model.InvestmentTypeName;
 import com.toolformoney.model.pamm.Pamm;
@@ -18,22 +19,22 @@ public class AlpariPamm extends Pamm {
     }
 
     @Override
-    public Double getCommissionEnterPercentage() {
+    public Double getCommissionEnterPercentage(ProvidedParams providedParams) {
         return 2.5;
     }
 
     @Override
-    public Double getCommissionWithdrawPercentage() {
+    public Double getCommissionWithdrawPercentage(ProvidedParams providedParams) {
         return 2.5;
     }
 
     @Override
-    public Double getCommissionEnterFixed(Currency currency) {
+    public Double getCommissionEnterFixed(ProvidedParams providedParams) {
         return 0.;
     }
 
     @Override
-    public Double getCommissionWithdrawFixed(Currency currency) throws IOException {
-        return YahooExchangeRates.convert(30., Currency.RUB, currency);
+    public Double getCommissionWithdrawFixed(ProvidedParams providedParams) throws IOException {
+        return YahooExchangeRates.convert(30., Currency.RUB, providedParams.getCurrency());
     }
 }

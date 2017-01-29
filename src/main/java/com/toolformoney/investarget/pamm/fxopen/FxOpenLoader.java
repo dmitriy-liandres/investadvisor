@@ -5,9 +5,9 @@ import com.google.inject.Singleton;
 import com.toolformoney.investarget.pamm.DailyChange;
 import com.toolformoney.investarget.pamm.fxopen.model.*;
 import com.toolformoney.model.InvestmentTypeName;
+import com.toolformoney.model.forex.ForexLoader;
 import com.toolformoney.model.pamm.Pamm;
 import com.toolformoney.model.pamm.PammBroker;
-import com.toolformoney.model.pamm.PammLoader;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +35,7 @@ import java.util.zip.GZIPInputStream;
  * Date 25.05.2016
  */
 @Singleton
-public class FxOpenLoader extends PammLoader {
+public class FxOpenLoader extends ForexLoader {
     private static final Logger logger = LoggerFactory.getLogger(FxOpenLoader.class);
 
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
@@ -114,7 +114,7 @@ public class FxOpenLoader extends PammLoader {
                         }
                     }
                     //all days are returned
-                    avgChange = addChangesToPamm(changes, pamm);
+                    avgChange = addChangesToForexTrades(changes, pamm);
                 }
 
 
@@ -162,11 +162,15 @@ public class FxOpenLoader extends PammLoader {
 
                         PammOfferFxOpen pammOfferFxOpen = new PammOfferFxOpen(manager.getName(), fxOpenOffersResultData.getInitialDeposit(), minPeriodInDays, fxOpenOffersResultData.getPerformanceFee(), fxOpenOffersResultData.getManagementFee(),
                                 fxOpenOffersResultData.getMinimumPerformanceConstraint(), fxOpenOffersResultData.getDepositCommision(),
-                                manager.getCurrency(), avgChange, "https://pamm.fxopen.ru/Pamm/" + manager.getName() + "?agent=691142");
+                                manager.getCurrency(), avgChange, "https://pamm.fxopen.ru/ru/Pamm/" + manager.getName() + "?agent=691142");
                         pamm.addOffer(pammOfferFxOpen);
-                        pamms.add(pamm);
+
                     }
                 }
+                if(CollectionUtils.isNotEmpty(pamm.getInvestmentTargetOffers())){
+                    pamms.add(pamm);
+                }
+
                 if (CollectionUtils.isEmpty(pamm.getInvestmentTargetOffers())) {
                     //no active offers
                     continue;
@@ -180,7 +184,7 @@ public class FxOpenLoader extends PammLoader {
         }
 
         logger.info("Downloaded all fxopen managers");
-        filterUselessPamms(pamms);
+        filterUselessForexAccounts(pamms);
         return pamms;
     }
 

@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.toolformoney.Currency;
 import com.toolformoney.exchangerates.model.YahooExchangeRateResponse;
-import com.toolformoney.investarget.pamm.fxopen.FxOpenLoader;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +22,7 @@ import java.util.Map;
  */
 public class YahooExchangeRates {
 
-    private static final Logger logger = LoggerFactory.getLogger(FxOpenLoader.class);
+    private static final Logger logger = LoggerFactory.getLogger(YahooExchangeRates.class);
 
     private static Map<Currency, Map<Currency, Double>> rates = null;
 

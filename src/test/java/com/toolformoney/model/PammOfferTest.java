@@ -4,13 +4,12 @@ import com.toolformoney.Currency;
 import com.toolformoney.ProvidedParams;
 import com.toolformoney.model.pamm.InvestmentTargetOffer;
 import com.toolformoney.model.pamm.Pamm;
-import com.toolformoney.model.pamm.PammOfferProfit;
-import com.toolformoney.model.pamm.PammOfferRisk;
-import com.toolformoney.investarget.pamm.fxopen.model.FxOpenPammOfferProfit;
+import com.toolformoney.model.forex.ForexOfferProfit;
+import com.toolformoney.model.forex.ForexOfferRisk;
+import com.toolformoney.investarget.pamm.fxopen.model.FxOpenForexOfferProfit;
 import com.toolformoney.investarget.pamm.fxopen.model.PammOfferFxOpen;
+import com.toolformoney.model.pamm.PammOfferRisk;
 import org.junit.Test;
-
-import java.io.IOException;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -30,9 +29,9 @@ public class PammOfferTest extends TestBase{
 
 
         ProvidedParams providedParams = generateProvidedParams();
-        InvestmentTargetOffer investmentTargetOffer = new InvestmentTargetOffer("name", minBalance, null, minPeriodInDays, null, managerCommission, "link", Currency.USD, avgChange, new PammOfferRisk(), new PammOfferProfit());
+        InvestmentTargetOffer investmentTargetOffer = new InvestmentTargetOffer("name", minBalance, null, minPeriodInDays, null, managerCommission, "link", Currency.USD, avgChange, new PammOfferRisk(), new ForexOfferProfit());
 
-        Double calculateProfitAfterMangerCommission = new PammOfferProfit().calculateProfitAfterMangerCommission(pamm, investmentTargetOffer, providedParams);
+        Double calculateProfitAfterMangerCommission = new ForexOfferProfit().calculateProfitAfterMangerCommission(pamm, investmentTargetOffer, providedParams);
 
         Double estimatedIncrease = Math.pow(1 + avgChange / 100, providedParams.getPeriodInDays()) - 1;
         Double expectedCalculateProfitAfterMangerCommission = 1 + estimatedIncrease * (1 - managerCommission / 100);
@@ -57,7 +56,7 @@ public class PammOfferTest extends TestBase{
         ProvidedParams providedParams = generateProvidedParams();
         PammOfferFxOpen pammOfferFxOpen = new PammOfferFxOpen("name", minBalance, minPeriodInDays, managerCommission, annualMasterCommission, minimumPerformanceConstant, assignmentCommissions, Currency.USD, avgChange, "link");
 
-        Double calculateProfitAfterMangerCommission = new FxOpenPammOfferProfit().calculateProfitAfterMangerCommission(pamm, pammOfferFxOpen, providedParams);
+        Double calculateProfitAfterMangerCommission = new FxOpenForexOfferProfit().calculateProfitAfterMangerCommission(pamm, pammOfferFxOpen, providedParams);
         avgChange -= annualMasterCommission / 365;
         Double estimatedIncrease = Math.pow(1 + avgChange / 100, providedParams.getPeriodInDays()) - 1;
         Double finalIncreased = (1 + estimatedIncrease) * (1 - assignmentCommissions / 100);
@@ -81,7 +80,7 @@ public class PammOfferTest extends TestBase{
         ProvidedParams providedParams = generateProvidedParams();
         PammOfferFxOpen pammOfferFxOpen = new PammOfferFxOpen("name", minBalance, minPeriodInDays, managerCommission, annualMasterCommission, minimumPerformanceConstant, assignmentCommissions, Currency.USD, avgChange, "link");
 
-        Double calculateProfitAfterMangerCommission = new FxOpenPammOfferProfit().calculateProfitAfterMangerCommission(pamm, pammOfferFxOpen, providedParams);
+        Double calculateProfitAfterMangerCommission = new FxOpenForexOfferProfit().calculateProfitAfterMangerCommission(pamm, pammOfferFxOpen, providedParams);
         avgChange -= annualMasterCommission / 365;
         Double estimatedIncrease = Math.pow(1 + avgChange / 100, providedParams.getPeriodInDays()) - 1;
         Double finalIncreased = (1 + estimatedIncrease) * (1 - assignmentCommissions / 100);
@@ -106,7 +105,7 @@ public class PammOfferTest extends TestBase{
         ProvidedParams providedParams = generateProvidedParams();
         PammOfferFxOpen pammOfferFxOpen = new PammOfferFxOpen("name", minBalance, minPeriodInDays, managerCommission, annualMasterCommission, minimumPerformanceConstant, assignmentCommissions, Currency.USD, avgChange, "link");
 
-        Double calculateProfitAfterMangerCommission = new FxOpenPammOfferProfit().calculateProfitAfterMangerCommission(pamm, pammOfferFxOpen, providedParams);
+        Double calculateProfitAfterMangerCommission = new FxOpenForexOfferProfit().calculateProfitAfterMangerCommission(pamm, pammOfferFxOpen, providedParams);
         avgChange -= annualMasterCommission / 365;
         Double estimatedIncrease = Math.pow(1 + avgChange / 100, providedParams.getPeriodInDays()) - 1;
         Double finalIncreased = (1 + estimatedIncrease) * (1 - assignmentCommissions / 100);

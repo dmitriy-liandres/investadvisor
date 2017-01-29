@@ -1,6 +1,7 @@
 package com.toolformoney.investarget.hyip.yabankir.model;
 
 import com.toolformoney.Currency;
+import com.toolformoney.ProvidedParams;
 import com.toolformoney.exchangerates.YahooExchangeRates;
 import com.toolformoney.model.hyip.Hyip;
 
@@ -16,22 +17,22 @@ public class YaBankir extends Hyip {
     }
 
     @Override
-    public Double getCommissionEnterPercentage() {
+    public Double getCommissionEnterPercentage(ProvidedParams providedParams) {
         return 2.;
     }
 
     @Override
-    public Double getCommissionWithdrawPercentage() {
+    public Double getCommissionWithdrawPercentage(ProvidedParams providedParams) {
         return 3.;
     }
 
     @Override
-    public Double getCommissionEnterFixed(Currency currency) throws IOException {
-        return YahooExchangeRates.convert(50., Currency.RUB, currency);
+    public Double getCommissionEnterFixed(ProvidedParams providedParams) throws IOException {
+        return YahooExchangeRates.convert(50., Currency.RUB, providedParams.getCurrency());
     }
 
     @Override
-    public Double getCommissionWithdrawFixed(Currency currency) throws IOException {
+    public Double getCommissionWithdrawFixed(ProvidedParams providedParams) throws IOException {
         return 0.;
     }
 

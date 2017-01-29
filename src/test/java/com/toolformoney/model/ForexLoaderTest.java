@@ -2,7 +2,7 @@ package com.toolformoney.model;
 
 import com.toolformoney.investarget.pamm.DailyChange;
 import com.toolformoney.model.pamm.Pamm;
-import com.toolformoney.model.pamm.PammLoader;
+import com.toolformoney.model.forex.ForexLoader;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -16,7 +16,7 @@ import static junit.framework.Assert.assertEquals;
  * Author Dmitriy Liandres
  * Date 13.11.2016
  */
-public class PammLoaderTest extends TestBase {
+public class ForexLoaderTest extends TestBase {
 
     /**
      * final result >100%, but manager commissions is not taken
@@ -24,7 +24,7 @@ public class PammLoaderTest extends TestBase {
     @Test
     public void testFxOpenPositiveSmallProfit() {
         Pamm pamm = generatePamm();
-        PammLoaderBase pammLoaderBase = new PammLoaderBase();
+        ForexLoaderBase pammLoaderBase = new ForexLoaderBase();
 
         List<DailyChange> changes = new ArrayList<>();
         changes.add(new DailyChange(LocalDate.of(2016, 10, 1), 2.));
@@ -33,14 +33,14 @@ public class PammLoaderTest extends TestBase {
 
         pamm.setAgeInDays(3);
 
-        Double averageChange = pammLoaderBase.addChangesToPamm(changes, pamm);
+        Double averageChange = pammLoaderBase.addChangesToForexTrades(changes, pamm);
         assertEquals((Math.pow(1.02 * 0.97 * 1.04, 1. / 3) - 1) * 100, averageChange);
         assertEquals(-3., pamm.getAverageDailyLoss());
         assertEquals(-3., pamm.getMaxDailyLoss());
 
     }
 
-    private class PammLoaderBase extends PammLoader {
+    private class ForexLoaderBase extends ForexLoader {
 
         @Override
         public List<Pamm> load() throws IOException {

@@ -5,7 +5,8 @@ package com.toolformoney.model;
  * Date 05.06.2016
  */
 public enum InvestmentType {
-    PAMM("ПАММ"), HYIP("Хайп"), STARTUP("Стартап"), BANK("Банк"), TRUST_MANAGEMENT("Доверительное управление");
+    PAMM("ПАММ"), HYIP("Хайп"), STARTUP("Стартап"), BANK("Банк"),
+    TRUST_MANAGEMENT("Доверительное управление"), TRADE_SIGNAL ("Торговый сигнал");
 
     private String name;
 

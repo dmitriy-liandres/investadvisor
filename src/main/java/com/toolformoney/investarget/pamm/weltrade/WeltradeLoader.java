@@ -8,7 +8,12 @@ import com.toolformoney.investarget.pamm.weltrade.model.WeltradeAllPamsResult;
 import com.toolformoney.investarget.pamm.weltrade.model.WeltradeItem;
 import com.toolformoney.investarget.pamm.weltrade.model.WeltradeItemCode;
 import com.toolformoney.model.InvestmentTypeName;
-import com.toolformoney.model.pamm.*;
+import com.toolformoney.model.forex.ForexLoader;
+import com.toolformoney.model.forex.ForexOfferProfit;
+import com.toolformoney.model.pamm.InvestmentTargetOffer;
+import com.toolformoney.model.pamm.Pamm;
+import com.toolformoney.model.pamm.PammBroker;
+import com.toolformoney.model.pamm.PammOfferRisk;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -31,7 +36,7 @@ import java.util.regex.Pattern;
  * Date 25.09.2016
  */
 @Singleton
-public class WeltradeLoader extends PammLoader {
+public class WeltradeLoader extends ForexLoader {
     private static final Logger logger = LoggerFactory.getLogger(WeltradeLoader.class);
 
     //fetch name
@@ -163,8 +168,8 @@ public class WeltradeLoader extends PammLoader {
                         previousDate = currentDate;
                         previousProfit = profit;
                     }
-                    Double avgChange = addChangesToPamm(changes, pamm);
-                    InvestmentTargetOffer investmentTargetOffer = new InvestmentTargetOffer(weltradeItemCode.getDisplay_value(), minInvestment, null, 1., null, commission, weltradeItemCode.getDetail_page_url() + "&r1=ipartner&r2=9667", currency, avgChange, new PammOfferRisk(), new PammOfferProfit());
+                    Double avgChange = addChangesToForexTrades(changes, pamm);
+                    InvestmentTargetOffer investmentTargetOffer = new InvestmentTargetOffer(weltradeItemCode.getDisplay_value(), minInvestment, null, 1., null, commission, "http://www.weltrade.ru" + weltradeItemCode.getDetail_page_url() + "&r1=ipartner&r2=9667", currency, avgChange, new PammOfferRisk(), new ForexOfferProfit());
                     pamm.addOffer(investmentTargetOffer);
                     pamms.add(pamm);
                 } catch (Exception e) {
@@ -207,6 +212,7 @@ public class WeltradeLoader extends PammLoader {
 
     @Override
     public InvestmentTypeName getInvestmentTypeName() {
-        return InvestmentTypeName.WEL_TRADE;
+        //weltrade is going to remove PASS from the site
+        return null;
     }
 }

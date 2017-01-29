@@ -9,7 +9,7 @@ public enum InvestmentTypeName {
     ALFA_FOREX,
     ALPARI, FX_OPEN, PRIVATE_FX, AMARKETS,
 //    INSOLT_PAMM,
-    WEL_TRADE,
+    //WEL_TRADE,
     //BANKS
     BANK_MOSKVY, SBERBANK, VTB_24, GAZPROMBANK,
     //HYIP
@@ -17,6 +17,7 @@ public enum InvestmentTypeName {
     //STARTUPS
     SHARE_IN_STOCK,
 //    INSOLT_STARTUP
+    MQL5
 
 
     //NOTE, YA_BANKIR, UNI_TRADE, ITC_TRAVEL - died

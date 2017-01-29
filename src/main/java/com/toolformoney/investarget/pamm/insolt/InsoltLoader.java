@@ -6,7 +6,7 @@ import com.toolformoney.investarget.pamm.DailyChange;
 import com.toolformoney.model.InvestmentTypeName;
 import com.toolformoney.model.pamm.Pamm;
 import com.toolformoney.model.pamm.PammBroker;
-import com.toolformoney.model.pamm.PammLoader;
+import com.toolformoney.model.forex.ForexLoader;
 import com.toolformoney.investarget.pamm.insolt.model.InsoltGraphData;
 import com.toolformoney.investarget.pamm.insolt.model.InsoltInvestmentPlan;
 import com.toolformoney.investarget.pamm.insolt.model.InsoltPamm;
@@ -35,7 +35,7 @@ import java.util.regex.Pattern;
  * Date 27.05.2016
  */
 @Singleton
-public class InsoltLoader extends PammLoader {
+public class InsoltLoader extends ForexLoader {
 
     private static final Logger logger = LoggerFactory.getLogger(InsoltLoader.class);
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
@@ -130,7 +130,7 @@ public class InsoltLoader extends PammLoader {
                 previousValue = insoltGraphDataOneWeek.getValue();
 
             }
-            Double avgChange = addChangesToPamm(changes, pamm);
+            Double avgChange = addChangesToForexTrades(changes, pamm);
 
             PammOfferInsolt pammOffer = new PammOfferInsolt(insoltInvestmentPlan, avgChange);
             pamm.addOffer(pammOffer);

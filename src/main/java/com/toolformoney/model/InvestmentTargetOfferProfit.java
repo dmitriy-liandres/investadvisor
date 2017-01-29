@@ -10,43 +10,21 @@ import com.toolformoney.model.pamm.InvestmentTargetOffer;
 public abstract class InvestmentTargetOfferProfit {
 
 
-    private Double profitPercentage;
-    private Double profitMoney;
-
-
-    protected void setProfitPercentage(Double profitPercentage) {
-        this.profitPercentage = profitPercentage;
-    }
-
-    protected void setProfitMoney(Double profitMoney) {
-        this.profitMoney = profitMoney;
-    }
-
-    public Double getProfitPercentage() {
-        return profitPercentage;
-    }
-
-    public Double getProfitMoney() {
-        return profitMoney;
-    }
-
-
     /**
      * Commission is calculated based on visa/mastercard. This method must set profitMoney and profitPercentage
      *
      * @param investmentTarget investmentTarget
      * @param providedParams   provided params
-     * @return true if investmentTarget suits user, false otherwise
      * @throws Exception
      */
-    public Boolean calculateProfit(InvestmentTarget investmentTarget, InvestmentTargetOffer investmentTargetOffer, ProvidedParams providedParams) throws Exception {
-
+    public InvestmentTargetOfferProfitCalculation calculateProfit(InvestmentTarget investmentTarget, InvestmentTargetOffer investmentTargetOffer, ProvidedParams providedParams) throws Exception {
+        InvestmentTargetOfferProfitCalculation investmentTargetOfferProfitCalculation = new InvestmentTargetOfferProfitCalculation();
         //calculate commission
-        Double commissionEnterPercentage = investmentTarget.getCommissionEnterPercentage();
-        Double commissionWithdrawPercentage = investmentTarget.getCommissionWithdrawPercentage();
+        Double commissionEnterPercentage = investmentTarget.getCommissionEnterPercentage(providedParams);
+        Double commissionWithdrawPercentage = investmentTarget.getCommissionWithdrawPercentage(providedParams);
 
-        Double commissionEnterFixed = investmentTarget.getCommissionEnterFixed(providedParams.getCurrency());
-        Double commissionWithdrawFixed = investmentTarget.getCommissionWithdrawFixed(providedParams.getCurrency());
+        Double commissionEnterFixed = investmentTarget.getCommissionEnterFixed(providedParams);
+        Double commissionWithdrawFixed = investmentTarget.getCommissionWithdrawFixed(providedParams);
 
         //let's tale into consideration that pamm manager works with entered money - commission
         Double investedMoney = providedParams.getSumm() * (1 - commissionEnterPercentage / 100) - commissionEnterFixed;
@@ -54,12 +32,13 @@ public abstract class InvestmentTargetOfferProfit {
         Double resultMoney = null;
         //check whether offer fits
 
-        if (investmentTargetOffer.getMinInvestment() > investedMoney
+        if ((investmentTargetOffer.getMaxInvestment() != null && investmentTargetOffer.getMinInvestment() > investedMoney)
                 || (investmentTargetOffer.getMaxInvestment() != null && investmentTargetOffer.getMaxInvestment() < investedMoney)
-                || investmentTargetOffer.getMinPeriodInDays() > providedParams.getPeriodInDays()
+                || (investmentTargetOffer.getMinPeriodInDays() != null && investmentTargetOffer.getMinPeriodInDays() > providedParams.getPeriodInDays())
                 || (investmentTargetOffer.getMaxPeriodInDays() != null && investmentTargetOffer.getMaxPeriodInDays() < providedParams.getPeriodInDays())
                 || investmentTargetOffer.getCurrency() != providedParams.getCurrency()) {
-            return false;
+            investmentTargetOfferProfitCalculation.setIsSuitsUser(false);
+            return investmentTargetOfferProfitCalculation;
         }
 
         Double calculatedFinalResultAfterMangerCommission = calculateProfitAfterMangerCommission(investmentTarget, investmentTargetOffer, providedParams);
@@ -71,13 +50,14 @@ public abstract class InvestmentTargetOfferProfit {
 
         resultMoney = profitMoneyForSpecifiedCommission;
 
-        setProfitMoney(resultMoney);
+        investmentTargetOfferProfitCalculation.setProfitMoney(resultMoney);
         //we decrease on 100 to get net profit
-        setProfitPercentage((resultMoney / providedParams.getSumm()) * 100);
+        investmentTargetOfferProfitCalculation.setProfitPercentage((resultMoney / providedParams.getSumm()) * 100);
 
-        return true;
+        investmentTargetOfferProfitCalculation.setIsSuitsUser(true);
+
+        return investmentTargetOfferProfitCalculation;
     }
-
 
     /**
      * Calculates final result (1+ increase) based on provided params
@@ -94,9 +74,6 @@ public abstract class InvestmentTargetOfferProfit {
 
     @Override
     public String toString() {
-        return "InvestmentTargetProfit{" +
-                "profitPercentage=" + profitPercentage +
-                ", profitMoney=" + profitMoney +
-                '}';
+        return "InvestmentTargetOfferProfit{}";
     }
 }

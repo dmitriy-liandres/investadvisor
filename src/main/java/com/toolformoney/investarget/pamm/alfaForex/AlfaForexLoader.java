@@ -7,6 +7,9 @@ import com.toolformoney.investarget.pamm.alfaForex.model.AlfaForexPamm;
 import com.toolformoney.investarget.pamm.alfaForex.model.PammAlfaForexManagerMoney;
 import com.toolformoney.investarget.pamm.alfaForex.model.PammAlfaForexManagerMoneyResultItem;
 import com.toolformoney.model.InvestmentTypeName;
+import com.toolformoney.model.forex.ForexLoader;
+import com.toolformoney.model.forex.ForexOfferProfit;
+import com.toolformoney.model.forex.ForexOfferRisk;
 import com.toolformoney.model.pamm.*;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -33,7 +36,7 @@ import java.util.regex.Pattern;
  * Date 24.05.2016
  */
 @Singleton
-public class AlfaForexLoader extends PammLoader {
+public class AlfaForexLoader extends ForexLoader {
     private static final Logger logger = LoggerFactory.getLogger(AlfaForexLoader.class);
 
     Pattern CSRF_HIDDEN_TOKEN_PATTERN = Pattern.compile("<input type=\"hidden\" name=\"_csrf\" value=\"(.*?)\">");
@@ -129,7 +132,7 @@ public class AlfaForexLoader extends PammLoader {
                         previousValue[0] = resultItem.getValue();
                     }
 
-                    Double avgChange = addChangesToPamm(changes, pamm);
+                    Double avgChange = addChangesToForexTrades(changes, pamm);
 
                     //load commissions
                     Document doc = Jsoup.connect("https://my.alfaforex.com/public/pamm/view/" + id + "#offer").timeout(30000).get();
@@ -152,7 +155,7 @@ public class AlfaForexLoader extends PammLoader {
 
 
                     pamm.addOffer(new InvestmentTargetOffer(name, minInvestment, null, minPeriod, null, percentage, "https://my.alfaforex.com/public/pamm/view/" + pamm.getId() + "?partner_id=719755",
-                            currency, avgChange, new PammOfferRisk(), new PammOfferProfit()));
+                            currency, avgChange, new PammOfferRisk(), new ForexOfferProfit()));
 
                     pamms.add(pamm);
 
@@ -167,7 +170,7 @@ public class AlfaForexLoader extends PammLoader {
                 response = loadPammsPerPage(_identity, page, csrfLoginToken);
             }
         }
-        filterUselessPamms(pamms);
+        filterUselessForexAccounts(pamms);
         logger.info("Download all Alfa forex managers Done");
         return pamms;
     }

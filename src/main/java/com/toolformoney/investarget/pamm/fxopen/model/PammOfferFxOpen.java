@@ -2,6 +2,7 @@ package com.toolformoney.investarget.pamm.fxopen.model;
 
 import com.toolformoney.Currency;
 import com.toolformoney.model.pamm.InvestmentTargetOffer;
+import com.toolformoney.model.forex.ForexOfferRisk;
 import com.toolformoney.model.pamm.PammOfferRisk;
 
 /**
@@ -32,7 +33,7 @@ public class PammOfferFxOpen extends InvestmentTargetOffer {
                            Currency currency,
                            Double avgChange,
                            String link) {
-        super(name, minInvestment, null, minPeriodInDays, null, commissionFromProfit, link, currency, avgChange, new PammOfferRisk(), new FxOpenPammOfferProfit());
+        super(name, minInvestment, null, minPeriodInDays, null, commissionFromProfit, link, currency, avgChange, new PammOfferRisk(), new FxOpenForexOfferProfit());
         this.annualMasterCommission = annualMasterCommission;
         this.minimumPerformanceConstant = minimumPerformanceConstant;
         this.assignmentCommissions = assignmentCommissions;

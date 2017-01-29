@@ -3,7 +3,7 @@ package com.toolformoney.investarget.pamm.unitrade;
 import com.toolformoney.model.InvestmentTypeName;
 import com.toolformoney.model.pamm.Pamm;
 import com.toolformoney.model.pamm.PammBroker;
-import com.toolformoney.model.pamm.PammLoader;
+import com.toolformoney.model.forex.ForexLoader;
 import com.toolformoney.investarget.pamm.unitrade.model.UniTradePamm;
 import com.toolformoney.investarget.pamm.unitrade.model.UnitradeInvestmentPlan;
 import org.slf4j.Logger;
@@ -22,7 +22,7 @@ import java.util.List;
  * Author Dmitriy Liandres
  * Date 27.05.2016
  */
-public class UniTradeLoader extends PammLoader {
+public class UniTradeLoader extends ForexLoader {
 
     private static final Logger logger = LoggerFactory.getLogger(UniTradeLoader.class);
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");

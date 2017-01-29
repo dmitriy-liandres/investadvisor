@@ -6,7 +6,7 @@ package com.toolformoney;
  * Date 24.05.2016
  */
 public enum Currency {
-    USD, EUR, RUB, GBP, AUD;
+    USD, EUR, RUB, GBP, AUD, CZK, SGD, JPY, TRY, PLN;
 
     /**
      * Checks whether valueToTest is from the enum
