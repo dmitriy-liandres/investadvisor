@@ -2,7 +2,7 @@ package com.toolformoney.model.bank;
 
 import com.toolformoney.Currency;
 import com.toolformoney.ProvidedParams;
-import com.toolformoney.exchangerates.YahooExchangeRates;
+import com.toolformoney.exchangerates.FixerIOExchangeRates;
 import com.toolformoney.model.InvestmentTargetOfferProfitCalculation;
 import com.toolformoney.model.InvestmentTargetOfferRisk;
 
@@ -26,8 +26,8 @@ public class BankOfferRisk extends InvestmentTargetOfferRisk<Bank> {
     public Double calculateAndSetRisk(Bank bank, ProvidedParams providedParams, InvestmentTargetOfferProfitCalculation investmentTargetOfferProfitCalculation) throws IOException {
         //let's calculate sum
 
-        Double resultsMoneyInRubles = YahooExchangeRates.convert(investmentTargetOfferProfitCalculation.getProfitMoney() + providedParams.getSumm(), providedParams.getCurrency(), Currency.RUB);
-        Double risk ;
+        Double resultsMoneyInRubles = FixerIOExchangeRates.convert(investmentTargetOfferProfitCalculation.getProfitMoney() + providedParams.getSumm(), providedParams.getCurrency(), Currency.RUB);
+        Double risk;
         if (resultsMoneyInRubles < MAX_SAFE_AMOUNT) {
             //amount will be returned by special agency in any case
             risk = BASE_RISK_VALUE;

@@ -35,20 +35,20 @@ public class StartupOfferRisk extends InvestmentTargetOfferRisk<Startup> {
 
     @Override
     public Double calculateAndSetRisk(Startup startup, ProvidedParams providedParams, InvestmentTargetOfferProfitCalculation investmentTargetOfferProfitCalculation) throws IOException {
-        Double baseCommission;
+        Double baseRisk;
         switch (startup.getStartupBroker()) {
 
             case SHARE_IN_STOCK:
-                baseCommission = 2.4;   //check https://docs.google.com/spreadsheets/d/1BTF74xrrFseArIUS0YtvKYZ7Wkf0LBeQMaxnAx_BQuE/edit#gid=488837017 C11
+                baseRisk = 2.4;   //check https://docs.google.com/spreadsheets/d/1BTF74xrrFseArIUS0YtvKYZ7Wkf0LBeQMaxnAx_BQuE/edit#gid=488837017 C11
                 if (providedParams.getPeriodInDays() < 365) {
                     //in a year shares can be sold by nominal, earlier - not
-                    baseCommission *= 2;
+                    baseRisk *= 2;
                 }
                 //currently shareInStock under higher risk
-                baseCommission *= 3;
+                baseRisk *= 50;
                 break;
             case INSOLT:
-                baseCommission = 6.25;   //check https://docs.google.com/spreadsheets/d/1BTF74xrrFseArIUS0YtvKYZ7Wkf0LBeQMaxnAx_BQuE/edit#gid=488837017 C11
+                baseRisk = 6.25;   //check https://docs.google.com/spreadsheets/d/1BTF74xrrFseArIUS0YtvKYZ7Wkf0LBeQMaxnAx_BQuE/edit#gid=488837017 C11
                 break;
             default:
                 throw new RuntimeException("No base commission for startup " + startup.getStartupBroker());
@@ -67,7 +67,7 @@ public class StartupOfferRisk extends InvestmentTargetOfferRisk<Startup> {
             percentageCoefficient = 2.;
         }
 
-        Double risk = baseCommission * attractedSharesCoefficient * percentageCoefficient * qualityCoefficient;
+        Double risk = baseRisk * attractedSharesCoefficient * percentageCoefficient * qualityCoefficient;
         return risk;
     }
 }

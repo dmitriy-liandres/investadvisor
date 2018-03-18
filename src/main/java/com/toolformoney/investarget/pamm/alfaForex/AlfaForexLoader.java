@@ -9,12 +9,13 @@ import com.toolformoney.investarget.pamm.alfaForex.model.PammAlfaForexManagerMon
 import com.toolformoney.model.InvestmentTypeName;
 import com.toolformoney.model.forex.ForexLoader;
 import com.toolformoney.model.forex.ForexOfferProfit;
-import com.toolformoney.model.forex.ForexOfferRisk;
+
 import com.toolformoney.model.pamm.*;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,7 +52,7 @@ public class AlfaForexLoader extends ForexLoader {
     Pattern AGE_PATTERN = Pattern.compile("<td>(\\d*?) <small>");
 
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-    DateTimeFormatter dateFormatterPamm = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    DateTimeFormatter dateFormatterPamm = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public List<Pamm> load() throws IOException {
         logger.info("Download all Alfa forex managers");
@@ -67,14 +68,13 @@ public class AlfaForexLoader extends ForexLoader {
         String response = loadPammsPerPage(_identity, page, csrfLoginToken);
 
         Set<String> ids = new HashSet<>();
-
         //we load block, each includes resultsPerPage managers
         while (StringUtils.isNotEmpty(response)) {
 
             Matcher managersMather = MANAGER_PATTERN.matcher(response);
             //<tr data-key="24"><td>1</td><td>120734</td><td><a type="button" href="/public/pamm/view/2619" onclick="return printProfile($(this).prop(&quot;href&quot;), 1024, 768);" data-pjax="0">BullsandBearsUSD</a></td><td>612 <small>дн.</small></td><td><span class='decimal-delim'>4119095.22</span></td><td>22.09%</td></tr>
             //let's overwork manages one by one
-            while (managersMather.find()) {
+              while (managersMather.find()) {
                 try {
                     String managerBlock = managersMather.group(1).replaceAll("RUR", "RUB");
 
@@ -136,10 +136,16 @@ public class AlfaForexLoader extends ForexLoader {
 
                     //load commissions
                     Document doc = Jsoup.connect("https://my.alfaforex.com/public/pamm/view/" + id + "#offer").timeout(30000).get();
-                    Elements cells = doc.getElementById("w11-container").getElementsByTag("td");
-                    Double percentage = Double.valueOf(cells.get(1).text().replace("%", ""));
-                    Double minInvestment = Double.valueOf(cells.get(2).text().split("/")[0]);
-                    Double minPeriod = Double.valueOf(cells.get(3).text());
+                    Element offerForm = doc.getElementsByClass("offer").get(0).getElementsByClass("form-group").get(0);
+
+                    Element percentageElement = offerForm.getElementsByClass("pull-left").size() > 0 ?
+                            offerForm.getElementsByClass("pull-left").get(0) :
+                            offerForm.getElementsByTag("td").get(0);
+                    Double percentage = Double.valueOf(percentageElement.text().replace("%", ""));
+
+                    Elements cells = doc.getElementById("w14-container").getElementsByTag("td");
+                    Double minInvestment = 1.;
+                    Double minPeriod = Double.valueOf(cells.get(2).text());
 
 
                     cells = doc.getElementsByClass("pull-left");

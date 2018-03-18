@@ -51,7 +51,7 @@ public class AlpariLoader extends ForexLoader {
         List<Pamm> pamms = new ArrayList<>();
 
         //this url returns all pamms for alpari
-        URL urlAll = new URL("http://www.alpari.ru/ru/investor/pamm/rating.json");
+        URL urlAll = new URL("https://www.alpari.com/ru/investor/pamm/rating.json");
 
         //maps returned json to the object
         PAMMAlpariGeneral allValue = objectMapper.readValue(urlAll.openStream(), PAMMAlpariGeneral.class);
@@ -65,11 +65,11 @@ public class AlpariLoader extends ForexLoader {
             pamm.setPammBroker(PammBroker.ALPARI);
             pamm.setId(String.valueOf(onePammElements.get(0)));
             String name = String.valueOf(onePammElements.get(1));
-            pamm.setAgeInDays(Integer.valueOf(String.valueOf(onePammElements.get(29))));
+            pamm.setAgeInDays(Integer.valueOf(String.valueOf(onePammElements.get(37))));
             pamm.setManagerMoney(Double.valueOf(String.valueOf(onePammElements.get(12))));
             pamm.setTotalMoney(Double.valueOf(String.valueOf(onePammElements.get(10))));
 
-            String currency = String.valueOf(onePammElements.get(15)).replace("RUR", "RUB");
+            String currency = String.valueOf(onePammElements.get(16)).replace("RUR", "RUB");
             if (!Currency.isRelevant(currency)) {
                 //alpari has their own currency GLD, maybe we will add it in future, not now
                 return;
@@ -88,7 +88,7 @@ public class AlpariLoader extends ForexLoader {
             try {
                 logger.info("Start overwork pamm {}", pamm);
 
-                URL url = new URL("http://www.alpari.ru/ru/investor/pamm/" + pamm.getId() + "/monitoring/daily_all_candle.csv");
+                URL url = new URL("https://www.alpari.com/ru/investor/pamm/" + pamm.getId() + "/monitoring/daily_all_candle.csv");
                 BufferedReader in = new BufferedReader(
                         new InputStreamReader(url.openStream()));
 
@@ -117,7 +117,7 @@ public class AlpariLoader extends ForexLoader {
                 Double avgChange = addChangesToForexTrades(changes, pamm);
 
                 //let's load commissions
-                Document doc = Jsoup.connect("http://www.alpari.ru/ru/investor/pamm/" + pamm.getId()).timeout(30000).get();
+                Document doc = Jsoup.connect("https://www.alpari.com/ru/investor/pamm/" + pamm.getId()).timeout(30000).get();
                 Elements linesWithCommission = doc.select(".pamm-info_offer table tr");
                 if (linesWithCommission.size() == 0) {
                     //pamm is not available
@@ -139,7 +139,7 @@ public class AlpariLoader extends ForexLoader {
                     Double minBalance = minBalanceCommissionPairs.get(i).getKey();
                     Double commission = minBalanceCommissionPairs.get(i).getValue();
                     Double maxBalance = i == minBalanceCommissionPairs.size() - 1 ? null : minBalanceCommissionPairs.get(i + 1).getKey();
-                    InvestmentTargetOffer investmentTargetOffer = new InvestmentTargetOffer(namePerPamm.get(pamm.getId()), minBalance, maxBalance, 1., null, commission, "http://www.alpari.ru/ru/investor/pamm/" + pamm.getId() + "/?partner_id=1231285", currencyPerPamm.get(pamm.getId()), avgChange, new PammOfferRisk(), new ForexOfferProfit());
+                    InvestmentTargetOffer investmentTargetOffer = new InvestmentTargetOffer(namePerPamm.get(pamm.getId()), minBalance, maxBalance, 1., null, commission, "https://www.alpari.com/ru/investor/pamm/" + pamm.getId() + "/?partner_id=1231285", currencyPerPamm.get(pamm.getId()), avgChange, new PammOfferRisk(), new ForexOfferProfit());
                     pamm.addOffer(investmentTargetOffer);
                 }
 

@@ -1,0 +1,49 @@
+INFO   [14:55:05.428] [main] o.e.j.u.log -  Logging initialized @3657ms 
+INFO   [14:55:05.542] [main] i.d.a.AssetsBundle -  Registering AssetBundle with name: assets for path /assets/* 
+INFO   [14:55:05.592] [main] c.h.d.g.AutoConfig -  Added injectableHealthCheck: class com.toolformoney.health.TemplateHealthCheck 
+INFO   [14:55:05.608] [main] c.h.d.g.AutoConfig -  Added resource class: class com.toolformoney.resources.InvestmentResource 
+INFO   [14:55:05.673] [main] o.r.Reflections -  Reflections took 53 ms to scan 1 urls, producing 40 keys and 91 values  
+INFO   [14:55:05.786] [main] c.h.d.g.AutoConfig -  Added task: class com.toolformoney.ReloadProvidersTask 
+INFO   [14:55:05.849] [main] o.r.Reflections -  Reflections took 52 ms to scan 1 urls, producing 192 keys and 243 values  
+INFO   [14:55:06.445] [main] i.d.s.ServerFactory -  Starting hello-world
+                           web-scale hello world dP for the web
+                                                 88
+  .d8888b. dP.  .dP .d8888b. 88d8b.d8b. 88d888b. 88 .d8888b.
+  88ooood8  `8bd8'  88'  `88 88'`88'`88 88'  `88 88 88ooood8
+  88.  ...  .d88b.  88.  .88 88  88  88 88.  .88 88 88.  ...
+  `88888P' dP'  `dP `88888P8 dP  dP  dP 88Y888P' dP `88888P'
+                                        88
+                                        dP
+ 
+INFO   [14:55:06.456] [main] i.d.s.DefaultServerFactory -  Registering jersey handler with root path prefix: / 
+INFO   [14:55:06.484] [main] i.d.s.DefaultServerFactory -  Registering admin handler with root path prefix: / 
+INFO   [14:55:06.537] [main] o.e.j.s.SetUIDListener -  Opened application@56cc9f29{HTTP/1.1}{0.0.0.0:8083} 
+INFO   [14:55:06.538] [main] o.e.j.s.SetUIDListener -  Opened admin@535b1ae6{HTTP/1.1}{0.0.0.0:8084} 
+INFO   [14:55:06.542] [main] o.e.j.s.Server -  jetty-9.2.13.v20150730 
+INFO   [14:55:07.365] [main] i.d.j.DropwizardResourceConfig -  The following paths were found for the configured resources:
+
+    POST    /investment/investment-options (com.toolformoney.resources.InvestmentResource)
+    GET     /investment/investment-targets (com.toolformoney.resources.InvestmentResource)
+    GET     /swagger.{type:json|yaml} (io.swagger.jaxrs.listing.ApiListingResource)
+ 
+INFO   [14:55:07.371] [main] o.e.j.s.h.ContextHandler -  Started i.d.j.MutableServletContextHandler@6c2a95d5{/,null,AVAILABLE} 
+INFO   [14:55:07.379] [main] i.d.s.AdminEnvironment -  tasks = 
+
+    POST    /tasks/log-level (io.dropwizard.servlets.tasks.LogConfigurationTask)
+    POST    /tasks/ReloadProvidersTask (com.toolformoney.ReloadProvidersTask)
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+ 
+INFO   [14:55:07.387] [main] o.e.j.s.h.ContextHandler -  Started i.d.j.MutableServletContextHandler@463045fb{/,null,AVAILABLE} 
+INFO   [14:55:07.410] [main] o.e.j.s.ServerConnector -  Started application@56cc9f29{HTTP/1.1}{0.0.0.0:8083} 
+INFO   [14:55:07.419] [main] o.e.j.s.ServerConnector -  Started admin@535b1ae6{HTTP/1.1}{0.0.0.0:8084} 
+INFO   [14:55:07.419] [main] o.e.j.s.Server -  Started @5650ms 
+INFO   [14:55:18.495] [Thread-35] c.t.b.b.BankMoskvyLoader -  Start download all http://www.bm.ru/ (VTB) offers 
+INFO   [14:55:18.495] [Thread-35] c.t.b.b.BankMoskvyLoader -  Finish download all http://www.bm.ru/ (VTB) offers 
+INFO   [14:55:21.579] [Thread-36] c.t.b.b.BankMoskvyLoader -  Start download all http://www.bm.ru/ (VTB) offers 
+INFO   [14:55:21.579] [Thread-36] c.t.b.b.BankMoskvyLoader -  Finish download all http://www.bm.ru/ (VTB) offers 
+INFO   [14:55:21.718] [Thread-37] c.t.b.b.BankMoskvyLoader -  Start download all http://www.bm.ru/ (VTB) offers 
+INFO   [14:55:21.718] [Thread-37] c.t.b.b.BankMoskvyLoader -  Finish download all http://www.bm.ru/ (VTB) offers 
+INFO   [14:55:21.869] [Thread-38] c.t.b.b.BankMoskvyLoader -  Start download all http://www.bm.ru/ (VTB) offers 
+INFO   [14:55:21.870] [Thread-38] c.t.b.b.BankMoskvyLoader -  Finish download all http://www.bm.ru/ (VTB) offers 
+INFO   [14:55:22.024] [Thread-39] c.t.b.b.BankMoskvyLoader -  Start download all http://www.bm.ru/ (VTB) offers 
+INFO   [14:55:22.025] [Thread-39] c.t.b.b.BankMoskvyLoader -  Finish download all http://www.bm.ru/ (VTB) offers 

@@ -13,7 +13,7 @@ import java.io.IOException;
  */
 public class PrivateFXPamm extends Pamm {
     public PrivateFXPamm() {
-        super(InvestmentTypeName.PRIVATE_FX, "privateFX", "/vklady-investitsii/pamm/private-fx");
+        super(null/*InvestmentTypeName.PRIVATE_FX*/, "privateFX", "/vklady-investitsii/pamm/private-fx");
     }
 
     @Override

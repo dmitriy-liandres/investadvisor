@@ -106,7 +106,7 @@ public abstract class ForexLoader<T extends ForexInvestmentTarget> extends Inves
                 continue;
             }
             //no money of two young pamm
-            if (pamm.getTotalMoney() == 0. || pamm.getAgeInDays() < 7) {
+            if (pamm.getTotalMoney() == 0. || pamm.getAgeInDays() < 30) {
                 pammIterator.remove();
             }
         }

@@ -3,7 +3,7 @@ package com.toolformoney.investarget.tradesignals.mql5;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.inject.Singleton;
 import com.toolformoney.Currency;
-import com.toolformoney.exchangerates.YahooExchangeRates;
+import com.toolformoney.exchangerates.FixerIOExchangeRates;
 import com.toolformoney.investarget.pamm.DailyChange;
 import com.toolformoney.investarget.tradesignals.mql5.model.*;
 import com.toolformoney.model.InvestmentTypeName;
@@ -51,7 +51,8 @@ public class MetaTrader4Loader extends ForexLoader<TradeSignal> {
     private static final String EQUITY_CHAR_DATA = "Signals.EquityChartData = [";
     private static final String EQUITY_CHAR_BALANCES = "Signals.EquityChartBalances = [";
 
-    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:SS");
+    private static final DateTimeFormatter dateTimeFormatterLong = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:SS");
+    private static final DateTimeFormatter dateTimeFormatterShort = DateTimeFormatter.ofPattern("yyyy.MM.dd");
 
     private static final String ANONIMIZER = "http://0s.o53xo.nvywynjomnxw2.nblz.ru/"; //0s.o53xo.nvywynjomnxw2.cmle.ru
 
@@ -60,6 +61,7 @@ public class MetaTrader4Loader extends ForexLoader<TradeSignal> {
 
         logger.info("Download all mql5 metatrader 4 signals");
         LocalDate now = LocalDate.now();
+        YearMonth yearMonthNow = YearMonth.of(now.getYear(), now.getMonth());
         String authCookie = getAuthCookie();
         logger.info("authCookie = {}", authCookie);
         List<TradeSignal> tradeSignals = new ArrayList<>();
@@ -83,7 +85,7 @@ public class MetaTrader4Loader extends ForexLoader<TradeSignal> {
                         String[] hrefParts = linkToSignal.attr("href").split("/");
                         //to do
                         String id = hrefParts[hrefParts.length - 1];
-                        //String id = "236201";
+                        //String id = "263900";
 
 
                         logger.info("Download mql5 metatrader 4 signal {}", id);
@@ -123,7 +125,7 @@ public class MetaTrader4Loader extends ForexLoader<TradeSignal> {
                         }
 
                         managerMoneyStr = managerMoneyStr.replaceAll(" " + currency, "").replaceAll(" ", "");
-                        Double managerMoney = YahooExchangeRates.convert(Double.valueOf(managerMoneyStr), Currency.valueOf(currency), Currency.USD);
+                        Double managerMoney = FixerIOExchangeRates.convert(Double.valueOf(managerMoneyStr), Currency.valueOf(currency), Currency.USD);
                         tradeSignal.setManagerMoney(managerMoney);
 
                         String usersMoneyStr = signalsTradeData.getElementsByAttributeValue("title", "Совокупные средства только реальных счетов в рамках используемых рисков").get(0).getElementsByTag("span").text().replaceAll(" USD", "");
@@ -202,9 +204,13 @@ public class MetaTrader4Loader extends ForexLoader<TradeSignal> {
                                         return;
                                     }
                                     if (tradesNumber > 0) {
+                                        YearMonth yearMonthObject = YearMonth.of(year, month);
+
+                                        int daysInMonth = yearMonthObject.equals(yearMonthNow) ? now.getDayOfMonth() : yearMonthObject.lengthOfMonth();
+
                                         for (Integer tradeNumber = 0; tradeNumber < tradesNumber; tradeNumber++) {
-                                            YearMonth yearMonthObject = YearMonth.of(year, month);
-                                            int daysInMonth = yearMonthObject.lengthOfMonth();
+
+
                                             Integer date = (tradeNumber + 1) * daysInMonth / tradesNumber;
                                             Integer dateNext = (tradeNumber + 2) * daysInMonth / tradesNumber;
                                             if (date == 0 || (date.equals(dateNext) && tradeNumber != tradesNumber - 1)) {
@@ -503,7 +509,7 @@ public class MetaTrader4Loader extends ForexLoader<TradeSignal> {
                 return;
             }
             if (StringUtils.isNotEmpty(volume)) {
-                LocalDate parsedDate = LocalDate.parse(time, dateTimeFormatter);
+                LocalDate parsedDate = time.length() == 10 ? LocalDate.parse(time, dateTimeFormatterShort) : LocalDate.parse(time, dateTimeFormatterLong);
                 if (nowMinus3Month.isBefore(parsedDate)) {
                     lots.add(Double.valueOf(volume));
                 }

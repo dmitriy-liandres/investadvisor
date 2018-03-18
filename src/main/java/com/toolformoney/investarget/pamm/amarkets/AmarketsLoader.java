@@ -49,7 +49,7 @@ public class AmarketsLoader extends ForexLoader {
         for (AmarketsPammGeneraLInfo onePammManager : allValues) {
             try {
                 logger.info("load Privatefx  Amarkets " + onePammManager.getName() + " (" + onePammManager.getId() + ")");
-                URL urlOne = new URL("http://www.amarkets.org/investment/pamm/reyting/" + onePammManager.getId() + "/json/");
+                URL urlOne = new URL("https://www.amarkets.org/investment/pamm/reyting/" + onePammManager.getId() + "/json/");
 
                 //maps returned json to the object
                 AmarketsPammInfo oneValue = objectMapper.readValue(urlOne, AmarketsPammInfo.class);
@@ -91,7 +91,7 @@ public class AmarketsLoader extends ForexLoader {
                     oneValue.getPercent_rates().forEach(percentRate -> {
                         Double minInvestment = percentRate.get(0);
                         Double percentage = percentRate.get(1);
-                        pamm.addOffer(new InvestmentTargetOffer(oneValue.getName(), minInvestment, null, oneValue.getPayment_period(), null, percentage, "http://www.amarkets.org/investment/pamm/reyting/" + pamm.getId() + "/g/4MCP6",
+                        pamm.addOffer(new InvestmentTargetOffer(oneValue.getName(), minInvestment, null, oneValue.getPayment_period(), null, percentage, "https://www.amarkets.org/investment/pamm/reyting/" + pamm.getId() + "/g/4MCP6",
                                 Currency.USD, avgChange, new PammOfferRisk(), new ForexOfferProfit()));
                     });
 

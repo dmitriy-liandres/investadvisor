@@ -1,8 +1,9 @@
 package com.toolformoney.resources;
 
 import com.google.inject.Inject;
-import com.toolformoney.InvestmentTargets;
-import com.toolformoney.ProvidedParams;
+import com.toolformoney.*;
+import com.toolformoney.Currency;
+import com.toolformoney.exchangerates.FixerIOExchangeRates;
 import com.toolformoney.model.*;
 import com.toolformoney.model.pamm.InvestmentTargetOffer;
 import com.toolformoney.model.view.InvestmentOption;
@@ -13,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -41,6 +43,13 @@ public class InvestmentResource {
     @GET
     @Path("allowed-investment-type-names")
     public Set<InvestmentTypeName> getAllowedInvestmentTypeNames() throws InvocationTargetException, IllegalAccessException {
+
+
+        try {
+            FixerIOExchangeRates.convert(1., Currency.EUR, Currency.USD);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return allowedInvestmentTypeNames;
     }
 
@@ -117,6 +126,8 @@ public class InvestmentResource {
         //filter by max allowed risk
         result = result.stream().filter(investmentOption -> investmentOption.getTotalRisk() <= providedParams.getMaxAllowedRisk()).collect(Collectors.toList());
         //filter by profit >=0
+
+
         result = result.stream().filter(investmentOption -> investmentOption.getProfitPercentage() >= 0).collect(Collectors.toList());
         result.sort((investmentOption1, investmentOption2) -> -investmentOption1.getProfitPercentage().compareTo(investmentOption2.getProfitPercentage()));
         //set risk to 1 if it is 0

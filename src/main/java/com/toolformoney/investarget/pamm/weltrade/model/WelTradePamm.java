@@ -2,8 +2,7 @@ package com.toolformoney.investarget.pamm.weltrade.model;
 
 import com.toolformoney.Currency;
 import com.toolformoney.ProvidedParams;
-import com.toolformoney.exchangerates.YahooExchangeRates;
-import com.toolformoney.model.InvestmentTypeName;
+import com.toolformoney.exchangerates.FixerIOExchangeRates;
 import com.toolformoney.model.pamm.Pamm;
 
 import java.io.IOException;
@@ -35,6 +34,6 @@ public class WelTradePamm extends Pamm {
 
     @Override
     public Double getCommissionWithdrawFixed(ProvidedParams providedParams) throws IOException {
-        return YahooExchangeRates.convert(50., Currency.RUB, providedParams.getCurrency());
+        return FixerIOExchangeRates.convert(50., Currency.RUB, providedParams.getCurrency());
     }
 }

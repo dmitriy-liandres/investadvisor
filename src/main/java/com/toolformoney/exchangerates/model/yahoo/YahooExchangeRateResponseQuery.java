@@ -1,4 +1,4 @@
-package com.toolformoney.exchangerates.model;
+package com.toolformoney.exchangerates.model.yahoo;
 
 /**
  * Author Dmitriy Liandres

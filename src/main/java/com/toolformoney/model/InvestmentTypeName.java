@@ -7,7 +7,9 @@ package com.toolformoney.model;
 public enum InvestmentTypeName {
     //PAMM
     ALFA_FOREX,
-    ALPARI, FX_OPEN, PRIVATE_FX, AMARKETS,
+    ALPARI, FX_OPEN,
+    //PRIVATE_FX,
+    AMARKETS,
 //    INSOLT_PAMM,
     //WEL_TRADE,
     //BANKS
@@ -15,9 +17,9 @@ public enum InvestmentTypeName {
     //HYIP
 
     //STARTUPS
-    SHARE_IN_STOCK,
+    //SHARE_IN_STOCK,
 //    INSOLT_STARTUP
-    MQL5
+   MQL5
 
 
     //NOTE, YA_BANKIR, UNI_TRADE, ITC_TRAVEL - died

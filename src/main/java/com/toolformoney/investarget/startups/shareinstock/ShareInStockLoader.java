@@ -58,6 +58,6 @@ public class ShareInStockLoader extends InvestmentTargetLoader<Startup> {
 
     @Override
     public InvestmentTypeName getInvestmentTypeName() {
-        return InvestmentTypeName.SHARE_IN_STOCK;
+        return null;//InvestmentTypeName.SHARE_IN_STOCK;
     }
 }

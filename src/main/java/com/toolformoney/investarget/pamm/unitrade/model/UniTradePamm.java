@@ -25,7 +25,7 @@ public class UniTradePamm extends Pamm {
 
     @Override
     public Double getCommissionWithdrawPercentage(ProvidedParams providedParams) {
-        return 0.;   //todo check test
+        return 0.;
     }
 
     @Override

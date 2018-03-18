@@ -19,7 +19,7 @@ public class FXOpenManagerGeneral {
     //manager capital
     private Double mastercapital;
 
-    private Currency currency;
+    private String currency;
 
     public String getId() {
         return id;
@@ -61,11 +61,11 @@ public class FXOpenManagerGeneral {
         this.mastercapital = mastercapital;
     }
 
-    public Currency getCurrency() {
+    public String getCurrency() {
         return currency;
     }
 
-    public void setCurrency(Currency currency) {
+    public void setCurrency(String currency) {
         this.currency = currency;
     }
 

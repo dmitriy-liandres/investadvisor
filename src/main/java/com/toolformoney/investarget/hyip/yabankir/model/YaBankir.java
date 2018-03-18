@@ -2,7 +2,7 @@ package com.toolformoney.investarget.hyip.yabankir.model;
 
 import com.toolformoney.Currency;
 import com.toolformoney.ProvidedParams;
-import com.toolformoney.exchangerates.YahooExchangeRates;
+import com.toolformoney.exchangerates.FixerIOExchangeRates;
 import com.toolformoney.model.hyip.Hyip;
 
 import java.io.IOException;
@@ -28,7 +28,7 @@ public class YaBankir extends Hyip {
 
     @Override
     public Double getCommissionEnterFixed(ProvidedParams providedParams) throws IOException {
-        return YahooExchangeRates.convert(50., Currency.RUB, providedParams.getCurrency());
+        return FixerIOExchangeRates.convert(50., Currency.RUB, providedParams.getCurrency());
     }
 
     @Override

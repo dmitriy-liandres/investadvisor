@@ -2,6 +2,7 @@ package com.toolformoney.investarget.pamm.fxopen;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.inject.Singleton;
+import com.toolformoney.Currency;
 import com.toolformoney.investarget.pamm.DailyChange;
 import com.toolformoney.investarget.pamm.fxopen.model.*;
 import com.toolformoney.model.InvestmentTypeName;
@@ -55,6 +56,10 @@ public class FxOpenLoader extends ForexLoader {
         for (FXOpenManagerGeneral manager : allValues) {
             try {
                 logger.info("Start load FxOpen manager details, pammId = {}", manager.getId());
+                if(!Currency.isRelevant(manager.getCurrency())){
+                    logger.info("Currency {} is not relevant", manager.getCurrency());
+                    continue;
+                }
                 Pamm pamm = new FxOpenPamm();
                 pamm.setPammBroker(PammBroker.FXOPEN);
                 pamm.setAgeInDays(manager.getDays());
@@ -160,9 +165,10 @@ public class FxOpenLoader extends ForexLoader {
                         }
 
 
+
                         PammOfferFxOpen pammOfferFxOpen = new PammOfferFxOpen(manager.getName(), fxOpenOffersResultData.getInitialDeposit(), minPeriodInDays, fxOpenOffersResultData.getPerformanceFee(), fxOpenOffersResultData.getManagementFee(),
                                 fxOpenOffersResultData.getMinimumPerformanceConstraint(), fxOpenOffersResultData.getDepositCommision(),
-                                manager.getCurrency(), avgChange, "https://pamm.fxopen.ru/ru/Pamm/" + manager.getName() + "?agent=691142");
+                                Currency.valueOf(manager.getCurrency()), avgChange, "https://pamm.fxopen.ru/ru/Pamm/" + manager.getName() + "?agent=691142");
                         pamm.addOffer(pammOfferFxOpen);
 
                     }

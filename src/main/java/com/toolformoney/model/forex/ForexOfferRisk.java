@@ -2,7 +2,7 @@ package com.toolformoney.model.forex;
 
 import com.toolformoney.Currency;
 import com.toolformoney.ProvidedParams;
-import com.toolformoney.exchangerates.YahooExchangeRates;
+import com.toolformoney.exchangerates.FixerIOExchangeRates;
 import com.toolformoney.model.ForexInvestmentTarget;
 import com.toolformoney.model.InvestmentTargetOfferProfitCalculation;
 import com.toolformoney.model.InvestmentTargetOfferRisk;
@@ -30,9 +30,9 @@ public abstract class ForexOfferRisk<T extends ForexInvestmentTarget> extends In
         //get currency
         InvestmentTargetOffer offer = forexInvestmentTarget.getInvestmentTargetOffers().get(0);
 
-        Double managerMoneyInUsd = YahooExchangeRates.convert(forexInvestmentTarget.getManagerMoney(), offer.getCurrency(), Currency.USD);
-        Double totalMoneyInUsd = YahooExchangeRates.convert(forexInvestmentTarget.getTotalMoney(), offer.getCurrency(), Currency.USD);
-        Double providedMoneyInUsd = YahooExchangeRates.convert(providedParams.getSumm(), providedParams.getCurrency(), Currency.USD);
+        Double managerMoneyInUsd = FixerIOExchangeRates.convert(forexInvestmentTarget.getManagerMoney(), offer.getCurrency(), Currency.USD);
+        Double totalMoneyInUsd = FixerIOExchangeRates.convert(forexInvestmentTarget.getTotalMoney(), offer.getCurrency(), Currency.USD);
+        Double providedMoneyInUsd = FixerIOExchangeRates.convert(providedParams.getSumm(), providedParams.getCurrency(), Currency.USD);
         Double providedPeriodInDays = providedParams.getPeriodInDays();
 
         pammAgeCoefficient = forexInvestmentTarget.getAgeInDays() < 30 ? 10 : forexInvestmentTarget.getAgeInDays() < 90 ? 5. : forexInvestmentTarget.getAgeInDays() < 180 ? 2.5 : forexInvestmentTarget.getAgeInDays() < 365 ? 1.5 : 1.;
