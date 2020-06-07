@@ -22,6 +22,7 @@ import java.util.concurrent.FutureTask;
 /**
  * Author Dmitriy Liandres
  * Date 12.06.2016
+ * curl -X POST http://91.218.229.113:8086/tasks/ReloadProvidersTask"
  */
 public class ReloadProvidersTask extends Task {
 

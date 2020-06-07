@@ -6,20 +6,21 @@ package com.toolformoney.model;
  */
 public enum InvestmentTypeName {
     //PAMM
-    ALFA_FOREX,
+    //ALFA_FOREX,
     ALPARI, FX_OPEN,
     //PRIVATE_FX,
-    AMARKETS,
+    //todo AMARKETS,
 //    INSOLT_PAMM,
     //WEL_TRADE,
     //BANKS
-    BANK_MOSKVY, SBERBANK, VTB_24, GAZPROMBANK,
+    //todo BANK_MOSKVY,
+    SBERBANK, VTB_24, GAZPROMBANK,
     //HYIP
 
     //STARTUPS
     //SHARE_IN_STOCK,
 //    INSOLT_STARTUP
-   MQL5
+   //todo MQL5
 
 
     //NOTE, YA_BANKIR, UNI_TRADE, ITC_TRAVEL - died

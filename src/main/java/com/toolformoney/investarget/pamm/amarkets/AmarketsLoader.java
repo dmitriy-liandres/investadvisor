@@ -111,6 +111,6 @@ public class AmarketsLoader extends ForexLoader {
 
     @Override
     public InvestmentTypeName getInvestmentTypeName() {
-        return InvestmentTypeName.AMARKETS;
+        return null/*InvestmentTypeName.AMARKETS*/;
     }
 }

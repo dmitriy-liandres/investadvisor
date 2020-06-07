@@ -15,7 +15,7 @@ public class Mql5TradeSignal extends TradeSignal {
     private Double commissionPerMonth;
 
     public Mql5TradeSignal(Double commissionPerMonth) {
-        super(InvestmentTypeName.MQL5, "MQL5", "/vklady-investitsii/torgovye-signaly");
+        super(null/*InvestmentTypeName.MQL5*/, "MQL5", "/vklady-investitsii/torgovye-signaly");
         this.commissionPerMonth = commissionPerMonth;
     }
 

@@ -303,7 +303,7 @@ public class AlfaForexLoader extends ForexLoader {
 
     @Override
     public InvestmentTypeName getInvestmentTypeName() {
-        return InvestmentTypeName.ALFA_FOREX;
+        return null;//InvestmentTypeName.ALFA_FOREX;
     }
 
     /**

@@ -10,12 +10,14 @@ import com.toolformoney.model.forex.ForexLoader;
 import com.toolformoney.model.pamm.Pamm;
 import com.toolformoney.model.pamm.PammBroker;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.io.IOUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.Instant;
@@ -26,6 +28,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
 
 /**
@@ -40,6 +44,11 @@ public class FxOpenLoader extends ForexLoader {
     private static final Logger logger = LoggerFactory.getLogger(FxOpenLoader.class);
 
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    // VIP1 (25/0/0 - 0/10 - 50000/1000/50000 - 5)
+    //https://pamm.fxopen.com/en/HowItWorks/General/Overview
+    Pattern offerPattern = Pattern.compile(".* \\((\\d+)/(\\d+)/(\\d+) - (\\d+)/(\\d+) - (\\d+)/(\\d+)/(\\d+) - (\\d+)\\)");
+    //<br/> Trading Interval: Month</td>
+    Pattern intervalPattern = Pattern.compile(".*<br/> Trading Interval: (.*)</td>");
 
     public List<Pamm> load() throws IOException {
         logger.info("Download all fxopen managers");
@@ -56,7 +65,7 @@ public class FxOpenLoader extends ForexLoader {
         for (FXOpenManagerGeneral manager : allValues) {
             try {
                 logger.info("Start load FxOpen manager details, pammId = {}", manager.getId());
-                if(!Currency.isRelevant(manager.getCurrency())){
+                if (!Currency.isRelevant(manager.getCurrency())) {
                     logger.info("Currency {} is not relevant", manager.getCurrency());
                     continue;
                 }
@@ -82,7 +91,7 @@ public class FxOpenLoader extends ForexLoader {
                         break;
                     }
                 }
-
+                conGetCookie.disconnect();
 
                 //2. load changes
                 LocalDate now = LocalDate.now();
@@ -98,12 +107,14 @@ public class FxOpenLoader extends ForexLoader {
                 InputStreamReader readerLoadGain = new InputStreamReader(new GZIPInputStream(urlLoadGainConnection.getInputStream()));
                 List<PammFxOpenManagerMoney> dailyGains = objectMapper.readValue(readerLoadGain, new TypeReference<List<PammFxOpenManagerMoney>>() {
                 });
+                readerLoadGain.close();
                 if (dailyGains.size() > 0) {
                     //get deposit load
                     URL urlDepositLoad = new URL("https://datastore5.soft-fx.com/Chart/AccountDepositLoad?BrokerId=D5CBE825-CC28-4DF8-A52A-12F20165C794&id=" + manager.getId() + "&from=" + theFirstWorkingDateStr + "&to=" + nowFormatted);
                     InputStreamReader readerDepositLoad = new InputStreamReader(urlDepositLoad.openStream());
                     List<FXOpenDepositLoad> allDepositLoads = objectMapper.readValue(readerDepositLoad, new TypeReference<List<FXOpenDepositLoad>>() {
                     });
+                    readerDepositLoad.close();
 
 
                     Map<String, Double> depositLoadPerDate = new HashMap<>();
@@ -124,56 +135,69 @@ public class FxOpenLoader extends ForexLoader {
 
 
                 //3. get offers
-                URL urlGetOffers = new URL("https://pamm.fxopen.ru/ru/Slave/Account/Offers_Read/" + manager.getId() + "?accountId=00000000-0000-0000-0000-000000000000");
-                HttpURLConnection conGetOffer = (HttpURLConnection) urlGetOffers.openConnection();
-                conGetOffer.setRequestProperty("content-type", "application/x-www-form-urlencoded; charset=UTF-8");
-                conGetOffer.setRequestProperty("cookie", aspAuthCookie);
-                conGetOffer.setReadTimeout(30000);
-                conGetOffer.setConnectTimeout(30000);
-                conGetOffer.setRequestMethod("POST");
-                conGetOffer.setDoInput(true);
-                conGetOffer.setDoOutput(true);
 
 
-                DataOutputStream wr = new DataOutputStream(conGetOffer.getOutputStream());
-                wr.writeBytes("sort=&page=1&pageSize=1000&group=&filter=");
-                wr.flush();
-                wr.close();
+                //
+                Document doc = Jsoup.connect("https://pamm.fxopen.com/en/Pamm/" + manager.getName())
 
-                FxOpenOffersResult fxOpenOffersResult = objectMapper.readValue(conGetOffer.getInputStream(), FxOpenOffersResult.class);
-                if (CollectionUtils.isEmpty(fxOpenOffersResult.getData())) {
+                        .userAgent("Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Mobile Safari/537.36")
+                        .timeout(20000)
+                        .get();
+
+                Elements offers = doc.getElementsByAttributeValue("name", "offerCheckbox");
+                if (offers == null || offers.size() == 0) {
                     //no offers
                     continue;
                 }
 
-                for (FxOpenOffersResultData fxOpenOffersResultData : fxOpenOffersResult.getData()) {
-                    if (fxOpenOffersResultData.getOfferTypeStr().equals("Active")) {
 
-                        Double minPeriodInDays = null;
-                        switch (fxOpenOffersResultData.getInterval()) {
-                            case 3:
-                                minPeriodInDays = 122.;
-                                break;
-                            case 2:
-                                minPeriodInDays = 30.;
-                                break;
-                            case 1:
-                                minPeriodInDays = 7.;
-                                break;
-                            default:
-                                throw new RuntimeException("Incorrect interval id = " + fxOpenOffersResultData.getInterval());
+                for (int i = 0; i < offers.size(); i++) {
+                    String text = offers.get(i).parent().text();
+                    Matcher offerMatcher = offerPattern.matcher(text);
+                    if (offerMatcher.find()) {
+                        Double performanceFee = Double.valueOf(offerMatcher.group(1));
+                        Double masterComission = Double.valueOf(offerMatcher.group(2));
+                        Double minimumPerformanceConstraint = Double.valueOf(offerMatcher.group(3));
+                        Double initialAssignment = Double.valueOf(offerMatcher.group(6));
+                        Double assignemntCommission = Double.valueOf(offerMatcher.group(4));
+                        //my commission Double agentComission = Double.valueOf(offerMatcher.group(9));
+
+
+                        String onmouseover = offers.get(i).parent().getElementsByTag("label").get(0).attr("onmouseover");
+                        Matcher intervalMatcher = intervalPattern.matcher(onmouseover);
+                        boolean isIntervalFound = intervalMatcher.find();
+                        if (isIntervalFound) {
+                            Double minPeriodInDays = null;
+                            String interval = intervalMatcher.group(1);
+                            switch (interval) {
+                                case "Quarter":
+                                    minPeriodInDays = 122.;
+                                    break;
+                                case "Month":
+                                    minPeriodInDays = 30.;
+                                    break;
+                                case "Week":
+                                    minPeriodInDays = 7.;
+                                    break;
+                                case "Day":
+                                    minPeriodInDays = 1.;
+                                    break;
+                                default:
+                                    logger.warn("Incorrect interval id = " + interval);
+                            }
+                            if (minPeriodInDays != null) {
+                                PammOfferFxOpen pammOfferFxOpen = new PammOfferFxOpen(manager.getName(), initialAssignment, minPeriodInDays, performanceFee, masterComission,
+                                        minimumPerformanceConstraint, assignemntCommission,
+                                        Currency.valueOf(manager.getCurrency()), avgChange, "https://pamm.fxopen.ru/ru/Pamm/" + manager.getName() + "?agent=9008256");
+                                pamm.addOffer(pammOfferFxOpen);
+                            }
                         }
 
 
-
-                        PammOfferFxOpen pammOfferFxOpen = new PammOfferFxOpen(manager.getName(), fxOpenOffersResultData.getInitialDeposit(), minPeriodInDays, fxOpenOffersResultData.getPerformanceFee(), fxOpenOffersResultData.getManagementFee(),
-                                fxOpenOffersResultData.getMinimumPerformanceConstraint(), fxOpenOffersResultData.getDepositCommision(),
-                                Currency.valueOf(manager.getCurrency()), avgChange, "https://pamm.fxopen.ru/ru/Pamm/" + manager.getName() + "?agent=691142");
-                        pamm.addOffer(pammOfferFxOpen);
-
                     }
+
                 }
-                if(CollectionUtils.isNotEmpty(pamm.getInvestmentTargetOffers())){
+                if (CollectionUtils.isNotEmpty(pamm.getInvestmentTargetOffers())) {
                     pamms.add(pamm);
                 }
 
@@ -192,6 +216,25 @@ public class FxOpenLoader extends ForexLoader {
         logger.info("Downloaded all fxopen managers");
         filterUselessForexAccounts(pamms);
         return pamms;
+    }
+
+    private String sendRequest(String url, String referer) throws IOException {
+        URL urlManagerMoney = new URL(url);
+        HttpURLConnection conManagerMoney = (HttpURLConnection) urlManagerMoney.openConnection();
+
+        conManagerMoney.setRequestProperty("authority", "pamm.fxopen.com");
+        conManagerMoney.setRequestProperty("user-agent", "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Mobile Safari/537.36");
+        conManagerMoney.setRequestProperty("referer", referer);
+
+
+        //add request header
+        conManagerMoney.setReadTimeout(30000);
+        conManagerMoney.setConnectTimeout(30000);
+        String response = null;
+        try (InputStream io = conManagerMoney.getInputStream()) {
+            response = IOUtils.toString(io, "UTF-8");
+        }
+        return response;
     }
 
     @Override

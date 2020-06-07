@@ -43,24 +43,12 @@ public class PammOfferFxOpen extends InvestmentTargetOffer {
     public Double getAnnualMasterCommission() {
         return annualMasterCommission;
     }
-
-    public void setAnnualMasterCommission(Double annualMasterCommission) {
-        this.annualMasterCommission = annualMasterCommission;
-    }
-
     public Double getMinimumPerformanceConstant() {
         return minimumPerformanceConstant;
-    }
-
-    public void setMinimumPerformanceConstant(Double minimumPerformanceConstant) {
-        this.minimumPerformanceConstant = minimumPerformanceConstant;
     }
 
     public Double getAssignmentCommissions() {
         return assignmentCommissions;
     }
 
-    public void setAssignmentCommissions(Double assignmentCommissions) {
-        this.assignmentCommissions = assignmentCommissions;
-    }
 }

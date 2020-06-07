@@ -1,10 +1,12 @@
 package com.toolformoney.investarget.pamm.alpari;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.inject.Singleton;
 import com.toolformoney.Currency;
 import com.toolformoney.investarget.pamm.DailyChange;
 import com.toolformoney.investarget.pamm.alpari.model.AlpariPamm;
 import com.toolformoney.investarget.pamm.alpari.model.PAMMAlpariGeneral;
+import com.toolformoney.investarget.pamm.alpari.model.PammDaily;
 import com.toolformoney.model.InvestmentTypeName;
 import com.toolformoney.model.forex.ForexLoader;
 import com.toolformoney.model.forex.ForexOfferProfit;
@@ -12,17 +14,14 @@ import com.toolformoney.model.pamm.InvestmentTargetOffer;
 import com.toolformoney.model.pamm.Pamm;
 import com.toolformoney.model.pamm.PammBroker;
 import com.toolformoney.model.pamm.PammOfferRisk;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVRecord;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -46,28 +45,30 @@ public class AlpariLoader extends ForexLoader {
      * @throws IOException
      */
     public List<Pamm> load() throws IOException {
+
+
         logger.info("Start download all Alpari pamm managers");
         List<Pamm> filledPamms = new ArrayList<>();
-        List<Pamm> pamms = new ArrayList<>();
+        List<AlpariPamm> pamms = new ArrayList<>();
 
         //this url returns all pamms for alpari
-        URL urlAll = new URL("https://www.alpari.com/ru/investor/pamm/rating.json");
-
+        String ratings = sendRequest("https://alpari.com/ru/invest/pamm/rating.json", "https://alpari.com");
         //maps returned json to the object
-        PAMMAlpariGeneral allValue = objectMapper.readValue(urlAll.openStream(), PAMMAlpariGeneral.class);
+        PAMMAlpariGeneral allValue = objectMapper.readValue(ratings, PAMMAlpariGeneral.class);
 
         //pamm id->curreny
         Map<String, Currency> currencyPerPamm = new HashMap<>();
         //pamm id->name
         Map<String, String> namePerPamm = new HashMap<>();
         allValue.getElements().forEach(onePammElements -> {
-            Pamm pamm = new AlpariPamm();
+            AlpariPamm pamm = new AlpariPamm();
             pamm.setPammBroker(PammBroker.ALPARI);
             pamm.setId(String.valueOf(onePammElements.get(0)));
             String name = String.valueOf(onePammElements.get(1));
-            pamm.setAgeInDays(Integer.valueOf(String.valueOf(onePammElements.get(37))));
-            pamm.setManagerMoney(Double.valueOf(String.valueOf(onePammElements.get(12))));
-            pamm.setTotalMoney(Double.valueOf(String.valueOf(onePammElements.get(10))));
+            pamm.setAgeInDays(Integer.valueOf(String.valueOf(onePammElements.get(38))));
+            pamm.setManagerMoney(Double.valueOf(String.valueOf(onePammElements.get(17))));
+            pamm.setTotalMoney(Double.valueOf(String.valueOf(onePammElements.get(9))));
+            pamm.setOffersId(String.valueOf(((ArrayList) (onePammElements.get(23))).get(2)));
 
             String currency = String.valueOf(onePammElements.get(16)).replace("RUR", "RUB");
             if (!Currency.isRelevant(currency)) {
@@ -84,62 +85,76 @@ public class AlpariLoader extends ForexLoader {
 
         logger.info("Finish download all Alpari pamm managers");
         //load data per each pamm
-        for (Pamm pamm : pamms) {
+        for (AlpariPamm pamm : pamms) {
             try {
                 logger.info("Start overwork pamm {}", pamm);
 
-                URL url = new URL("https://www.alpari.com/ru/investor/pamm/" + pamm.getId() + "/monitoring/daily_all_candle.csv");
-                BufferedReader in = new BufferedReader(
-                        new InputStreamReader(url.openStream()));
 
-                Iterable<CSVRecord> records = CSVFormat.EXCEL.withDelimiter(';').parse(in);
+                String pammData = sendRequest("https://alpari.com/chart/pamm/" + pamm.getId() + "/return/daily.json", "https://alpari.com/ru/invest/pamm/" + pamm.getId() + "/");
+                PammDaily pammDaily = objectMapper.readValue(pammData, PammDaily.class);
+
 
                 //only work days are returned
                 List<DailyChange> changes = new ArrayList<>();
+                if (CollectionUtils.isNotEmpty(pammDaily.getData())) {
+                    double previous = 0;
 
-                for (CSVRecord record : records) {
-                    String date = record.get(0);
-                    LocalDate localDate = LocalDate.parse(date, dateFormatter);
+                    for (List<String> pammDate : pammDaily.getData()) {
 
-                    Double open = Double.valueOf(record.get(1));
-                    Double close = Double.valueOf(record.get(4));
-                    Double depositLoad = Double.valueOf(record.get(6));
-                    if (depositLoad == 0.) {
-                        //no operations, not need to calculate
-                        continue;
+                        String date = pammDate.get(0);
+                        LocalDate localDate = LocalDate.parse(date, dateFormatter);
+
+                        Double close = Double.valueOf(pammDate.get(1));
+                        if (close == previous) {
+                            //no operations, not need to calculate
+                            continue;
+                        }
+
+                        //if open == -100, it means, that account was closed, but let's calculate next way
+                        Double change = close == -100 ? -100 : (close - previous) * 100 / (previous + 100);
+
+                        changes.add(new DailyChange(localDate, change));
+                        previous = close;
                     }
-
-                    //if open == -100, it means, that account was closed, but let's calculate next way
-                    Double change = open == -100 ? -100 : (close - open) * 100 / (open + 100);
-
-                    changes.add(new DailyChange(localDate, change));
                 }
                 Double avgChange = addChangesToForexTrades(changes, pamm);
 
                 //let's load commissions
-                Document doc = Jsoup.connect("https://www.alpari.com/ru/investor/pamm/" + pamm.getId()).timeout(30000).get();
-                Elements linesWithCommission = doc.select(".pamm-info_offer table tr");
-                if (linesWithCommission.size() == 0) {
-                    //pamm is not available
-                    continue;
-                }
-                Elements minBalances = linesWithCommission.get(0).children();
-                Elements commissions = linesWithCommission.get(1).children();
-                char[] spaceChar = {160};
-                String spaceCharStr = new String(spaceChar);
-
                 List<Map.Entry<Double, Double>> minBalanceCommissionPairs = new ArrayList<>();
 
-                for (int i = 1; i < minBalances.size(); i++) {
-                    Double minBalance = Double.valueOf(minBalances.get(i).text().replace(spaceCharStr, "").trim());
-                    Double commission = Double.valueOf(commissions.get(i).text().replace("%", "").trim());
-                    minBalanceCommissionPairs.add(new AbstractMap.SimpleEntry<>(minBalance, commission));
+                String pammCommissionData = sendRequest("https://alpari.com/api/ru/pamm/other/" + pamm.getOffersId() + "/active/", "https://alpari.com/ru/invest/pamm/" + pamm.getId() + "/");
+                JsonNode activePammsJson = objectMapper.readTree(pammCommissionData);
+                JsonNode activeElements = activePammsJson.path("data").path("return").path("elements");
+                if (!activeElements.isMissingNode()) {
+                    activeElements.forEach(activeElement -> {
+                        String id = activeElement.get("id").asText();
+                        if (!pamm.getId().equals(id)) {
+                            return;
+                        }
+                        JsonNode publicOfferJson = activeElement.path("publicOffer");
+                        if (publicOfferJson == null || publicOfferJson.isMissingNode()) {
+                            logger.info("no offers");
+                        } else {
+                            JsonNode levelsJson = publicOfferJson.path("levels");
+                            if (levelsJson == null || levelsJson.isMissingNode()) {
+                                logger.info("no levels");
+                            } else {
+                                levelsJson.forEach(levelJson -> {
+                                    minBalanceCommissionPairs.add(new AbstractMap.SimpleEntry<>(levelJson.get("balance").asDouble(), levelJson.get("fee").asDouble()));
+                                });
+                            }
+                        }
+
+                    });
+                }
+                if (minBalanceCommissionPairs.size() == 0) {
+                    continue;
                 }
                 for (int i = 0; i < minBalanceCommissionPairs.size(); i++) {
                     Double minBalance = minBalanceCommissionPairs.get(i).getKey();
                     Double commission = minBalanceCommissionPairs.get(i).getValue();
                     Double maxBalance = i == minBalanceCommissionPairs.size() - 1 ? null : minBalanceCommissionPairs.get(i + 1).getKey();
-                    InvestmentTargetOffer investmentTargetOffer = new InvestmentTargetOffer(namePerPamm.get(pamm.getId()), minBalance, maxBalance, 1., null, commission, "https://www.alpari.com/ru/investor/pamm/" + pamm.getId() + "/?partner_id=1231285", currencyPerPamm.get(pamm.getId()), avgChange, new PammOfferRisk(), new ForexOfferProfit());
+                    InvestmentTargetOffer investmentTargetOffer = new InvestmentTargetOffer(namePerPamm.get(pamm.getId()), minBalance, maxBalance, 1., null, commission, "https://www.alpari.com/ru/investor/pamm/" + pamm.getId() + "/?agent=18167", currencyPerPamm.get(pamm.getId()), avgChange, new PammOfferRisk(), new ForexOfferProfit());
                     pamm.addOffer(investmentTargetOffer);
                 }
 
@@ -154,6 +169,26 @@ public class AlpariLoader extends ForexLoader {
         filterUselessForexAccounts(filledPamms);
         return filledPamms;
     }
+
+    private String sendRequest(String url, String referer) throws IOException {
+        URL urlManagerMoney = new URL(url);
+        HttpURLConnection conManagerMoney = (HttpURLConnection) urlManagerMoney.openConnection();
+
+        conManagerMoney.setRequestProperty("authority", "alpari.com");
+        conManagerMoney.setRequestProperty("user-agent", "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Mobile Safari/537.36");
+        conManagerMoney.setRequestProperty("referer", referer);
+
+
+        //add request header
+        conManagerMoney.setReadTimeout(30000);
+        conManagerMoney.setConnectTimeout(30000);
+        String response = null;
+        try (InputStream io = conManagerMoney.getInputStream()) {
+            response = IOUtils.toString(io, "UTF-8");
+        }
+        return response;
+    }
+
 
     @Override
     public InvestmentTypeName getInvestmentTypeName() {

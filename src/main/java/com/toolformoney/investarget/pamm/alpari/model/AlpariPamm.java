@@ -13,6 +13,8 @@ import java.io.IOException;
  * Date 29.05.2016
  */
 public class AlpariPamm extends Pamm {
+    //offer id is different from pass id, so we need an additional id
+    private String  offersId;
 
     public AlpariPamm() {
         super(InvestmentTypeName.ALPARI, "Alpari", "/vklady-investitsii/pamm/alpari/");
@@ -36,5 +38,13 @@ public class AlpariPamm extends Pamm {
     @Override
     public Double getCommissionWithdrawFixed(ProvidedParams providedParams) throws IOException {
         return FixerIOExchangeRates.convert(30., Currency.RUB, providedParams.getCurrency());
+    }
+
+    public String getOffersId() {
+        return offersId;
+    }
+
+    public void setOffersId(String offersId) {
+        this.offersId = offersId;
     }
 }

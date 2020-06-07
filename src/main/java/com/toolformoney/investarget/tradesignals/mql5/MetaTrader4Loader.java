@@ -577,7 +577,7 @@ public class MetaTrader4Loader extends ForexLoader<TradeSignal> {
 
     @Override
     public InvestmentTypeName getInvestmentTypeName() {
-        return InvestmentTypeName.MQL5;
+        return null;//InvestmentTypeName.MQL5;
     }
 
 
