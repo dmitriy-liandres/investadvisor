@@ -18,7 +18,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <jersey.version>2.22</jersey.version>
         <dropwizard.version>0.9.1</dropwizard.version>
-        <h2.version>1.4.187</h2.version>
+        <h2.version>2.1.210</h2.version>
     </properties>
 
     <repositories>
